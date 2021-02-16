@@ -1,0 +1,106 @@
+RPM (team name) Minutes 2/8
+Start Time: 11:30
+
+
+End Time: 12:30
+
+
+Tasks Performed in Meeting:
+Matthew (present) (recorder): 
+* Worked on Introduction and General Requirements for the Specification (SRS) Document.
+
+
+Patrick (present) (team leader): 
+* Worked on Introduction and General Requirements for the Specification (SRS) Document.
+
+Robert (present): 
+* Worked on Introduction and General Requirements for the Specification (SRS) Document.
+
+
+Discussion:
+* Discussed strategies on Databasing with SQL and creating Graphical User Interfaces in Java.
+Action Items:
+* Meet with clients to discuss specifics
+* Finish Specific Requirement section of the SRS Document.
+
+
+https://chumpolm.files.wordpress.com/2018/09/ieee-std-830-1984.pdf
+
+
+Spent the meeting assessing deliverable #1 and planning project, all worked on SRS document. 
+
+
+Meeting with client: 
+
+
+Access for four people to the system: registration staff, nurse, physician, billing.
+Registration staff: Name of patient, address, phone number, emergency contact and number, symptoms, medication patient is taking, allergies, assign nurse, put down the insurance.
+Physicians: 
+* Think about at least 10 diagnoses to implement in the system.
+* Medications for diagnoses to implement in the system.  At least one per diagnosis
+   * Two different types of prescriptions: Injection is first type: Intravenous (IV, IM (intramuscular), SC (subcutaneous); oral medications is second type
+* Should be able to enter a comment box for instruction for nurses.
+
+
+Nurse: Patient info - vitals, weight, height, assign physician, admitted or not.
+
+
+* Physicians need specialties associated with it.
+* Nurses:
+* Takes patient’s vital signs.
+* Registration assigns a nurse
+* Has access to all medical records, not financial records
+* Check if patient was admitted or discharged
+* Will assign physician based on diagnosis
+* Access to comments by a doctor.
+* Can’t change medical records, only add comments
+* Access to enter how many nights patient is in hospital for billing
+* Able to print discharge instructions.
+   * Guidelines to after discharges exercise patients can participate in. Print instructions
+Tests involved:
+        Blood test:
+                Red blood cell, white blood cell, liver function test, kidney function test, electrolyte test.  Assigned by one or more physicians.
+        Radiology labs:
+                At least three options: X-rays, CT scans, MRI
+Urinary tests
+Stool test
+
+
+Billing:
+* Not access to all medical records.
+* Should know how many nights they've been in hospital, assign price per night
+* Access to tests and medications requested
+* Print bill/itemized bill with total cost
+
+
+
+
+
+
+RPM Minutes 2/10
+Start Time: 5:00 p.m.
+
+
+End Time: 6:30 p.m.
+
+
+Tasks Performed in Meeting:
+        Matthew (present) (recorder): 
+* Worked on Functional Requirements for the Specification (SRS) Document.
+
+
+Patrick (present) (team leader): 
+* Worked on Functional Requirements for the Specification (SRS) Document.
+
+Robert (present): 
+* Worked on Functional Requirements for the Specification (SRS) Document.
+
+
+Discussion:
+* Discussed the different functions of the product to clearly define them within the SRS document per the client’s specifications on their product.
+* Discussed whether to use Swing class or Java FX for User Interface on product
+
+
+Action Items:
+* Finish the Specifications (SRS) Documents and send it to the client.
+* Create team website (github site) for client’s access and team’s use
