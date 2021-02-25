@@ -1,6 +1,10 @@
 RPM (team name) Minutes 2/8
 
 https://github.com/pjosephgorman/CS460WProject/tree/main 
+Attendance: 
+Team Leader: Patrick (present)
+Recorder: Matt (present)
+N/A: Rob (present)
 
 Start Time: 11:30
 
@@ -95,8 +99,14 @@ Meeting with Client (Dr. Russell) 2/17
 Make sure beginning of deliverable team name, members, link to team website
 Clear that there are four users for systems: Staff, physician, nurses, billing
 Read access and write access
+ATTENDANCE:
+Matt (present)
+Patrick (present)
+Rob (not present)
+
 RPM Minutes 2/19
 
+Attendance:
 Team Leader: Matt(present)
 Recorder: Patrick(present)
 None: Rob(present)
@@ -127,18 +137,18 @@ ReadAccounts (Admin, System)
 EditAccount (Admin, System)
 DeleteAccount (Admin, System)
 CreatePatientDischarge(Billing, Nurse, System)
-ViewPatientDischargeInfo(Nurse, System
+ReadPatientDischargeInfo(Nurse, System
 EditPatientDischargeInfo (Nurse, System)
-ViewPatientInfo
 PrintBill (BIlling, System)
-EditPatientGeneralInfo Reception, System)
-EditPatientInsuranceInfo (Reception, System)
-AdmitPatient/AssignNurse (Reception, System)
+AdmitPatient (Reception, System)
+ReadPatientAdmittanceInfo (Reception, System)
+EditPatientAdmittanceInfo (Reception, System)
 ReadPatientVitals
 InputPatientVitals (Nurse, System)
-ReadPatientRecords (Nurse, Physician, System
+ReadPatientRecords (Nurse, Physician, System 
 EditCommentField (Nurse, System)
 AssignDoctor(Nurse, System)
+CreatePatientMedicalChart
 TestPatient (Doctor, Nurse, System)
 AssignBloodTest (Doctor, System)
 WhiteBloodCellTest (Docto
@@ -163,24 +173,57 @@ EditNurseInstructionField
 
 
 
-
 RPM Minutes 2/23
 
+Attendance:
 Team Leader: Matt(present)
 Recorder: Patrick(present)
-None: Rob(present)
+None: Rob(not present)
 
-Start Time: 
+Start Time: 6:00
 
-End Time: 
+End Time: 6:45
 
 Tasks Performed During Meeting:
-
-
+Continued compilation of Use Cases
 
 Discussion: 
-
-
+When doing discharge use cases, within regular discharge papers you input the diagnosis and the prescribed medication, should we structure it that way?
 
 Action Items: 
 Submit Deliverable 2 on 2/24
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RPM Minutes 2/24
+
+Attendance:
+Team Leader: Matt (present)
+Recorder: Patrick (present)
+N/A: Rob (present)
+
+Start Time: 2:00
+
+End Time: 3:00
+
+Tasks Performed During Meeting:
+Final compilation of Use Cases (Task division of use cases listed in 2/19 minutes)
+Assessment of Deliverable 2 status before submission
+
+Discussion:
+
+Action Items: 
+Completion of the separate parts of the Use Cases.
+All members completed their parts in a timely manner
+
