@@ -1,0 +1,777 @@
+﻿RPM
+Members: 
+        Robert Venezia
+        Patrick Gorman
+        Matt Maiello
+        Roles are kept in minutes.
+
+
+1. Introduction
+   1. Purpose:
+        The purpose of this document is to outline the product we are developing for Dr. Ingrid Russel (the client).
+   2. Scope:
+        We will build a Graphical User Interface for a hospital database that has several facets.  This interface will allow reception staff, physicians, nurses, and billing staff to log in to the system. These users will be able to manage patient data in the database.
+   3. Definitions, Acronyms, and Abbreviations:
+Placeholder text for definitions, acronyms and abbreviations.
+   4. References:
+Placeholder for References 
+   5. Overview:
+Throughout the remainder of this  document, we will discuss the specifics of our project. We will be covering the core functions of our project, the constraints and limitations of the project, the assumptions we make and dependencies our project has (i.e. availability of certain software, etc.), the user interfaces and general user experience, the data storage and database management, and the availability, security and maintainability of our project. 
+
+
+   2. General Description
+   1. Product Perspective:
+It will include Java coupled with an SQL Database, and be an independent product. 
+   2. Product Functions:
+Functions will include: login service for hospital staff additional faculty, registration for new hires, will allow to update current information to staff and faculty information, register and update patient personal information, access patient medical records, and allow access to patient billing information.
+   3. User Characteristics:
+Basic computer experience of any previous use of any websites (i.e. email, social media, e-services, etc) will be sufficient to interact with the interface.
+   4. General Constraints:
+Java is required. 
+   5. Assumption and Dependencies:
+We assume javafx and our SQL database ideas work together effectively, and that we won’t run into any Java-related limitations. 
+   3. Specific Requirements:
+   1. Functional Requirements:
+   1. Accessing Records
+   1. Introduction:
+        User accesses various records based on security access, and can 
+        apply changes. 
+   2. Inputs:
+Patient’s name (required)
+Patient ID (required)
+Record type (required)
+Updated information, or request for information
+   3. Processing: 
+Prompt user to input required and optional fields.
+Check fields for acceptable inputs.
+Check security access with requested record type and ensure access to that record is granted for the current user, if not, show error alert and quit.
+Access requested record from medical records database. 
+Display requested information and, if necessary, display updated information. 
+Save any changes to the database. 
+Exit. 
+   4. Outputs:
+Outputs applicable for physicians:
+        Patient personal information and medical records
+        Patient diagnosis
+        Medications related to ailments or diagnosis
+        Patient current medications
+Patient prescriptions
+Patient tests
+Outputs applicable for reception: 
+        Patient name
+        Patient address
+        Patient phone number
+        Emergency Contact
+        Symptoms reported
+        Current medications
+        Allergies
+        Insurance information
+        Assigned nurse
+Outputs applicable for nurses:
+        Patient personal information and medical records (read-only)
+        Patient vitals
+        Patient weight
+        Patient height
+        Assigned physician
+        Physician comments
+Outputs applicable for billing
+        Insurance information
+        Itemized bill
+        Patient name
+        Patient address
+   2. Print Discharge Instructions
+   1. Introduction: 
+Nurses must be able to allow for patient to be discharged
+   2. Inputs:
+Patient name / ID
+Does patient need wheelchair?
+Special discharge instructions
+   3. Processing:
+Format a discharge ticket based on the input information
+Print the ticket
+   4. Outputs:
+Printed discharge ticket
+   3. Order Tests
+   1. Introduction:
+Physicians must be able to order tests for patients
+   2. Inputs:
+Patient
+Type of test being ordered
+Urgency
+   3. Processing:
+Store the test order in the 'tests' database, associated with the patient record
+   4. Outputs:
+Test is ordered, testing staff will input results when completed
+   5. Test Types:
+   1. Laboratory Test – this section will give the order for the following:
+   1. Hematologic Laboratory
+   1. Red blood cell
+   2. White blood cell
+   3. Liver function test
+   4. Renal function test
+   5. Electrolyte test
+   2. Radiologic Laboratory
+   1. X-ray
+   2. Computed Tomography (CT)
+   3. Magnetic Resonance Image (MRI)
+   3. Urinary Test
+   4. Stool Test
+   2. Prescription (this section will give prescription to patient)
+   1. Injection
+   1. Intramuscular injection (IM)
+   2. Intravascular injection (IV)
+   3. Subcutaneous injection (SC)
+   2. P.O (Per Os;  Oral medication )
+   1. Diagnose Patient
+   1. Introduction:
+Physicians must be able to diagnose the patient, appearing on their medical record
+   2. Inputs:
+Patient’s Name / ID
+Patient’s symptoms
+Physician's diagnosis
+   3. Processing:
+Symptoms and diagnosis will be stored in the patient's record.
+   4. Outputs:
+Diagnosis is given to patient and stored in medical records.
+   2. Prescribe Medication
+   1. Introduction:
+Physicians must be able to prescribe a patient medicine based on diagnosis. 
+   2. Inputs:
+Patient Name/ID
+Patient Prescription
+   3. Processing:
+Prompt physician to input required fields.
+Check inputs to make sure all required fields are filled with an acceptable input. 
+Access database and assign prescription to patient. 
+Save changes, display changes, and exit.
+   4. Outputs:
+Prescription information.
+   3. Print itemized bill
+   1. Introduction:
+Billing must be able to print a bill for the patient to pay. 
+   2. Inputs:
+Patient insurance information
+Patient prescriptions
+Patient tests
+   3. Processing:
+Prompt user to input all required fields.
+Ensure all required fields were filled with an acceptable input. 
+Check prices of prescriptions, tests, and base cost of visit.
+Apply insurance.
+Print itemized bill, showing all pieces.
+Exit.
+   4. Outputs:
+Itemized bill.
+   2. External Interface Requirements
+   1. User Interfaces:
+No specified requirements
+   2. Hardware Interfaces:
+No specified requirements
+   3. Software Interfaces: 
+Access to medical records database
+   4. Communications Interfaces: 
+No specified requirements
+   3. Performance Requirements: 
+No specified requirements
+   4. Design Constraints:
+   1. Standards Compliance: 
+No specified requirements
+   2. Hardware Limitations: 
+No specified requirements
+   5. Attributes:
+   1. Availability:
+No specified requirements
+   2. Security Requirements:
+Limited records access
+Billing - Financial records, only required medical records
+Physicians - Medical records
+Nurses - Medical records (No edit, only add comment)
+Reception - Basic records
+   3. Maintainability:
+No specified requirements
+   6. Other Requirements:
+No Specified Requirements 
+________________
+Specified Requirements Use Cases
+
+
+Use Case Name
+	LoginToSystem
+	Participating Actors
+	User (Any of Physician, Nurse, Reception, Billing, Admin)
+System
+	Flow of Events
+	   1. The User selects the 'Login' button from a terminal.
+   1. The system presents a login form to the User
+   2. The User inputs login information (Username and password), and submits the form to be validated; OR user selects 'cancel'
+   1. System checks login information against account database, checking for a match
+   2. If no match is found: System pops up error, 'Incorrect username or password', and re-presents the form (back to previous step)
+   3. If success: System pops up 'Login successful', redirects user to main menu
+	Entry Condition
+	User is not logged in, and selects the Login button
+	Exit Condition
+	User is logged in
+OR User cancels login attempt
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	CreateNewAccount
+	Participating Actors
+	User (Admin)
+System
+	Flow of Events
+	   1. Admin selects 'Create New Account'
+   1. System presents an account creation form
+   2. Admin fills out the form with new user information; Username, Password, Full Name, Station (Billing, Physician, Nurse, Reception, Admin) OR Admin selects 'cancel'
+   1. If Username is taken, System presents error 'Username already in use', re-presenting the form (Password field is cleared on re-present)
+   2. If Password does not meet minimum requirements, System presents error 'Password must be at least 8 characters, and include 3 of: (Uppercase, Lowercase, Numeric, Symbol)' (then re-presents the form) (Password field is cleared on re-present)
+   3. Otherwise, system presents 'Account Created Successfully', redirecting Admin to the 'ReadAccounts' use case
+	Entry Condition
+	Admin is logged in, and selects 'Create New Account'
+	Exit Condition
+	New account is created
+OR Account creation is cancelled
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	ReadOwnAccount
+	Participating Actors
+	User (Any of Physician, Nurse, Reception, Billing, Admin)
+System
+	Flow of Events
+	   1. User selects 'Account Info'
+   1. System displays the user's account information; Username, Full Name, Station (not password)
+   2. User selects 'Change Password' -> goto case 'ChangeOwnPassword'
+   3. User selects 'Exit'
+	Entry Condition
+	User is logged in, and selects 'Account Info'
+	Exit Condition
+	User selects 'exit'
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	ChangeOwnPassword
+	Participating Actors
+	User (Any of Physician, Nurse, Reception, Billing, Admin)
+System
+	Flow of Events
+	   2. System presents user with 3 empty fields: 'Current Passwod', 'New Password', and 'Confirm New Password'.
+   4. User fills these fields, and submits.
+   1. If 'Current Password' does not match the user's current password in the database, System displays an error 'Incorrect Password'
+   2. If 'New Password' and 'Confirm New Password' do not match, System displays an error ''New Password' and 'Confirm New Password' must match'
+   3. If 'New Password' does not meet minimum requirements, System presents error 'Password must be at least 8 characters, and include 3 of: (Uppercase, Lowercase, Numeric, Symbol)'
+   4. After any of the above 3 errors, the fields are re-presented, once again empty.
+   5. If none of the above errors are presented, then User's password is changed in the database, a success message is displayed, and the user is redirected back to 'Account Info'
+   5. User selects 'cancel'
+	Entry Condition
+	User selects 'Change Password' from 'Account Info' menu
+	Exit Condition
+	User successfully changes password
+OR User selects 'cancel'
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	ReadAccounts
+	Participating Actors
+	Admin
+System
+	Flow of Events
+	   1. Admin selects 'View Accounts' to enter this menu
+   1. System displays a list of all users registered in the database
+   2. Admin selects a user to view
+   1. System displays the account information of the selected user, similarly to 'ReadOwnAccount' case.
+   2. Buttons 'Edit' and 'Delete' appear in the corner of the data.
+   3. Admin selects 'Edit' -> goto case 'EditAccounts'
+   4. Admin selects 'Delete' -> goto case 'DeleteAccounts'
+   5. Admin selects Exit
+	Entry Condition
+	Admin is logged in with admin credentials, and selects 'View Accounts'
+	Exit Condition
+	Admin selects exit
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	EditAccounts
+	Participating Actors
+	Admin
+System
+	Flow of Events
+	   3. System displays a menu almost identical to the single-user info screen presented in 'ReadAccounts', where the button leading here is found; but, the information fields are editable, and there is a 'Save Changes' button in the corner.
+   6. Admin selects 'Save Changes'
+   1. System validates the information in the fields, and for any field which has no errors, writes the data in that field to the database.
+   7. Admin selects Exit
+	Entry Condition
+	Admin is logged in with admin credentials, and selects 'Edit' from the 'View Accounts' menu of a specific account.
+	Exit Condition
+	Admin selects exit
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	DeleteAccounts
+	Participating Actors
+	Admin
+System
+	Flow of Events
+	   2. System displays a pop-up prompt 'Are you sure you want to delete the account (account name here)?'
+   8. Admin selects 'Yes'
+   1. System deletes the selected account entirely from the database, sending 'Admin' back to the start of 'ReadAccounts' case.
+   9. Admin selects 'No' == Exit
+	Entry Condition
+	Admin is logged in with admin credentials, and selects 'Delete' from the 'View Accounts' menu of a specific account.
+	Exit Condition
+	Admin selects 'Yes' or 'No'
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	InputPatientVitals
+	Participating Actors
+	User (Nurse) 
+System
+	Flow of Events
+	   1. User selects ‘Input Patient Vitals’ from the terminal.
+   1. System displays patient’s general information, as well as fields to input the vital signs of the patient. 
+   2. User inputs the acquired information and selects ‘Complete Changes’. 
+   1. System saves changes, and displays user’s general information and vitals. 
+   2. User may assign doctor. -> goto case ‘AssignDoctor’
+      3.    User exits. 
+	Entry Condition
+	User is logged in as Nurse.
+User is assigned to patient in question. 
+	Exit Condition
+	Vitals are entered and saved.
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	ReadPatientRecords
+	Participating Actors
+	User (any of Nurse, Physician)
+System
+	Flow of Events
+	   1. User selects ‘View Patient Medical Records’. 
+   1. System checks to see if the User is assigned to the patient in question OR System displays list of User’s assigned patients to view medical records of. 
+   1. System displays patient medical records. 
+   2. User either edits editable fields or exits. 
+   1. -> extends case ‘EditCommentField’
+   2. -> extends case ‘AssignDoctor’
+	Entry Condition
+	User is logged in as Nurse or Physician.
+User either has assigned patient or is assigned to patient in question, depending on decisions that have not been made yet. 
+Patient has accessible medical records.
+	Exit Condition
+	User selects exit. 
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	EditCommentField
+	Participating Actors
+	User (Nurse)
+System
+	Flow of Events
+	   1. -> extended from ‘ReadPatientRecords’
+   2. User selects ‘Enter Comment’.
+   1. System prompts User with a text box to input comments into.
+   3. User inputs comments and saves.
+   1. System displays medical records with comments attached.
+   4. User selects exit.
+	Entry Condition
+	User has accessed patient medical records.
+User is logged in as Nurse.
+	Exit Condition
+	User selects exit. 
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	AssignDoctor
+	Participating Actors
+	User (Nurse)
+System
+	Flow of Events
+	   1. Extended from ‘InputPatientVitals’ or ‘ReadPatientRecords’.
+   2. User selects ‘AssignDoctor’ from the patient’s vitals page.
+   1. System displays a list of doctors.
+   3. User selects a Physician from the dropdown list.
+   1. System saves the selected Physician in the assignedDoctor field of the patient info.
+   4. User selects exit.
+	Entry Condition
+	User is logged in as Nurse.
+User is on the patient’s vitals or medical info pages.
+User is assigned to patient in question. 
+	Exit Condition
+	User selects exit.
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	TestPatient
+	Participating Actors
+	User (Physician)
+System
+	Flow of Events
+	   1. Extended from ‘PatientMedicalChart’
+   2. User selects ‘Test Patient’ from the terminal.
+   1. System displays test options for User to select from. 
+   3. User selects a test from the given list.
+   1. System saves selected test, and assigns the test to the patient.
+   1. ->extends ‘AssignBloodTest’
+   2. ->extends ‘AssignRadiologyTest’
+   3. ->extends ‘AssignUrinaryTest’
+   4. ->extends ‘AssignStoolTest’
+	Entry Condition
+	User is logged in as Physician
+User is assigned to patient in question
+	Exit Condition
+	Test has been selected and results input
+User selects exit
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	AssignBloodTest
+	Participating Actors
+	User (Physician)
+System
+	Flow of Events
+	   1. Extended from ‘TestPatient’
+   2. User selected a Blood Test in ‘TestPatient’.
+   1. System presents User with list of blood test options. 
+   1. Red Blood Cell Test
+   2. White Blood Cell Test
+   3. Liver Function Test
+   4. Kidney Function Test
+   5. Electrolyte Test
+	Entry Condition
+	User is logged in as Physician
+User is assigned to patient in question
+User selected Blood Test from the menu in ‘TestPatient’
+	Exit Condition
+	User selected a test
+User selected exit
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	AssignRadiologyTest
+	Participating Actors
+	User (Physician)
+System
+	Flow of Events
+	   1. Extended from ‘TestPatient’
+   2. User selected a Radiology Test in ‘TestPatient’.
+   1. System presents User with list of radiology test options. 
+   1. CT Test
+   2. XRay Test
+   3. MRI Test
+	Entry Condition
+	User is logged in as Physician
+User is assigned to patient in question
+User selected Radiology Test from the menu in ‘TestPatient’
+	Exit Condition
+	User selected a test
+User selected exit
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	AssignUrinaryTest
+	Participating Actors
+	User (Physician)
+System
+	Flow of Events
+	   1. Extended from ‘TestPatient’
+   2. User selected a Urinary Test in ‘TestPatient’.
+   1. System saves Urinary Test. 
+	Entry Condition
+	User is logged in as Physician
+User is assigned to patient in question
+User selected Urinary Test from the menu in ‘TestPatient’
+	Exit Condition
+	User selected a test
+User selected exit
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	AssignStoolTest
+	Participating Actors
+	User (Physician)
+System
+	Flow of Events
+	   1. Extended from ‘TestPatient’
+   2. User selected a Stool Test in ‘TestPatient’.
+   1. System saves Stool Test. 
+	Entry Condition
+	User is logged in as Physician
+User is assigned to patient in question
+User selected Stool Test from the menu in ‘TestPatient’
+	Exit Condition
+	User selected a test
+User selected exit
+	Quality Requirements
+	N/A
+	
+
+Use Case Name
+	CreatePatientDischarge
+	Participating Actors
+	User (Billing Department or Nurse), System
+	Flow of Events
+	1.      User selects ‘Creates Patient Discharge’
+a. System displays Patient’s personal information (Name, Age, etc), Patient’s Insurance Information, Attending Physician, Patient’s Medical History, Tests on Patient and Patient’s diagnosis.
+b.      System present rest of blank fields within form.
+2.      User fills out the rest of blank fields: Admission Date, Discharge Date, Reason for Discharge
+3.      User makes diagno
+4.      User selects ‘Save changes’
+a.       System saves new patient discharge and adds it to database.
+5.      User selects ‘Exit’
+	Entry Condition
+	User is logged in as Nurse or Billing
+User has access to patients’ medical records, personal information, insurance information
+User has access to patient’s test and patient’s diagnosis
+	Exit Condition
+	User selects ‘Save changes’ or cancels by pressing ‘exit’
+	Quality Requirements
+	N/A
+	 
+ 
+Use Case Name
+	ReadPatientDischargeInfo
+	Participating Actors
+	User (Nurse or Billing Department), System
+	Flow of Events
+	1.      User selects ‘View Patient Discharge Information’
+a.       System checks if User has access to patient medical records
+                                                              i.      If user does not access, System will print a message of invalid access.
+2.      System display Discharge Information
+3.      User can edit editable fields
+a.       Go to case ‘EditPatientDischarge’
+4.      User can print itemized bill determined by calculating how many days between admittance and discharge, tests performed and medications requested.
+a.       Go to case ‘PrintBill’
+5.      User selects ‘Exit’
+	Entry Condition
+	User is logged in as Nurse or Billing Department
+	Exit Condition
+	User selects ‘Save Changes’ or ‘Exit’
+	Quality Requirements
+	N/A
+	 
+ 
+Use Case Name
+	EditPatientDischargeInfo
+	Participating Actors
+	User (Nurse), System
+	Flow of Events
+	1.          Extended from ‘ReadPatientDischargeInfo’
+2.          User selects ‘Edit Patient Discharge’
+a.           System prompts user’s for editable text fields.
+3.          User edits fields and clicks “Save Changes”
+a.           System displays new patient discharge information.
+4.          User selects ‘Exit’.
+	Entry Condition
+	User is logged in as nurse
+User has access to Patient Discharge Information
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	 
+ 
+Use Case Name
+	PrintBill
+	Participating Actors
+	User (Billing Department), System
+	Flow of Events
+	1.          Extended
+2.          User selects ‘Print bill’
+a.           System prints a calculated total dependent on if/how many nights, medications prescribed and tests performed.
+	Entry Condition
+	User is logged in as Billing Department
+	Exit Condition
+	User selects ‘Print Bill’
+	Quality Requirements
+	N/A
+	 
+ 
+Use Case Name
+	AdmitPatient
+	Participating Actors
+	User (Reception), System
+	Flow of Events
+	1.      User selects ‘Admit Patient’
+a.       System prompts user with a form that allows them to Patient Admittance form
+2.      User enters patient general information, insurance information, allergies and symptoms
+a.       System displays patient general information, patient insurance information and stores it in database.
+3.      User then assigns nurse in ‘Assign Nurse’ field.
+4.      User selects ‘Exit’
+	Entry Condition
+	User is logged in as reception.
+User selects ‘Admit Patient’
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	 
+ 
+Use Case Name
+	ReadPatientAdmittanceInfo
+	Participating Actors
+	User (Physician, Nurse, Reception, Billing), System
+	Flow of Events
+	1.          User Selects ‘Patient Admittance Information’
+a.           System displays patient general information (name, age, etc.), patient insurance information, allergies, symptoms and assigned nurse.
+2.          User has option to edit Patient Admittance information
+a.           Go to ‘EditPatientAdmittanceInfo’
+3.          User selects ‘Exit’
+	Entry Condition
+	User is logged in as Nurse, Physician, Reception or billing
+User selects ‘Patient Information’
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	 
+Use Case Name
+	EditPatitentAdmittanceInfo
+	Participating Actors
+	User (Reception), System
+	Flow of Events
+	   1. Extended from ‘ReadPatientAdmittanceInfo’
+   2. User Selects ‘Edit Admittance Information’
+   1. System prompts user for editable text fields.
+   3. User edits fields and clicks ‘Save Changes’
+   1. System displays new patient admittance information and is stored in database.
+   4. User selects ‘Exit’
+	Entry Condition
+	User is logged in as Reception
+User selects “Edit Admittance Information”
+	Exit Condition
+	User selects “Exit”
+	
+
+
+
+Use Case Name
+	MakeDiagnosis
+	Participating Actors
+	User (Physician), System
+	Flow of Events
+	   1. Extends from ‘PatientMedicalChart’
+   2. User goes to ‘Diagnosis’ field on chart
+   1. System has 10 Diagnoses’ readily available
+   1. User chooses diagnosis based on array of symptoms and tests performed
+   3. User clicks ‘Saves Changes’
+   1. System displays updated Medical Chart
+	Entry Condition
+	User is logged in as Physician
+User has access to Medical chart
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	PatientMedicalChart
+	Participating Actors
+	User (Physician, Nurse), System
+	Flow of Events
+	   1. User selects ‘Create Medical Chart’
+   1. System creates a form with blank fields
+   1. Fields will be updated as needed either by tests and diagnosis
+   1. User selects ‘Exit’
+	Entry Condition
+	User is logged in as Physician
+User selects ‘Create Medical Chart’
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	PrescribeMedication
+	Participating Actors
+	User (Physician), System
+	Flow of Events
+	   1. Extends from ‘MakeDiagnosis’
+   2. User goes ‘Prescribed Medications’ field and inputs medications that treat the diagnosis
+   3. User selects ‘Save Changes’ 
+   1. System displays updated medical chart.
+   4. User selects ‘Exit’
+	Entry Condition
+	User is logged in as Physician
+User has access to medical charts
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	
+
+
+
+Use Case Name
+	EditNurseInstructionField
+	Participating Actors
+	User (Physician), System
+	Flow of Events
+	   1. Extends from ‘MakeDiagnosis’
+   2. User goes to instruction field and inputs information of instructions for diagnosis
+   3. User selects ‘Save Changes’
+   1. System displays updated medical chart
+   4. User selects ‘Exit’
+	Entry Condition
+	User is logged in as Physician
+User has access to medical charts
+	Exit Condition
+	User selects ‘Exit’
+	Quality Requirements
+	N/A
+	
+
+Maiello, Gorman, Venezia
