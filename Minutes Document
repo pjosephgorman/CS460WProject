@@ -227,3 +227,132 @@ Action Items:
 Completion of the separate parts of the Use Cases.
 All members completed their parts in a timely manner
 
+
+
+
+
+
+
+
+
+
+
+
+RPM Minutes 2/26
+
+Attendance:
+Team Leader: Rob (present)
+Recorder: Matt (present)
+N/A: Patrick (present)
+
+Start Time: 5:00
+End Time: 6:15
+
+Tasks Performed During Meeting:
+We started compiling the proper component for the third deliverable.
+Divided up portions of the activity diagrams.
+Assigned who will work on the Prototype UI and Class and Object diagram
+
+Discussion:
+Figure out what software to use for deliverable 3.
+Activity Diagram Possibilities
+AssignTest
+DeleteAccounts
+EditAccounts
+EditCommentField
+CreatePatientDischarge
+AssignDoctor
+
+Action Items: 
+Task assignments
+Rob Matt Patrick
+AssignTest
+EditCommentField
+DeleteAccounts
+EditAccounts
+CreatePatientDischarge
+AssignDoctor
+RPM Minutes 3/3
+
+Attendance:
+Team Leader: Rob (present)
+Recorder: Matt (present)
+N/A: Patrick (present)
+
+Start Time: 11:20
+End Time: 12:30
+
+Tasks Performed During Meeting:
+Shared progress on activity diagrams that were assigned from last meeting.
+Decided that we need to use DIA software for both the prototype UI and Class and Object Diagrams
+Assigned who does UI and Class and Object Diagrams respectively.
+
+Discussion:
+How we are going to approach the UI and Class and Object Diagrams.
+Who has the most experience to work on either respectively.
+
+Action Items: 
+Finish previously assigned activity diagrams from the last meeting.
+Start designing prototype for UI:
+Rob
+Start designing prototype for Class and Object Diagram:
+Patrick and Matt
+
+
+
+
+
+
+
+
+RPM Minutes 3/5
+
+Attendance:
+Team Leader: Rob (present)
+Recorder: Matt (present)
+N/A: Patrick (present)
+
+Start Time: 5:00
+End Time: 6:00
+
+Tasks Performed During Meeting:
+Showed progress on our Prototype UI, Class and Object diagrams infrastructure.
+Parsed through what needs to be done for Class and Objects.
+Shared github with new recorder.
+
+Discussion:
+Class and Object Diagrams:
+Classes:
+Server
+ClientHandler (Server Side only)
+PatientInfo
+TestingInfo
+Client (client side only)
+Showcase first completed Prototype UI for Login Screen
+Prototype UI’s will be in accordance with the activity diagrams that were assigned previously.
+
+Action Items: 
+Matt: Will design the prototype UI’s according to his own activity diagrams and Patrick’s activity diagrams as previously assigned
+Patrick: Create the Class and Object Diagrams.
+Rob: Will design the prototype UI according to his own activity diagrams and will assist Patrick and Matt
+
+RPM Minutes 3/8
+
+Attendance:
+Team Leader: Rob (present)
+Recorder: Matt (present)
+N/A: Patrick (present)
+
+Start Time: 11:20
+End Time: 12:30
+
+Tasks Performed During Meeting:
+Compiled the Object and Class Diagrams, Prototype UI’s, and Activity Diagrams for Deliverable 3.
+Went back to edit Use cases to fit our new diagrams.
+
+Discussion:
+Review and finalized Class and Object Diagrams and Prototype UI’s.
+Discussed preparations of submission and what our individual contributions were.
+
+Action Items: 
+Submit Deliverable 3.
