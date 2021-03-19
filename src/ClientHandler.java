@@ -87,3 +87,6 @@ class ClientHandler extends Thread
         } 
     } 
 } 
+
+
+// create a timeout. start a timer, and update on every action. If it has been longer than an hour since last action, terminate connection and send message
