@@ -89,4 +89,31 @@ class ClientHandler extends Thread
 } 
 
 
-// create a timeout. start a timer, and update on every action. If it has been longer than an hour since last action, terminate connection and send message
+// // create a timeout. start a timer, and update on every action. If it has been longer than an hour since last action, terminate connection and send message
+
+// // Set the socket timeout for ten seconds
+// connection.setSoTimeout (10000);
+// try
+// {
+//    // Create a DataInputStream for reading from socket
+//    DataInputStream dis = new DataInputStream (connection.getInputStream());
+//    // Read data until end of data
+//    for (;;)
+//    {
+//       String line = dis.readLine();
+//       if (line != null)
+//          System.out.println (line);
+//       else
+//          break;
+//    }
+// }
+// // Exception thrown when network timeout occurs
+// catch (InterruptedIOException iioe)
+// {
+//    System.err.println ("Remote host timed out during read operation");
+// }
+// // Exception thrown when general network I/O error occurs
+// catch (IOException ioe)
+// {
+//    System.err.println ("Network I/O error - " + ioe);
+// }
