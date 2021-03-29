@@ -1,85 +1,95 @@
 // Java implementation of  Server side 
 // It contains two classes : Server and ClientHandler 
 // Save file as Server.java 
-  
-import java.io.*; 
-import java.text.*; 
-import java.util.*; 
-import java.net.*; 
-  
-// ClientHandler class 
-class ClientHandler extends Thread  
-{
-    final DataInputStream dis; 
-    final DataOutputStream dos; 
-    final Socket s; 
-      
-  
-    // Constructor 
-    public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)  
-    { 
-        this.s = s; 
-        this.dis = dis; 
-        this.dos = dos; 
-    } 
-  
-    @Override
-    public void run()  
-    { 
-        String received; 
-        String toreturn; 
-        while (true)  
-        { 
-            try { 
-  
-                // Ask user what he wants 
-                dos.writeUTF(" ");
-                  
-                // receive the answer from client 
-                received = dis.readUTF(); 
-                  
-                if(received.equalsIgnoreCase("Exit")) 
-                {  
-                    System.out.println("Client " + this.s + " sends exit..."); 
-                    System.out.println("Closing this connection."); 
-                    this.s.close(); 
-                    System.out.println("Connection closed"); 
-                    break; 
-                }
-                  
-                // write on output stream based on the 
-                // answer from the client 
-                switch (received) { 
-                  
-                    case " " :
-                        break; 
-                          
-                    case " " :
-                        break; 
-                          
-                    default: 
-                        dos.writeUTF("Invalid input"); 
-                        break; 
-                } 
-            } catch (IOException e) { 
-                e.printStackTrace(); 
-            } 
-        } 
-          
-        try
-        { 
-            // closing resources 
-            this.dis.close(); 
-            this.dos.close(); 
-              
-        }catch(IOException e){ 
-            e.printStackTrace(); 
-        } 
-    } 
-}
 
-public static void main(String args) {
-    ClientHandler ch = new ClientHandler();
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.net.*;
+
+// ClientHandler class 
+class ClientHandler extends Thread
+{
+	final DataInputStream dis;
+	final DataOutputStream dos;
+	final Socket s;
+	
+	
+	// Constructor
+	public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)
+	{
+		this.s = s;
+		this.dis = dis;
+		this.dos = dos;
+	}
+	
+	@Override
+	public void run()
+	{
+		String received;
+		String toreturn;
+		while(true)
+		{
+			try
+			{
+				
+				// Ask user what he wants
+				
+				// receive the answer from client
+				received = dis.readUTF();
+				String[] cmd = received.split(" ");
+				
+				// write on output stream based on the
+				// answer from the client
+				switch(cmd[0].toLowerCase())
+				{
+					
+					case "login":
+						if(cmd.length < 3)
+						{
+							Util.error("Login attempted with < 3 args");
+							dos.writeUTF("error");
+							break;
+						}
+						System.out.println("Login attempted: " + cmd[1] + " " + cmd[2]);
+						dos.writeUTF("login");
+						break;
+					
+					case "exit":
+						dos.writeUTF("exit");
+						System.out.println("Client " + this.s + " sends exit...");
+						System.out.println("Closing this connection.");
+						this.s.close();
+						System.out.println("Connection closed");
+						return;
+					
+					default:
+						dos.writeUTF("error");
+						break;
+				}
+			}
+			catch(IOException ioe)
+			{
+				ioe.printStackTrace();
+				break;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		try
+		{
+			// closing resources
+			this.dis.close();
+			this.dos.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
 }
 
 

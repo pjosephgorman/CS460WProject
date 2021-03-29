@@ -7,11 +7,18 @@ import java.util.concurrent.LinkedTransferQueue;
 // Client class
 public class ConnectionHandler extends Thread
 {
-	private LinkedTransferQueue<String> commands;
+	private final LinkedTransferQueue<String> commands;
 	
 	public ConnectionHandler()
 	{
 		commands = new LinkedTransferQueue<>();
+	}
+	
+	public static void main(String[] args)
+	{
+		ConnectionHandler ch = new ConnectionHandler();
+		ch.start();
+		ch.runCommand("login x y");
 	}
 	
 	@Override
@@ -53,6 +60,8 @@ public class ConnectionHandler extends Thread
 							dos.close();
 							return;
 						case "login":
+							break;
+						case "error":
 							break;
 						default:
 							//unexpected command
