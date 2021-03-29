@@ -68,4 +68,8 @@ public class ConnectionHandler extends Thread
     public void runCommand(String cmd) {
         commands.add(cmd);
     }
-} 
+}
+
+
+// need to add:
+//

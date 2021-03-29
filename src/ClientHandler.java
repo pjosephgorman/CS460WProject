@@ -9,9 +9,7 @@ import java.net.*;
   
 // ClientHandler class 
 class ClientHandler extends Thread  
-{ 
-    DateFormat fordate = new SimpleDateFormat("yyyy/MM/dd"); 
-    DateFormat fortime = new SimpleDateFormat("hh:mm:ss"); 
+{
     final DataInputStream dis; 
     final DataOutputStream dos; 
     final Socket s; 
@@ -35,8 +33,7 @@ class ClientHandler extends Thread
             try { 
   
                 // Ask user what he wants 
-                dos.writeUTF("What do you want?[Date | Time]..\n"+ 
-                            "Type Exit to terminate connection."); 
+                dos.writeUTF(" ");
                   
                 // receive the answer from client 
                 received = dis.readUTF(); 
@@ -48,23 +45,16 @@ class ClientHandler extends Thread
                     this.s.close(); 
                     System.out.println("Connection closed"); 
                     break; 
-                } 
-                  
-                // creating Date object 
-                Date date = new Date(); 
+                }
                   
                 // write on output stream based on the 
                 // answer from the client 
                 switch (received) { 
                   
-                    case "Date" : 
-                        toreturn = fordate.format(date); 
-                        dos.writeUTF(toreturn); 
+                    case " " :
                         break; 
                           
-                    case "Time" : 
-                        toreturn = fortime.format(date); 
-                        dos.writeUTF(toreturn); 
+                    case " " :
                         break; 
                           
                     default: 
@@ -86,7 +76,11 @@ class ClientHandler extends Thread
             e.printStackTrace(); 
         } 
     } 
-} 
+}
+
+public static void main(String args) {
+    ClientHandler ch = new ClientHandler();
+}
 
 
 // // create a timeout. start a timer, and update on every action. If it has been longer than an hour since last action, terminate connection and send message
@@ -117,3 +111,11 @@ class ClientHandler extends Thread
 // {
 //    System.err.println ("Network I/O error - " + ioe);
 // }
+
+
+// need to add:
+// public static void main in this and have it create
+// a client handler and run the server and have it connect
+// and make you r test main type commands for it
+// type commands and see how it works
+// use some sort of delimiter on the string you receive to split it into fields
