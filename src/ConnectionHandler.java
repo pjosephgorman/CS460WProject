@@ -7,16 +7,18 @@ import java.util.concurrent.LinkedTransferQueue;
 // Client class
 public class ConnectionHandler extends Thread
 {
+	private Client client;
 	private final LinkedTransferQueue<String> commands;
 	
-	public ConnectionHandler()
+	public ConnectionHandler(Client cl)
 	{
+		client = cl;
 		commands = new LinkedTransferQueue<>();
 	}
 	
 	public static void main(String[] args)
 	{
-		ConnectionHandler ch = new ConnectionHandler();
+		ConnectionHandler ch = new ConnectionHandler(null);
 		ch.start();
 		ch.runCommand("login x y");
 	}

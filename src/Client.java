@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 public class Client extends Application
 {
+	private ConnectionHandler handler;
 	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart;
 	Stage stage;
 	
@@ -13,6 +14,9 @@ public class Client extends Application
 	public void start(Stage primaryStage) throws Exception
 	{
 		stage = primaryStage;
+		handler = new ConnectionHandler(this);
+		handler.start();
+		handler.runCommand("Fuck");
 		
 		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		login = new Scene(root, 300, 275);
