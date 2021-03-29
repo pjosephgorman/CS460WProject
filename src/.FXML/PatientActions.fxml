@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client">
+    <children>
+        <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
+            <content>
+                <TableView prefHeight="302.0" prefWidth="602.0">
+                    <columns>
+                        <TableColumn prefWidth="591.0" text="Patient" />
+                    </columns>
+                </TableView>
+            </content>
+        </ScrollPane>
+        <Button layoutX="82.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" text="Create Chart" />
+        <Button layoutX="270.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#changeToMedicalChart" text="View Chart" />
+        <Button layoutX="455.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#changeToMainMenu" text="Back" />
+        <Label layoutX="233.0" layoutY="7.0" text="Hosptial Patients">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
