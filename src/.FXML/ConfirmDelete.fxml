@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" minHeight="150.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client">
+<GridPane alignment="center" hgap="10" minHeight="150.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client">
     <columnConstraints>
         <ColumnConstraints minWidth="110.0" />
         <ColumnConstraints />
@@ -22,6 +22,6 @@
                 <Font size="18.0" />
             </font></Label>
         <Button minWidth="50.0" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button minWidth="50.0" mnemonicParsing="false" onAction="#changeToACP" text="No" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Button minWidth="50.0" mnemonicParsing="false" text="No" GridPane.columnIndex="3" GridPane.rowIndex="1" />
     </children>
 </GridPane>

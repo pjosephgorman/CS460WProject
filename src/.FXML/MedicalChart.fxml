@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Client">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client">
     <columnConstraints>
         <ColumnConstraints maxWidth="121.0" minWidth="89.0" prefWidth="119.0" />
         <ColumnConstraints maxWidth="222.0" minWidth="88.0" prefWidth="178.0" />
@@ -48,7 +48,7 @@
         <ListView prefHeight="178.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <Button minWidth="80.0" mnemonicParsing="false" text="Edit Fields" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
         <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Test Patient" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-        <Button minWidth="80.0" mnemonicParsing="false" onAction="#changeToPatientActions" prefHeight="25.0" prefWidth="55.0" text="Back" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+        <Button minWidth="80.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="55.0" text="Back" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
     </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
