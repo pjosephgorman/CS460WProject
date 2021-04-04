@@ -97,3 +97,10 @@ public class ConnectionHandler extends Thread
 // need to add:
 // unnecessary comment
 // magical fix
+
+// need to add:
+// public static void main in this and have it create
+// a client handler and run the server and have it connect
+// and make you r test main type commands for it
+// type commands and see how it works
+// use some sort of delimiter on the string you receive to split it into fields
