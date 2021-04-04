@@ -1,7 +1,7 @@
 RPM (team name) Minutes 2/8
 
-https://github.com/pjosephgorman/CS460WProject/tree/main 
-Attendance: 
+https://github.com/pjosephgorman/CS460WProject/tree/main
+Attendance:
 Team Leader: Patrick (present)
 Recorder: Matt (present)
 N/A: Rob (present)
@@ -11,13 +11,13 @@ Start Time: 11:30
 End Time: 12:30
 
 Tasks Performed in Meeting:
-Matthew (present) (recorder): 
+Matthew (present) (recorder):
 Worked on Introduction and General Requirements for the Specification (SRS) Document.
 
-Patrick (present) (team leader): 
+Patrick (present) (team leader):
 Worked on Introduction and General Requirements for the Specification (SRS) Document.
 
-Robert (present): 
+Robert (present):
 Worked on Introduction and General Requirements for the Specification (SRS) Document.
 
 Discussion:
@@ -28,13 +28,13 @@ Finish Specific Requirement section of the SRS Document.
 
 https://chumpolm.files.wordpress.com/2018/09/ieee-std-830-1984.pdf
 
-Spent the meeting assessing deliverable #1 and planning project, all worked on SRS document. 
+Spent the meeting assessing deliverable #1 and planning project, all worked on SRS document.
 
-Meeting with client: 
+Meeting with client:
 
 Access for four people to the system: registration staff, nurse, physician, billing.
 Registration staff: Name of patient, address, phone number, emergency contact and number, symptoms, medication patient is taking, allergies, assign nurse, put down the insurance.
-Physicians: 
+Physicians:
 Think about at least 10 diagnoses to implement in the system.
 Medications for diagnoses to implement in the system.  At least one per diagnosis
 Two different types of prescriptions: Injection is first type: Intravenous (IV, IM (intramuscular), SC (subcutaneous); oral medications is second type
@@ -78,13 +78,13 @@ Start Time: 5:00 p.m.
 End Time: 6:30 p.m.
 
 Tasks Performed in Meeting:
-	Matthew (present) (recorder): 
+	Matthew (present) (recorder):
 Worked on Functional Requirements for the Specification (SRS) Document.
 
-Patrick (present) (team leader): 
+Patrick (present) (team leader):
 Worked on Functional Requirements for the Specification (SRS) Document.
 
-Robert (present): 
+Robert (present):
 Worked on Functional Requirements for the Specification (SRS) Document.
 
 Discussion:
@@ -95,7 +95,7 @@ Action Items:
 Finish the Specifications (SRS) Documents and send it to the client.
 Create team website (github site) for client’s access and team’s use.
 
-Meeting with Client (Dr. Russell) 2/17
+Meeting with JavaSrc.Client (Dr. Russell) 2/17
 Make sure beginning of deliverable team name, members, link to team website
 Clear that there are four users for systems: Staff, physician, nurses, billing
 Read access and write access
@@ -115,7 +115,7 @@ Start Time: 2:30
 
 End Time: 4:45
 
-Tasks Performed In Meeting: 
+Tasks Performed In Meeting:
 Discussion of expected upcoming assignments.
 Discussion of 2/17 meeting and “feedback.”
 Creating Use Cases to be made outside of meeting
@@ -123,10 +123,10 @@ Fine tuning SRS Document
 
 Discussion:
 IBM Knowledge Center (IBM Use Case Definition & Example)
-MAJOR QUESTION: Do we need users and use cases for testing  information and staff. I.E. when the doctor calls for a test, do we need users and use cases to execute the test, gather results, input results, and deliver results? 
+MAJOR QUESTION: Do we need users and use cases for testing  information and staff. I.E. when the doctor calls for a test, do we need users and use cases to execute the test, gather results, input results, and deliver results?
 
 Action Items:
-Color Coded Assigned Use Case Items to be created before meeting tuesday. 
+Color Coded Assigned Use Case Items to be created before meeting tuesday.
 Rob Matt Patrick
 Use cases to create:
 LoginToSystem (Any User, System)
@@ -145,7 +145,7 @@ ReadPatientAdmittanceInfo (Reception, System)
 EditPatientAdmittanceInfo (Reception, System)
 ReadPatientVitals
 InputPatientVitals (Nurse, System)
-ReadPatientRecords (Nurse, Physician, System 
+ReadPatientRecords (Nurse, Physician, System
 EditCommentField (Nurse, System)
 AssignDoctor(Nurse, System)
 CreatePatientMedicalChart
@@ -156,7 +156,7 @@ RedBloodCellTest
 LiverFunctionTest,
 KidneyFunctionTest,
 ElectrolyteTest
-AssignRadiologyTest (Doctor, System) 
+AssignRadiologyTest (Doctor, System)
 CTTest
 XrayTest
 MRITest
@@ -187,10 +187,10 @@ End Time: 6:45
 Tasks Performed During Meeting:
 Continued compilation of Use Cases
 
-Discussion: 
+Discussion:
 When doing discharge use cases, within regular discharge papers you input the diagnosis and the prescribed medication, should we structure it that way?
 
-Action Items: 
+Action Items:
 Submit Deliverable 2 on 2/24
 
 
@@ -223,7 +223,7 @@ Assessment of Deliverable 2 status before submission
 
 Discussion:
 
-Action Items: 
+Action Items:
 Completion of the separate parts of the Use Cases.
 All members completed their parts in a timely manner
 
@@ -263,7 +263,7 @@ EditCommentField
 CreatePatientDischarge
 AssignDoctor
 
-Action Items: 
+Action Items:
 Task assignments
 Rob Matt Patrick
 AssignTest
@@ -291,7 +291,7 @@ Discussion:
 How we are going to approach the UI and Class and Object Diagrams.
 Who has the most experience to work on either respectively.
 
-Action Items: 
+Action Items:
 Finish previously assigned activity diagrams from the last meeting.
 Start designing prototype for UI:
 Rob
@@ -323,15 +323,15 @@ Shared github with new recorder.
 Discussion:
 Class and Object Diagrams:
 Classes:
-Server
-ClientHandler (Server Side only)
+JavaSrc.Server
+JavaSrc.ClientHandler (JavaSrc.Server Side only)
 PatientInfo
 TestingInfo
-Client (client side only)
+JavaSrc.Client (client side only)
 Showcase first completed Prototype UI for Login Screen
 Prototype UI’s will be in accordance with the activity diagrams that were assigned previously.
 
-Action Items: 
+Action Items:
 Matt: Will design the prototype UI’s according to his own activity diagrams and Patrick’s activity diagrams as previously assigned
 Patrick: Create the Class and Object Diagrams.
 Rob: Will design the prototype UI according to his own activity diagrams and will assist Patrick and Matt
@@ -354,5 +354,5 @@ Discussion:
 Review and finalized Class and Object Diagrams and Prototype UI’s.
 Discussed preparations of submission and what our individual contributions were.
 
-Action Items: 
+Action Items:
 Submit Deliverable 3.

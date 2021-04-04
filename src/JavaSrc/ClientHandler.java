@@ -1,13 +1,13 @@
-// Java implementation of  Server side 
-// It contains two classes : Server and ClientHandler 
-// Save file as Server.java 
+package JavaSrc;// Java implementation of  JavaSrc.Server side
+// It contains two classes : JavaSrc.Server and JavaSrc.ClientHandler
+// Save file as JavaSrc.Server.java
 
-import java.io.*;
-import java.text.*;
-import java.util.*;
-import java.net.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 
-// ClientHandler class 
+// JavaSrc.ClientHandler class
 class ClientHandler extends Thread
 {
 	final DataInputStream dis;
@@ -16,11 +16,11 @@ class ClientHandler extends Thread
 	
 	
 	// Constructor
-	public ClientHandler(Socket s, DataInputStream dis, DataOutputStream dos)
+	public ClientHandler(Socket _s, DataInputStream _dis, DataOutputStream _dos)
 	{
-		this.s = s;
-		this.dis = dis;
-		this.dos = dos;
+		this.s = _s;
+		this.dis = _dis;
+		this.dos = _dos;
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ class ClientHandler extends Thread
 					
 					case "exit":
 						dos.writeUTF("exit");
-						System.out.println("Client " + this.s + " sends exit...");
+						System.out.println("JavaSrc.Client " + this.s + " sends exit...");
 						System.out.println("Closing this connection.");
 						this.s.close();
 						System.out.println("Connection closed");
@@ -121,4 +121,3 @@ class ClientHandler extends Thread
 // {
 //    System.err.println ("Network I/O error - " + ioe);
 // }
-

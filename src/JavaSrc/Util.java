@@ -1,3 +1,5 @@
+package JavaSrc;
+
 public class Util
 {
 	private static final boolean DEBUG = true;

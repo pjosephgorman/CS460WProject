@@ -1,10 +1,12 @@
+package JavaSrc;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.concurrent.LinkedTransferQueue;
 
-// Client class
+// JavaSrc.Client class
 public class ConnectionHandler extends Thread
 {
 	private Client client;

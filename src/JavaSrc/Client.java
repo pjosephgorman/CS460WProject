@@ -1,3 +1,5 @@
+package JavaSrc;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,25 +20,25 @@ public class Client extends Application
 		handler.start();
 		handler.runCommand("Fuck");
 		
-		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
 		login = new Scene(root, 300, 275);
 		
-		Parent mainMenuParent = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
+		Parent mainMenuParent = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
 		mainMenu = new Scene(mainMenuParent);
 		
-		Parent acpParent = FXMLLoader.load(getClass().getResource("ACP.fxml"));
+		Parent acpParent = FXMLLoader.load(getClass().getResource("/fxml/ACP.fxml"));
 		acp = new Scene(acpParent);
 		
-		Parent userAccountParent = FXMLLoader.load(getClass().getResource("UserAccount.fxml"));
+		Parent userAccountParent = FXMLLoader.load(getClass().getResource("/fxml/UserAccounts.fxml"));
 		usrAccounts = new Scene(userAccountParent);
 		
-		Parent confirmDeleteParent = FXMLLoader.load(getClass().getResource("ConfirmDelete.fxml"));
+		Parent confirmDeleteParent = FXMLLoader.load(getClass().getResource("/fxml/ConfirmDelete.fxml"));
 		confDel = new Scene(confirmDeleteParent);
 		
-		Parent patientActionsParent = FXMLLoader.load(getClass().getResource("PatientActions.fxml"));
+		Parent patientActionsParent = FXMLLoader.load(getClass().getResource("/fxml/PatientActions.fxml"));
 		patientActions = new Scene(patientActionsParent);
 		
-		Parent medicalChartParent = FXMLLoader.load(getClass().getResource("MedicalChart.fxml"));
+		Parent medicalChartParent = FXMLLoader.load(getClass().getResource("/fxml/MedicalChart.fxml"));
 		medicalChart = new Scene(medicalChartParent);
 		
 		stage.setTitle("Loading...");

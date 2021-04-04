@@ -6,7 +6,7 @@
 <?import javafx.scene.text.*?>
 
 <GridPane alignment="center" hgap="10" minHeight="400.0" minWidth="400.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client">
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaSrc.Client">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
