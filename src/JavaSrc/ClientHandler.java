@@ -37,6 +37,7 @@ class ClientHandler extends Thread
 				
 				// receive the answer from client
 				received = dis.readUTF();
+				System.out.println("Received: \"" + received + "\""); //TODO remove print
 				String[] cmd = received.split(" ");
 				
 				// write on output stream based on the
