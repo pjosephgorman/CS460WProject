@@ -2,6 +2,7 @@ package JavaSrc;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.concurrent.LinkedTransferQueue;
@@ -9,8 +10,9 @@ import java.util.concurrent.LinkedTransferQueue;
 // JavaSrc.Client class
 public class ConnectionHandler extends Thread
 {
-	private Client client;
+	private final Client client;
 	private final LinkedTransferQueue<String> commands;
+	private static final int RETRY_SECONDS = 30;
 	
 	public ConnectionHandler(Client cl)
 	{
@@ -18,6 +20,7 @@ public class ConnectionHandler extends Thread
 		commands = new LinkedTransferQueue<>();
 	}
 	
+	//TODO remove test function
 	public static void main(String[] args)
 	{
 		ConnectionHandler ch = new ConnectionHandler(null);
@@ -37,7 +40,25 @@ public class ConnectionHandler extends Thread
 			InetAddress ip = InetAddress.getByName("localhost");
 			
 			// establish the connection with server port 5056
-			Socket s = new Socket(ip, 5056);
+			Socket s = null;
+			int i = 0;
+			do
+			{
+				try
+				{
+					System.out.println("Attempting connection... #" + (i++));
+					s = new Socket(ip, 5056);
+				}
+				catch(ConnectException e)
+				{
+					try
+					{
+						Thread.sleep(1000 * RETRY_SECONDS);
+					}
+					catch(InterruptedException ignored){}
+				}
+			}
+			while(s == null);
 			
 			// obtaining input and out streams
 			DataInputStream dis = new DataInputStream(s.getInputStream());
@@ -55,6 +76,7 @@ public class ConnectionHandler extends Thread
 					
 					// printing date or time as requested by client
 					String received = dis.readUTF().trim();
+					System.out.println("Received: \"" + received + "\""); //TODO remove print
 					String[] cmd = received.split(" ");
 					switch(cmd[0].toLowerCase())
 					{
@@ -64,6 +86,7 @@ public class ConnectionHandler extends Thread
 							dos.close();
 							return;
 						case "login":
+							//Switch to main menu
 							break;
 						case "error":
 							break;
