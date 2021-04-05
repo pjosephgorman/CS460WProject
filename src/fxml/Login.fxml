@@ -22,6 +22,6 @@
    <PasswordField fx:id="pwd" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
    <Label text="Username:" />
    <Label text="Password:" GridPane.rowIndex="1"/>
-   <Button fx:id="login" onAction="#doLogin" mnemonicParsing="false" text="Login" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+   <Button onAction="#doLogin" mnemonicParsing="false" text="Login" GridPane.columnIndex="1" GridPane.halignment="CENTER"
            GridPane.rowIndex="2"/>
 </GridPane>
