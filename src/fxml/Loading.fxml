@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="JavaSrc.Client" alignment="CENTER">
+
+    <Label GridPane.columnIndex="0" GridPane.rowIndex="0">
+        <graphic>
+            <ImageView fitHeight="227.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" >
+                <Image url="http://uploads.webflow.com/55eeba108c3a43fa48d62e64/55eec48dffeb9dfb4814efed_loading-wheel.gif" />
+            </ImageView>
+        </graphic>
+    </Label>
+
+</GridPane>
