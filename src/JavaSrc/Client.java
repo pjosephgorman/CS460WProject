@@ -34,8 +34,6 @@ public class Client extends Application
 		login = new Scene(loader.load(), 300, 275);
 		loginController = loader.getController();
 		
-		System.out.println(loginController.uname);
-		System.out.println(loginController.pwd);
 		handler.start(); //Placed here so necessary scenes exist for startup
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
