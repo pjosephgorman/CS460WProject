@@ -59,7 +59,7 @@ public class ConnectionHandler extends Thread
 				}
 			}
 			while(s == null);
-			
+			client.setLogin();
 			// obtaining input and out streams
 			DataInputStream dis = new DataInputStream(s.getInputStream());
 			DataOutputStream dos = new DataOutputStream(s.getOutputStream());
