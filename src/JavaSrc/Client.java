@@ -28,7 +28,7 @@ public class Client extends Application
 		//loadingController = loader.getController();
 		
 		stage.setTitle("Loading...");
-		stage.setScene(loading); //should be loading, once that's added
+		stage.setScene(loading);
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 		login = new Scene(loader.load(), 300, 275);
