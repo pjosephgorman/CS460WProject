@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Client extends Application
@@ -76,6 +77,37 @@ public class Client extends Application
 	void clearLogin()
 	{
 		Platform.runLater(() -> loginController.clear());
+	}
+	
+	void error(String msg)
+	{
+		Platform.runLater(() ->
+		{
+			Label error = getErrorLabel(stage.getScene());
+			
+			if(error != null)
+				error.setText(msg);
+		});
+	}
+	
+	void clearError()
+	{
+		Platform.runLater(() ->
+		{
+			Label error = getErrorLabel(stage.getScene());
+			
+			if(error != null)
+				error.setText("");
+		});
+	}
+	
+	private Label getErrorLabel(Scene s)
+	{
+		if(s == login)
+		{
+			return loginController.error;
+		}
+		return null;
 	}
 	
 	public void runCommand(String cmd)

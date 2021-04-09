@@ -47,12 +47,11 @@ class ClientHandler extends Thread
 				// answer from the client
 				switch(cmd[0].toLowerCase())
 				{
-					
-					case "login":
+					case "login" -> {
 						if(cmd.length < 3)
 						{
 							Util.error("Login attempted with < 3 args");
-							dos.writeUTF("error");
+							error(ErrorCodes.INVALID_LOGIN, "Login message attempted with " + cmd.length + " args, needs 3 args.");
 							break;
 						}
 						Connection c = SQLHandler.connect();
@@ -65,21 +64,18 @@ class ClientHandler extends Thread
 						else
 						{
 							Util.msg("Login Failed");
-							dos.writeUTF("error Incorrect Username or Password!");
+							error(ErrorCodes.INVALID_LOGIN, "Incorrect Username or Password!");
 						}
-						break;
-					
-					case "exit":
+					}
+					case "exit" -> {
 						dos.writeUTF("exit");
 						System.out.println("JavaSrc.Client " + this.s + " sends exit...");
 						System.out.println("Closing this connection.");
 						this.s.close();
 						System.out.println("Connection closed");
 						return;
-					
-					default:
-						dos.writeUTF("error");
-						break;
+					}
+					default -> error(ErrorCodes.UNKNOWN_ERROR, "Unknown Error");
 				}
 			}
 			catch(IOException ioe)
@@ -103,6 +99,11 @@ class ClientHandler extends Thread
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	private void error(ErrorCodes code, String msg) throws IOException
+	{
+		dos.writeUTF("error " + code.ordinal() + " " + msg);
 	}
 }
 
