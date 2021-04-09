@@ -2,10 +2,13 @@ package JavaSrc;// Java implementation of  JavaSrc.Server side
 // It contains two classes : JavaSrc.Server and JavaSrc.ClientHandler
 // Save file as JavaSrc.Server.java
 
+import JavaSrc.Data.SQLHandler;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.Connection;
 
 // JavaSrc.ClientHandler class
 class ClientHandler extends Thread
@@ -52,8 +55,18 @@ class ClientHandler extends Thread
 							dos.writeUTF("error");
 							break;
 						}
-						System.out.println("Login attempted: " + cmd[1] + " " + cmd[2]);
-						dos.writeUTF("login");
+						Connection c = SQLHandler.connect();
+						Util.msg("Login attempted: " + cmd[1] + " " + cmd[2]);
+						if(SQLHandler.login(c, cmd[1], cmd[2]))
+						{
+							Util.msg("Login Successful");
+							dos.writeUTF("login");
+						}
+						else
+						{
+							Util.msg("Login Failed");
+							dos.writeUTF("error Incorrect Username or Password!");
+						}
 						break;
 					
 					case "exit":

@@ -1,6 +1,7 @@
 package fxml;
 
 import JavaSrc.Client;
+import JavaSrc.Util;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -17,7 +18,7 @@ public class LoginController
 		{
 			//TODO display error message 'missing required fields'
 		}
-		else Client.singleton.runCommand("login " + (uname.getText().replaceAll(" ", "")) + " " + (pwd.getText().replaceAll(" ", "")));
+		else Client.singleton.runCommand("login " + (uname.getText().replaceAll(" ", "")) + " " + Util.hash(pwd.getText().replaceAll(" ", "")));
 	}
 	
 	public void clear()

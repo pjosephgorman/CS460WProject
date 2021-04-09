@@ -86,9 +86,11 @@ public class ConnectionHandler extends Thread
 							dos.close();
 							return;
 						case "login":
+							Util.msg("Login successful!");
 							//Switch to main menu
 							break;
 						case "error":
+							Util.error("Error: " + (cmd.length > 1 ? received.split(" ", 2)[1] : "Unknown Error"));
 							break;
 						default:
 							//unexpected command

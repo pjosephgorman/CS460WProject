@@ -29,7 +29,7 @@ public class SQLHandler
 							CREATE TABLE users (
 								user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
 								uname      VARCHAR(32)  NOT NULL,
-								pwd        VARCHAR(128) NOT NULL
+								pwd        CHAR(128)    NOT NULL
 							);
 							INSERT INTO users (uname, pwd) VALUES
 								('foo','%s'),
@@ -38,9 +38,9 @@ public class SQLHandler
 				
 				update(c, initStr);
 				
-				System.out.println("""
-				                   %b,%b,%b,%b""".formatted(loginUnhashed(c, "foo", "pineapple"), loginUnhashed(c, "bar", "pineapple"), loginUnhashed(c, "foo",
-						"banana"), loginUnhashed(c, "bar", "banana")));
+				System.out.printf("""
+				                  %b,%b,%b,%b%n""", loginUnhashed(c, "foo", "pineapple"), loginUnhashed(c, "bar", "pineapple"), loginUnhashed(c, "foo",
+						"banana"), loginUnhashed(c, "bar", "banana"));
 				
 				new UserInfo(0);
 				new UserInfo(1);
@@ -122,7 +122,7 @@ public class SQLHandler
 		return true;
 	}
 
-	public static ResultSet fetchUserRow(int UserID)
+	static ResultSet fetchUserRow(int UserID)
 	{
 		try
 		{
