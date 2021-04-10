@@ -108,6 +108,7 @@ public class Client extends Application
 	
 	private SceneController getController(Scenes sc)
 	{
+		if(sc == null) return null;
 		switch(sc)
 		{
 			//case PATIENTACTIONS -> {return ;}
@@ -124,6 +125,7 @@ public class Client extends Application
 	
 	public void setScene(Scenes sc)
 	{
+		if(sc == null) return;
 		clearScene(scene);
 		stage.setScene(getScene(sc));
 		scene = sc;
@@ -131,6 +133,7 @@ public class Client extends Application
 	
 	private Scene getScene(Scenes sc)
 	{
+		if(sc == null) return null;
 		switch(sc)
 		{
 			case PATIENTACTIONS -> {return patientActions;}
