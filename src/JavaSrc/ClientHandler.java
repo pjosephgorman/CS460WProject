@@ -58,7 +58,6 @@ class ClientHandler extends Thread
 										false);
 							}
 							Connection c = SQLHandler.connect();
-							Util.msg("Login attempted: " + cmd[1] + " " + cmd[2]);
 							if(SQLHandler.login(c, cmd[1], cmd[2]))
 							{
 								Util.msg("Login Successful");
@@ -72,28 +71,26 @@ class ClientHandler extends Thread
 						}
 						case "exit" -> {
 							dos.writeUTF("exit");
-							System.out.println("JavaSrc.Client " + this.s + " sends exit...");
-							System.out.println("Closing this connection.");
-							this.s.close();
-							System.out.println("Connection closed");
+							Util.msg("Client " + this.s + " sends exit...");
+							Util.msg("Closing this connection.");
+							close();
+							Util.msg("Connection closed");
 							return;
 						}
 						case "createuser" -> throw new DuplicateUsernameException(); //TODO Implement user creation
 						default -> throw new RPMError();
 					}
+					dos.writeUTF("over");
 				}
 				catch(RPMException|RPMRuntimeException e)
 				{
-					if(e.getWarn())
-						warning(e.getCode(), e.getMessage());
-					else error(e.getCode(), e.getMessage());
+					handle(e, true);
 				}
 				catch(IndexOutOfBoundsException e)
 				{
 					Util.error(e.getMessage());
 					error(ErrorCodes.UNKNOWN_ERROR, "Unknown Index-Out-Of-Bounds Error!");
 				}
-				dos.writeUTF("over");
 			}
 			catch(IOException ioe)
 			{
@@ -108,9 +105,7 @@ class ClientHandler extends Thread
 		
 		try
 		{
-			// closing resources
-			this.dis.close();
-			this.dos.close();
+			close();
 		}
 		catch(IOException e)
 		{
@@ -118,6 +113,13 @@ class ClientHandler extends Thread
 		}
 	}
 	
+	private void handle(Exception e, boolean forceTerminal) throws IOException
+	{
+		if(! (e instanceof RPMException || e instanceof RPMRuntimeException)) return;
+		if(((ErrorCodable) e).getWarn() && !forceTerminal)
+			warning(((ErrorCodable) e).getCode(), e.getMessage());
+		else error(((ErrorCodable) e).getCode(), e.getMessage());
+	}
 	private void error(ErrorCodes code, String msg) throws IOException
 	{
 		Util.error("E#%03d: %s".formatted(code.ordinal(), msg));
@@ -127,6 +129,13 @@ class ClientHandler extends Thread
 	{
 		Util.error("W#%03d: %s".formatted(code.ordinal(), msg));
 		dos.writeUTF("warn " + code.ordinal() + " " + msg);
+	}
+	
+	private void close() throws IOException
+	{
+		this.dis.close();
+		this.dos.close();
+		this.s.close();
 	}
 }
 
