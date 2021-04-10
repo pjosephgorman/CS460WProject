@@ -11,7 +11,7 @@ public class Client extends Application
 {
 	public static Client singleton;
 	ConnectionHandler handler;
-	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart;
+	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount;
 	private Stage stage;
 	private Scenes scene;
 	
@@ -21,10 +21,11 @@ public class Client extends Application
 	private MainMenuController mainMenuController;
 	private MedicalChartController medicalChartController;
 	private UserAccountsController userAccountsController;
+	private EditAccountController editAccountController;
 	
 	public enum Scenes
 	{
-		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART
+		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT
 	}
 	
 	@Override
@@ -71,6 +72,10 @@ public class Client extends Application
 		medicalChart = new Scene(loader.load());
 		medicalChartController = loader.getController();
 		
+		loader = new FXMLLoader(getClass().getResource("/fxml/EditAccountInfo.fxml"));
+		editAccount = new Scene(loader.load());
+		editAccountController = loader.getController();
+		
 		stage.setOnCloseRequest(windowEvent ->
 		                        {
 			                        singleton = null;
@@ -116,6 +121,15 @@ public class Client extends Application
 							});
 	}
 	
+	public void setEditAccount()
+	{
+		Platform.runLater(() ->
+		                  {
+			                  setScene(Scenes.EDITACCOUNT);
+			                  stage.setTitle("Edit Account");
+		                  });
+	}
+	
 	
 	void error(String msg)
 	{
@@ -146,6 +160,7 @@ public class Client extends Application
 			//case ACP -> {return ;}
 			case MAINMENU -> {return mainMenuController;}
 			case USERACCOUNTS -> {return userAccountsController;}
+			//case EDITACCOUNT -> {return  editAccountController;}
 		}
 		return null;
 	}
@@ -171,6 +186,7 @@ public class Client extends Application
 			case ACP -> {return acp;}
 			case MAINMENU -> {return mainMenu;}
 			case USERACCOUNTS -> {return usrAccounts;}
+			case EDITACCOUNT -> {return editAccount;}
 		}
 		return null;
 	}
