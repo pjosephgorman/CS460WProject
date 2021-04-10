@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 public class UserInfo
 {
 	public final int id;
-	public String uname, pwd, fname, lname;
+	public String uname, pwd, fname, mname, lname, phone, email;
 	public Roles role;
 	
 	UserInfo()
@@ -26,8 +26,11 @@ public class UserInfo
 			uname = r.getString(2);
 			pwd = r.getString(3);
 			fname = r.getString(4);
-			lname = r.getString(5);
-			role = Roles.valueOf(r.getString(6));
+			mname = r.getString(5);
+			lname = r.getString(6);
+			role = Roles.valueOf(r.getString(7));
+			phone = r.getString(8);
+			email = r.getString(9);
 			System.out.println(this);
 		}
 		catch(NoSuchUserException e)
@@ -36,6 +39,7 @@ public class UserInfo
 		}
 		catch(Exception e)
 		{
+			Util.trace(e);
 			throw new NoSuchUserException();
 		}
 	}
@@ -47,7 +51,10 @@ public class UserInfo
 		       "id=" + id +
 		       ", uname='" + uname + '\'' +
 		       ", fname='" + fname + '\'' +
+		       ", mname='" + mname + '\'' +
 		       ", lname='" + lname + '\'' +
+		       ", phone='" + phone + '\'' +
+		       ", email='" + email + '\'' +
 		       ", role=" + role +
 		       ", pwd='" + Util.abbrev(pwd) + '\'' +
 		       '}';
