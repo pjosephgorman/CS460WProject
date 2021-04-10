@@ -1,9 +1,11 @@
 package JavaSrc.Data;
 
 import JavaSrc.Exceptions.NoSuchUserException;
+import JavaSrc.Exceptions.RPMError;
 import JavaSrc.Util;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserInfo
 {
@@ -20,17 +22,11 @@ public class UserInfo
 	{
 		try
 		{
-			id = userID;
 			ResultSet r = SQLHandler.fetchUserRow(userID);
 			if(r == null || !r.next()) throw new NoSuchUserException();
-			uname = r.getString(2);
-			pwd = r.getString(3);
-			fname = r.getString(4);
-			mname = r.getString(5);
-			lname = r.getString(6);
-			role = Roles.valueOf(r.getString(7));
-			phone = r.getString(8);
-			email = r.getString(9);
+			id = r.getInt(1);
+			load(r);
+			if(id != userID) throw new RPMError();
 			System.out.println(this);
 		}
 		catch(NoSuchUserException e)
@@ -42,6 +38,25 @@ public class UserInfo
 			Util.trace(e);
 			throw new NoSuchUserException();
 		}
+	}
+	
+	UserInfo(ResultSet r) throws SQLException
+	{
+		id = r.getInt(1);
+		load(r);
+		System.out.println(this);
+	}
+	
+	private void load(ResultSet r) throws SQLException
+	{
+		uname = r.getString(2);
+		pwd = r.getString(3);
+		fname = r.getString(4);
+		mname = r.getString(5);
+		lname = r.getString(6);
+		role = Roles.valueOf(r.getString(7));
+		phone = r.getString(8);
+		email = r.getString(9);
 	}
 	
 	@Override

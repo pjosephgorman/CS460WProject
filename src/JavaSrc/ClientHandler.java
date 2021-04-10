@@ -2,7 +2,9 @@ package JavaSrc;// Java implementation of  JavaSrc.Server side
 // It contains two classes : JavaSrc.Server and JavaSrc.ClientHandler
 // Save file as JavaSrc.Server.java
 
+import JavaSrc.Data.Roles;
 import JavaSrc.Data.SQLHandler;
+import JavaSrc.Data.UserInfo;
 import JavaSrc.Exceptions.*;
 
 import java.io.DataInputStream;
@@ -14,10 +16,11 @@ import java.sql.Connection;
 // JavaSrc.ClientHandler class
 class ClientHandler extends Thread
 {
-	final DataInputStream dis;
-	final DataOutputStream dos;
-	final Socket s;
-	
+	private final DataInputStream dis;
+	private final DataOutputStream dos;
+	private final Socket s;
+	private Roles usrRole;
+	private int usrID;
 	
 	// Constructor
 	public ClientHandler(Socket _s, DataInputStream _dis, DataOutputStream _dos)
@@ -25,6 +28,7 @@ class ClientHandler extends Thread
 		this.s = _s;
 		this.dis = _dis;
 		this.dos = _dos;
+		logout();
 	}
 	
 	@Override
@@ -58,9 +62,12 @@ class ClientHandler extends Thread
 										false);
 							}
 							Connection c = SQLHandler.connect();
-							if(SQLHandler.login(c, cmd[1], cmd[2]))
+							UserInfo info = SQLHandler.login(c, cmd[1], cmd[2]);
+							if(info != null)
 							{
-								Util.msg("Login Successful");
+								usrRole = info.role;
+								usrID = info.id;
+								Util.msg("Login Successful! Role: %s, ID: %05d".formatted(usrRole,usrID));
 								dos.writeUTF("login");
 							}
 							else
@@ -136,6 +143,12 @@ class ClientHandler extends Thread
 		this.dis.close();
 		this.dos.close();
 		this.s.close();
+	}
+	
+	private void logout()
+	{
+		usrRole = null;
+		usrID = -1;
 	}
 }
 
