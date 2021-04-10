@@ -11,11 +11,12 @@ public class Client extends Application
 {
 	public static Client singleton;
 	ConnectionHandler handler;
-	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount;
+	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount, welcome;
 	private Stage stage;
 	private Scenes scene;
 	boolean timeout = false;
 	
+	private WelcomeController welcomeController;
 	private ACPController acpController;
 	private ConfirmDeleteController confirmDeleteController;
 	private LoadingController loadingController;
@@ -28,7 +29,7 @@ public class Client extends Application
 	
 	public enum Scenes
 	{
-		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT
+		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT, WELCOME
 	}
 	
 	@Override
@@ -44,6 +45,10 @@ public class Client extends Application
 		
 		stage.setTitle("Loading...");
 		stage.setScene(loading);
+		
+		loader = new FXMLLoader(getClass().getResource("/fxml/Welcome.fxml"));
+		welcome = new Scene(loader.load(), 300, 275);
+		welcomeController = loader.getController();
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
 		login = new Scene(loader.load(), 300, 275);
@@ -90,7 +95,15 @@ public class Client extends Application
 		stage.show();
 	}
 	
-	void setLogin()
+	public void setWelcome(){
+		Platform.runLater(() ->
+		                  {
+			                  setScene(Scenes.WELCOME);
+			                  stage.setTitle("Login");
+		                  });
+	}
+	
+	public void setLogin()
 	{
 		Platform.runLater(() ->
 		                  {
@@ -174,6 +187,7 @@ public class Client extends Application
 			case MAINMENU -> {return mainMenuController;}
 			case USERACCOUNTS -> {return userAccountsController;}
 			case EDITACCOUNT -> {return  editAccountController;}
+			//case WELCOME -> {return welcomeController;}
 		}
 		return null;
 	}
@@ -200,6 +214,7 @@ public class Client extends Application
 			case MAINMENU -> {return mainMenu;}
 			case USERACCOUNTS -> {return usrAccounts;}
 			case EDITACCOUNT -> {return editAccount;}
+			case WELCOME -> {return welcome;}
 		}
 		return null;
 	}
