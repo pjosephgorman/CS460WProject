@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaSrc.Client">
+<AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.PatientActionsController">
     <children>
         <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
             <content>
@@ -15,9 +15,9 @@
                 </TableView>
             </content>
         </ScrollPane>
-        <Button layoutX="82.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" text="Create Chart" />
-        <Button layoutX="270.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" text="View Chart" />
-        <Button layoutX="455.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" text="Back" />
+        <Button layoutX="82.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#createChart" text="Create Chart" />
+        <Button layoutX="270.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#viewChart" text="View Chart" />
+        <Button layoutX="455.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#back" text="Back" />
         <Label layoutX="233.0" layoutY="7.0" text="Hosptial Patients">
             <font>
                 <Font size="18.0" />

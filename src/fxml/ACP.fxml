@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaSrc.Client">
+<AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ACPController">
     <children>
         <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
             <content>
@@ -16,10 +16,10 @@
                 </TableView>
             </content>
         </ScrollPane>
-        <Button layoutX="94.0" layoutY="361.0" minWidth="50.0" mnemonicParsing="false" text="New User" />
-        <Button layoutX="218.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" text="Edit" />
-        <Button layoutX="328.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" text="Delete" />
-        <Button layoutX="444.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false"  text="Back" />
+        <Button layoutX="94.0" layoutY="361.0" minWidth="50.0" mnemonicParsing="false" onAction="#createNewUser" text="New User" />
+        <Button layoutX="218.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" onAction="#editUserInfo" text="Edit" />
+        <Button layoutX="328.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
+        <Button layoutX="444.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" onAction="#back" text="Back" />
         <Label layoutX="223.0" layoutY="7.0" text="Admin Control Panel">
             <font>
                 <Font size="18.0" />
