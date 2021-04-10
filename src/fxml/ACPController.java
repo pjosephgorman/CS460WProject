@@ -1,5 +1,6 @@
 package fxml;
 
+import JavaSrc.Client;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -23,7 +24,7 @@ public class ACPController implements SceneController
 	}
 	
 	public void back(ActionEvent event){
-	
+		Client.singleton.setMainMenu();
 	}
 	
 	@Override

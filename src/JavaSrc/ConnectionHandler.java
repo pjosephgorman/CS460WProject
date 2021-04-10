@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.LinkedTransferQueue;
 
 // JavaSrc.Client class
@@ -55,10 +56,9 @@ public class ConnectionHandler extends Thread
 					{
 						Thread.sleep(1000 * RETRY_SECONDS);
 					}
-					catch(InterruptedException ignored){}
+					catch(InterruptedException ignored) {}
 				}
-			}
-			while(s == null);
+			} while(s == null);
 			client.setLogin();
 			// obtaining input and out streams
 			DataInputStream dis = new DataInputStream(s.getInputStream());
@@ -100,8 +100,9 @@ public class ConnectionHandler extends Thread
 									code = ErrorCodes.values()[Integer.parseInt(cmd[1])];
 								}
 								catch(Exception ignored) {}
-								String msg = ("%c#%03d").formatted(cmd[0].toUpperCase().charAt(0), code.ordinal()) + " " + (cmd.length < 3 ?
-								                                                                                   "Unknown Error" : cmd[2]);
+								String msg = ("%c#%03d").formatted(cmd[0].toUpperCase().charAt(0), code.ordinal()) + " " + (cmd.length < 3
+								                                                                                            ? "Unknown Error"
+								                                                                                            : cmd[2]);
 								Util.error(msg);
 								client.error(msg);
 								break;
@@ -114,7 +115,12 @@ public class ConnectionHandler extends Thread
 						}
 					}
 				}
-				catch(InterruptedException ignored){}
+				catch(InterruptedException ignored) {}
+				catch(SocketException e)
+				{
+					client.timeout = true;
+					running = false;
+				}
 				catch(Exception e)
 				{
 					e.printStackTrace();
@@ -124,6 +130,10 @@ public class ConnectionHandler extends Thread
 			// closing resources
 			dis.close();
 			dos.close();
+		}
+		catch(SocketException e)
+		{
+			client.timeout = true;
 		}
 		catch(Exception e)
 		{
@@ -151,13 +161,3 @@ public class ConnectionHandler extends Thread
 }
 
 
-// need to add:
-// unnecessary comment
-// magical fix
-
-// need to add:
-// public static void main in this and have it create
-// a client handler and run the server and have it connect
-// and make you r test main type commands for it
-// type commands and see how it works
-// use some sort of delimiter on the string you receive to split it into fields
