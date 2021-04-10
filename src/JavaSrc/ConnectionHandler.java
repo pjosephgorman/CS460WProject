@@ -87,6 +87,7 @@ public class ConnectionHandler extends Thread
 								dos.close();
 								return;
 							case "login":
+								client.setMainMenu();
 								Util.msg("Login successful!");
 								break;
 							case "error":

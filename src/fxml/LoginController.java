@@ -4,16 +4,19 @@ import JavaSrc.Client;
 import JavaSrc.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class LoginController implements SceneController
 {
+	public Button loginButton;
 	public TextField uname;
 	public PasswordField pwd;
 	@FXML
 	private Label error;
+	
 	
 	public void doLogin(ActionEvent event)
 	{

@@ -84,9 +84,17 @@ public class Client extends Application
 	{
 		Platform.runLater(() ->
 		                  {
-			                  loginController.clear();
 			                  setScene(Scenes.LOGIN);
 			                  stage.setTitle("Login");
+		                  });
+	}
+	
+	void setMainMenu()
+	{
+		Platform.runLater(() ->
+		                  {
+		                  	setScene(Scenes.MAINMENU);
+		                  	stage.setTitle("Main Menu");
 		                  });
 	}
 	

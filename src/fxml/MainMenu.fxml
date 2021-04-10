@@ -19,15 +19,15 @@
             <font>
                 <Font size="18.0" />
             </font></Label>
-        <Button mnemonicParsing="false" onAction="#goToPatientActions" text="Patient Actions" GridPane.rowIndex="1">
+        <Button fx:id="patientActionsButton" mnemonicParsing="false" onAction="#goToPatientActions" text="Patient Actions" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
-        <Button mnemonicParsing="false" onAction="#goToACP" prefHeight="25.0" prefWidth="96.0" text="ACP" GridPane.rowIndex="2">
+        <Button fx:id="acpButton" mnemonicParsing="false" onAction="#goToACP" prefHeight="25.0" prefWidth="96.0" text="ACP" GridPane.rowIndex="2">
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
-        <Button mnemonicParsing="false" onAction="#doLogout" prefHeight="25.0" prefWidth="96.0" text="Logout" GridPane.rowIndex="3">
+        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#doLogout" prefHeight="25.0" prefWidth="96.0" text="Logout" GridPane.rowIndex="3">
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
