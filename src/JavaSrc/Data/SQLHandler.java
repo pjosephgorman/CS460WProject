@@ -38,14 +38,17 @@ public class SQLHandler
 				          	uname      VARCHAR(32)  NOT NULL                   UNIQUE,
 				          	pwd        CHAR(128)    NOT NULL,
 				          	fname      VARCHAR(64)  NOT NULL,
+				          	mname      VARCHAR(64),
 				          	lname      VARCHAR(64)  NOT NULL,
-				          	role       VARCHAR(20)  NOT NULL CHECK(role IN (%s))
+				          	role       VARCHAR(20)  NOT NULL CHECK(role IN (%s)),
+				          	phone      VARCHAR(20)  NOT NULL,
+				          	email      VARCHAR(50)  NOT NULL
 				          );""".formatted(rolelist));
 				
 				//Test values
-				createUser(c, "foo", "pineapple", true, "a", "b", Admin);
-				createUser(c, "bar", "banana", true, "a", "b", Physician);
-				createUser(c, "bah", "abcd", true, "a", "b", Nurse);
+				createUser(c, "foo", "pineapple", true, "a", "","b", Admin,"555-555-5555", "foo@gmail.com");
+				createUser(c, "bar", "banana", true, "a", "","b", Physician,"555-555-5555", "foo@gmail.com");
+				createUser(c, "bah", "abcd", true, "a", "","b", Nurse,"555-555-5555","foo@gmail.com");
 				//createUser(c, "foo", "1234", true, "a", "b", Reception);
 				
 				int cnt = 0;
@@ -67,16 +70,28 @@ public class SQLHandler
 		}
 	}
 	
-	private static void createUser(Connection c, String uname, String pwd, boolean hash, String fname, String lname, Roles role)
+	private static void createUser(Connection c, String uname, String pwd, boolean hash, String fname, String mname, String lname, Roles role,
+	                               String phone,
+	                               String email)
 			throws SQLException, RPMException
 	{
 		if(hash)
 			pwd = Util.hash(pwd);
 		try
 		{
-			update(c,
-					"INSERT INTO users (uname, pwd, fname, lname, role) VALUES ('%s','%s','%s','%s','%s')".formatted(uname, pwd, fname, lname,
-							role.name()));
+			if(mname != null && !mname.equals(""))
+			{
+				update(c,
+						"INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(uname,
+								pwd, fname, mname, lname, role.name(), phone, email));
+			}
+			else
+			{
+				update(c,
+						"INSERT INTO users (uname, pwd, fname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s')".formatted(
+								uname,
+								pwd, fname, lname, role.name(), phone, email));
+			}
 		}
 		catch(SQLException e)
 		{
