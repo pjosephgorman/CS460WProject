@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class MainMenuController implements SceneController
 {
-	private Client client;
 	public Button patientActionsButton;
 	public Button acpButton;
 	public Button logoutButton;
@@ -27,11 +26,6 @@ public class MainMenuController implements SceneController
 	public void goToPatientActions(ActionEvent event){
 		//TODO create actions to get to patient actions window
 	}
-	
-//	public void changeScene(ActionEvent event )
-//	{
-//		if(event.getSource() == logoutButton || event.getSource() == acpButton || event.getSource() == )
-//	}
 	
 	@Override
 	public void clear()
