@@ -49,7 +49,7 @@ public class SQLHandler
 				createUser(c, "foo", "pineapple", true, "a", "","b", Admin,"555-555-5555", "foo@gmail.com");
 				createUser(c, "bar", "banana", true, "a", "","b", Physician,"555-555-5555", "foo@gmail.com");
 				createUser(c, "bah", "abcd", true, "a", "","b", Nurse,"555-555-5555","foo@gmail.com");
-				//createUser(c, "foo", "1234", true, "a", "b", Reception);
+				//createUser(c, "foo", "1234", true, "a", "", "b", Reception, "555-555-5555", "foo@gmail.com");
 				
 				int cnt = 0;
 				ResultSet r = query(c, "SELECT * FROM users");
