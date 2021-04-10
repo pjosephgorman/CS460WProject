@@ -144,26 +144,30 @@ public class SQLHandler
 		return s.executeQuery(sql);
 	}
 	
-	public static boolean loginUnhashed(Connection c, String uname, String rawPwd)
+	public static UserInfo loginUnhashed(Connection c, String uname, String rawPwd)
 	{
 		return login(c, uname, Util.hash(rawPwd));
 	}
 	
-	public static boolean login(Connection c, String uname, String hashedPwd)
+	public static UserInfo login(Connection c, String uname, String hashedPwd)
 	{
 		try
 		{
 			Statement s = c.createStatement();
 			ResultSet r = s.executeQuery("SELECT pwd FROM users WHERE uname = '" + uname + "'");
-			if(!r.next()) return false;
-			if(!hashedPwd.equals(r.getString(1))) return false;
+			if(!r.next()) return null;
+			if(!hashedPwd.equals(r.getString(1))) return null;
 			if(r.next()) throw new RPMError();
+			s = c.createStatement();
+			r = s.executeQuery("SELECT user_id FROM users WHERE uname = '" + uname + "'");
+			if(!r.next()) throw new RPMError();
+			return new UserInfo(r.getInt(1));
 		}
 		catch(SQLException ignored)
 		{
-			return false;
+			return null;
 		}
-		return true;
+		
 	}
 	
 	static ResultSet fetchUserRow(int UserID)
