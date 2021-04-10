@@ -10,7 +10,9 @@ import JavaSrc.Exceptions.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.Connection;
 
 // JavaSrc.ClientHandler class
@@ -34,13 +36,20 @@ class ClientHandler extends Thread
 	@Override
 	public void run()
 	{
+		// Set the socket timeout for ten minutes
+		try
+		{
+//			s.setSoTimeout(10 * 60 * 1000);
+			s.setSoTimeout(10000);
+		}
+		catch(SocketException ignored){}
+		
 		String received;
 		String toreturn;
 		while(true)
 		{
 			try
 			{
-				
 				// Ask user what he wants
 				
 				// receive the answer from client
@@ -59,7 +68,7 @@ class ClientHandler extends Thread
 							{
 								Util.error("Login attempted with < 3 args");
 								throw new RPMError(ErrorCodes.INVALID_LOGIN, "Login message attempted with " + cmd.length + " args, needs 3 args.",
-										false);
+								                   false);
 							}
 							Connection c = SQLHandler.connect();
 							UserInfo info = SQLHandler.login(c, cmd[1], cmd[2]);
@@ -73,7 +82,7 @@ class ClientHandler extends Thread
 							else
 							{
 								Util.msg("Login Failed");
-								throw new RPMError(ErrorCodes.INVALID_LOGIN, "Incorrect Username or Password!",true);
+								throw new RPMError(ErrorCodes.INVALID_LOGIN, "Incorrect Username or Password!", true);
 							}
 						}
 						case "exit" -> {
@@ -89,7 +98,7 @@ class ClientHandler extends Thread
 					}
 					dos.writeUTF("over");
 				}
-				catch(RPMException|RPMRuntimeException e)
+				catch(RPMException | RPMRuntimeException e)
 				{
 					handle(e, true);
 				}
@@ -99,6 +108,19 @@ class ClientHandler extends Thread
 					error(ErrorCodes.UNKNOWN_ERROR, "Unknown Index-Out-Of-Bounds Error!");
 				}
 			}
+			catch(InterruptedIOException iioe)
+			{
+				try
+				{
+					dos.writeUTF("exit");
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
+				break;
+			}
+			
 			catch(IOException ioe)
 			{
 				ioe.printStackTrace();
@@ -122,16 +144,17 @@ class ClientHandler extends Thread
 	
 	private void handle(Exception e, boolean forceTerminal) throws IOException
 	{
-		if(! (e instanceof RPMException || e instanceof RPMRuntimeException)) return;
-		if(((ErrorCodable) e).getWarn() && !forceTerminal)
-			warning(((ErrorCodable) e).getCode(), e.getMessage());
+		if(!(e instanceof RPMException || e instanceof RPMRuntimeException)) return;
+		if(((ErrorCodable) e).getWarn() && !forceTerminal) warning(((ErrorCodable) e).getCode(), e.getMessage());
 		else error(((ErrorCodable) e).getCode(), e.getMessage());
 	}
+	
 	private void error(ErrorCodes code, String msg) throws IOException
 	{
 		Util.error("E#%03d: %s".formatted(code.ordinal(), msg));
 		dos.writeUTF("error " + code.ordinal() + " " + msg);
 	}
+	
 	private void warning(ErrorCodes code, String msg) throws IOException
 	{
 		Util.error("W#%03d: %s".formatted(code.ordinal(), msg));
@@ -152,32 +175,3 @@ class ClientHandler extends Thread
 	}
 }
 
-
-// // create a timeout. start a timer, and update on every action. If it has been longer than an hour since last action, terminate connection and send message
-
-// // Set the socket timeout for ten seconds
-// connection.setSoTimeout (10000);
-// try
-// {
-//    // Create a DataInputStream for reading from socket
-//    DataInputStream dis = new DataInputStream (connection.getInputStream());
-//    // Read data until end of data
-//    for (;;)
-//    {
-//       String line = dis.readLine();
-//       if (line != null)
-//          System.out.println (line);
-//       else
-//          break;
-//    }
-// }
-// // Exception thrown when network timeout occurs
-// catch (InterruptedIOException iioe)
-// {
-//    System.err.println ("Remote host timed out during read operation");
-// }
-// // Exception thrown when general network I/O error occurs
-// catch (IOException ioe)
-// {
-//    System.err.println ("Network I/O error - " + ioe);
-// }

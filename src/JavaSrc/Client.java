@@ -14,6 +14,7 @@ public class Client extends Application
 	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount;
 	private Stage stage;
 	private Scenes scene;
+	boolean timeout = false;
 	
 	private ACPController acpController;
 	private ConfirmDeleteController confirmDeleteController;
