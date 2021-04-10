@@ -36,7 +36,7 @@ public class Client extends Application
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Loading.fxml"));
 		loading = new Scene(loader.load());
-		//loadingController = loader.getController();
+		loadingController = loader.getController();
 		
 		stage.setTitle("Loading...");
 		stage.setScene(loading);
@@ -49,21 +49,27 @@ public class Client extends Application
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
 		mainMenu = new Scene(loader.load());
+		mainMenuController = loader.getController();
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/ACP.fxml"));
 		acp = new Scene(loader.load());
 		
+		
 		loader = new FXMLLoader(getClass().getResource("/fxml/UserAccounts.fxml"));
 		usrAccounts = new Scene(loader.load());
+		userAccountsController = loader.getController();
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/ConfirmDelete.fxml"));
 		confDel = new Scene(loader.load());
+		confirmDeleteController = loader.getController();
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/PatientActions.fxml"));
 		patientActions = new Scene(loader.load());
 		
+		
 		loader = new FXMLLoader(getClass().getResource("/fxml/MedicalChart.fxml"));
 		medicalChart = new Scene(loader.load());
+		medicalChartController = loader.getController();
 		
 		stage.setOnCloseRequest(windowEvent ->
 		                        {
