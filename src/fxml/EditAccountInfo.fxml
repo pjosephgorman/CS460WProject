@@ -18,7 +18,7 @@
         <ColumnConstraints />
         <ColumnConstraints />
         <ColumnConstraints />
-        <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints maxWidth="0.0" minWidth="0.0"  prefWidth="0.0" />
         <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
     </columnConstraints>
     <rowConstraints>
