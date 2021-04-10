@@ -1,9 +1,11 @@
 package JavaSrc.Exceptions;
 
-public class DuplicateUsernameException extends RuntimeException
+import JavaSrc.ErrorCodes;
+
+public class DuplicateUsernameException extends RPMException
 {
 	public DuplicateUsernameException()
 	{
-		super("\nMultiple entries found in the database with duplicate usernames!\nThese rows must be fixed manually!");
+		super(ErrorCodes.DUPE_UNAME, "Username already in use!");
 	}
 }

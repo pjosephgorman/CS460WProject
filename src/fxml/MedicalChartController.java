@@ -4,7 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
 
-public class MedicalChartController
+public class MedicalChartController implements SceneController
 {
 	public ChoiceBox physicianChoiceBox;
 	public TextField idTextField;
@@ -32,5 +32,17 @@ public class MedicalChartController
 	
 	public void fillTestsPerformed(ActionEvent event){
 		//TODO fills the tests performed field after button is pressed
+	}
+	
+	@Override
+	public void clear()
+	{
+	
+	}
+	
+	@Override
+	public void error(String msg)
+	{
+	
 	}
 }

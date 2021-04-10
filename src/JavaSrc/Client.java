@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class Client extends Application
@@ -14,6 +13,7 @@ public class Client extends Application
 	private ConnectionHandler handler;
 	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart;
 	private Stage stage;
+	private Scenes scene;
 	
 	private ConfirmDeleteController confirmDeleteController;
 	private LoadingController loadingController;
@@ -21,6 +21,11 @@ public class Client extends Application
 	private MainMenuController mainMenuController;
 	private MedicalChartController medicalChartController;
 	private UserAccountsController userAccountsController;
+	
+	public enum Scenes
+	{
+		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART
+	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception
@@ -74,45 +79,71 @@ public class Client extends Application
 		Platform.runLater(() ->
 		                  {
 			                  loginController.clear();
-			                  stage.setScene(login);
+			                  setScene(Scenes.LOGIN);
 			                  stage.setTitle("Login");
 		                  });
-	}
-	
-	void clearLogin()
-	{
-		Platform.runLater(() -> loginController.clear());
 	}
 	
 	void error(String msg)
 	{
 		Platform.runLater(() ->
 		{
-			Label error = getErrorLabel(stage.getScene());
+			SceneController c = getController(scene);
 			
-			if(error != null)
-				error.setText(msg);
+			if(c != null)
+				c.error(msg);
 		});
 	}
 	
 	void clearError()
 	{
-		Platform.runLater(() ->
-		{
-			Label error = getErrorLabel(stage.getScene());
-			
-			if(error != null)
-				error.setText("");
-		});
+		error("");
 	}
 	
-	private Label getErrorLabel(Scene s)
+	private SceneController getController(Scenes sc)
 	{
-		if(s == login)
+		switch(sc)
 		{
-			return loginController.error;
+			//case PATIENTACTIONS -> {return ;}
+			case LOADING -> {return loadingController;}
+			case LOGIN -> {return loginController;}
+			case CONFDEL -> {return confirmDeleteController;}
+			case MEDICALCHART -> {return medicalChartController;}
+			//case ACP -> {return ;}
+			case MAINMENU -> {return mainMenuController;}
+			case USERACCOUNTS -> {return userAccountsController;}
 		}
 		return null;
+	}
+	
+	public void setScene(Scenes sc)
+	{
+		clearScene(scene);
+		stage.setScene(getScene(sc));
+		scene = sc;
+	}
+	
+	private Scene getScene(Scenes sc)
+	{
+		switch(sc)
+		{
+			case PATIENTACTIONS -> {return patientActions;}
+			case LOADING -> {return loading;}
+			case LOGIN -> {return login;}
+			case CONFDEL -> {return confDel;}
+			case MEDICALCHART -> {return medicalChart;}
+			case ACP -> {return acp;}
+			case MAINMENU -> {return mainMenu;}
+			case USERACCOUNTS -> {return usrAccounts;}
+		}
+		return null;
+	}
+	
+	private void clearScene(Scenes sc)
+	{
+		SceneController c = getController(sc);
+		if(c != null)
+			c.clear();
 	}
 	
 	public void runCommand(String cmd)

@@ -27,4 +27,10 @@ public class Util
 	public static void error(String err) {if(DEBUG) System.err.println(err);}
 	public static void msg(String msg) {if(DEBUG) System.out.println(msg);}
 	public static void trace(Exception e) {if(DEBUG) e.printStackTrace();}
+	
+	public static String abbrev(String str)
+	{
+		if(str.length() < 13) return str;
+		return str.substring(0,10) + "...";
+	}
 }

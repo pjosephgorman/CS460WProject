@@ -3,7 +3,7 @@ package fxml;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-public class ConfirmDeleteController
+public class ConfirmDeleteController implements SceneController
 {
 	public Button yesButton;
 	public Button noButton;
@@ -14,5 +14,17 @@ public class ConfirmDeleteController
 	
 	public void doNoButton(ActionEvent event){
 		//TODO creates function that denies deletion
+	}
+	
+	@Override
+	public void clear()
+	{
+	
+	}
+	
+	@Override
+	public void error(String msg)
+	{
+	
 	}
 }

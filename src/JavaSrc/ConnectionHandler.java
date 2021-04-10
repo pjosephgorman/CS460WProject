@@ -73,35 +73,44 @@ public class ConnectionHandler extends Thread
 				{
 					String tosend = commands.take();
 					dos.writeUTF(tosend);
-					
-					// printing date or time as requested by client
-					String received = dis.readUTF().trim();
-					System.out.println("Received: \"" + received + "\""); //TODO remove print
-					String[] cmd = received.split(" ");
-					//terminate GUI, and then return
-					//Switch to main menu
-					//unexpected command
-					switch(cmd[0].toLowerCase())
+					boolean processing = true;
+					while(processing)
 					{
-						case "exit" -> {
-							dis.close();
-							dos.close();
-							return;
+						// printing date or time as requested by client
+						String received = dis.readUTF().trim();
+						System.out.println("Received: \"" + received + "\""); //TODO remove print
+						String[] cmd = received.split(" ");
+						switch(cmd[0].toLowerCase())
+						{
+							case "exit":
+								dis.close();
+								dos.close();
+								return;
+							case "login":
+								Util.msg("Login successful!");
+								break;
+							case "error":
+								processing = false;
+							case "warning":
+								cmd = received.split(" ", 3);
+								ErrorCodes code = ErrorCodes.UNKNOWN_ERROR;
+								try
+								{
+									code = ErrorCodes.values()[Integer.parseInt(cmd[1])];
+								}
+								catch(Exception ignored) {}
+								String msg = ("%c#%03d").formatted(cmd[0].toUpperCase().charAt(0), code.ordinal()) + " " + (cmd.length < 3 ?
+								                                                                                   "Unknown Error" : cmd[2]);
+								Util.error(msg);
+								client.error(msg);
+								break;
+							case "over":
+								processing = false;
+								break;
+							default:
+								running = false;
+								break;
 						}
-						case "login" -> Util.msg("Login successful!");
-						case "error" -> {
-							cmd = received.split(" ", 3);
-							ErrorCodes code = ErrorCodes.UNKNOWN_ERROR;
-							try
-							{
-								code = ErrorCodes.values()[Integer.parseInt(cmd[1])];
-							}
-							catch(Exception ignored) {}
-							String msg = ("E#%03d").formatted(code.ordinal()) + " " + (cmd.length < 3 ? "Unknown Error" : cmd[2]);
-							Util.error(msg);
-							client.error(msg);
-						}
-						default -> running = false;
 					}
 				}
 				catch(Exception e)

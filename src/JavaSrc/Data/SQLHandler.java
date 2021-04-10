@@ -1,10 +1,14 @@
 package JavaSrc.Data;
 
 import JavaSrc.Exceptions.DuplicateUsernameException;
+import JavaSrc.Exceptions.RPMError;
+import JavaSrc.Exceptions.RPMException;
 import JavaSrc.Util;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 import java.sql.*;
+
+import static JavaSrc.Data.Roles.*;
 
 @SuppressWarnings("SqlResolve")
 public class SQLHandler
@@ -21,29 +25,35 @@ public class SQLHandler
 			Connection c = connect();
 			try
 			{
+				if(query(c, "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'users'").next()) return; //Already exists
+				
 				//Create table
-				String initStr = //TODO Fill out tables, fill out final init vals -V
-						"""
-						IF(NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'users'))
-						BEGIN
-							CREATE TABLE users (
-								user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
-								uname      VARCHAR(32)  NOT NULL,
-								pwd        CHAR(128)    NOT NULL
-							);
-							INSERT INTO users (uname, pwd) VALUES
-								('foo','%s'),
-								('bar','%s')
-						END""".formatted(Util.hash("pineapple"), Util.hash("banana"));
+				StringBuilder rolelist = new StringBuilder();
+				for(Roles r : Roles.values())
+				{ rolelist.append(",'").append(r.name()).append("'"); }
+				rolelist.deleteCharAt(0); //Extra comma!
+				update(c, """
+				          CREATE TABLE users (
+				          	user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
+				          	uname      VARCHAR(32)  NOT NULL                   UNIQUE,
+				          	pwd        CHAR(128)    NOT NULL,
+				          	fname      VARCHAR(64)  NOT NULL,
+				          	lname      VARCHAR(64)  NOT NULL,
+				          	role       VARCHAR(20)  NOT NULL CHECK(role IN (%s))
+				          );""".formatted(rolelist));
 				
-				update(c, initStr);
+				//Test values
+				createUser(c, "foo", "pineapple", true, "a", "b", Admin);
+				createUser(c, "bar", "banana", true, "a", "b", Physician);
+				createUser(c, "bah", "abcd", true, "a", "b", Nurse);
+				//createUser(c, "foo", "1234", true, "a", "b", Reception);
 				
-				System.out.printf("""
-				                  %b,%b,%b,%b%n""", loginUnhashed(c, "foo", "pineapple"), loginUnhashed(c, "bar", "pineapple"), loginUnhashed(c, "foo",
-						"banana"), loginUnhashed(c, "bar", "banana"));
-				
-				new UserInfo(0);
-				new UserInfo(1);
+				int cnt = 0;
+				ResultSet r = query(c, "SELECT * FROM users");
+				while(r.next())
+				{
+					new UserInfo(cnt++);
+				}
 			}
 			catch(Exception e)
 			{
@@ -54,6 +64,25 @@ public class SQLHandler
 		{
 			Util.error(e.getMessage());
 			System.exit(1);
+		}
+	}
+	
+	private static void createUser(Connection c, String uname, String pwd, boolean hash, String fname, String lname, Roles role)
+			throws SQLException, RPMException
+	{
+		if(hash)
+			pwd = Util.hash(pwd);
+		try
+		{
+			update(c,
+					"INSERT INTO users (uname, pwd, fname, lname, role) VALUES ('%s','%s','%s','%s','%s')".formatted(uname, pwd, fname, lname,
+							role.name()));
+		}
+		catch(SQLException e)
+		{
+			if(e.getMessage().contains("UNIQUE"))
+				throw new DuplicateUsernameException();
+			throw e;
 		}
 	}
 	
@@ -105,7 +134,7 @@ public class SQLHandler
 		return login(c, uname, Util.hash(rawPwd));
 	}
 	
-	public static boolean login(Connection c, String uname, String hashedPwd) throws DuplicateUsernameException
+	public static boolean login(Connection c, String uname, String hashedPwd)
 	{
 		try
 		{
@@ -113,7 +142,7 @@ public class SQLHandler
 			ResultSet r = s.executeQuery("SELECT pwd FROM users WHERE uname = '" + uname + "'");
 			if(!r.next()) return false;
 			if(!hashedPwd.equals(r.getString(1))) return false;
-			if(r.next()) throw new DuplicateUsernameException();
+			if(r.next()) throw new RPMError();
 		}
 		catch(SQLException ignored)
 		{
@@ -121,7 +150,7 @@ public class SQLHandler
 		}
 		return true;
 	}
-
+	
 	static ResultSet fetchUserRow(int UserID)
 	{
 		try

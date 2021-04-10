@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-public class UserAccountsController
+public class UserAccountsController implements SceneController
 {
 	public TextField username;
 	public TextField newPassword;
@@ -26,5 +26,17 @@ public class UserAccountsController
 	
 	public void doSubmit(ActionEvent event){
 		//TODO create submit button that sends data to database
+	}
+	
+	@Override
+	public void clear()
+	{
+	
+	}
+	
+	@Override
+	public void error(String msg)
+	{
+	
 	}
 }

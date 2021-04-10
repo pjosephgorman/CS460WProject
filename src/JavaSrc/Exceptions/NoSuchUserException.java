@@ -1,6 +1,6 @@
 package JavaSrc.Exceptions;
 
-public class NoSuchUserException extends RuntimeException
+public class NoSuchUserException extends RPMRuntimeException
 {
 	public NoSuchUserException()
 	{

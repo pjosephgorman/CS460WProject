@@ -3,6 +3,7 @@ package JavaSrc;// Java implementation of  JavaSrc.Server side
 // Save file as JavaSrc.Server.java
 
 import JavaSrc.Data.SQLHandler;
+import JavaSrc.Exceptions.*;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -45,38 +46,54 @@ class ClientHandler extends Thread
 				
 				// write on output stream based on the
 				// answer from the client
-				switch(cmd[0].toLowerCase())
+				try
 				{
-					case "login" -> {
-						if(cmd.length < 3)
-						{
-							Util.error("Login attempted with < 3 args");
-							error(ErrorCodes.INVALID_LOGIN, "Login message attempted with " + cmd.length + " args, needs 3 args.");
-							break;
+					switch(cmd[0].toLowerCase())
+					{
+						case "login" -> {
+							if(cmd.length < 3)
+							{
+								Util.error("Login attempted with < 3 args");
+								throw new RPMError(ErrorCodes.INVALID_LOGIN, "Login message attempted with " + cmd.length + " args, needs 3 args.",
+										false);
+							}
+							Connection c = SQLHandler.connect();
+							Util.msg("Login attempted: " + cmd[1] + " " + cmd[2]);
+							if(SQLHandler.login(c, cmd[1], cmd[2]))
+							{
+								Util.msg("Login Successful");
+								dos.writeUTF("login");
+							}
+							else
+							{
+								Util.msg("Login Failed");
+								throw new RPMError(ErrorCodes.INVALID_LOGIN, "Incorrect Username or Password!",true);
+							}
 						}
-						Connection c = SQLHandler.connect();
-						Util.msg("Login attempted: " + cmd[1] + " " + cmd[2]);
-						if(SQLHandler.login(c, cmd[1], cmd[2]))
-						{
-							Util.msg("Login Successful");
-							dos.writeUTF("login");
+						case "exit" -> {
+							dos.writeUTF("exit");
+							System.out.println("JavaSrc.Client " + this.s + " sends exit...");
+							System.out.println("Closing this connection.");
+							this.s.close();
+							System.out.println("Connection closed");
+							return;
 						}
-						else
-						{
-							Util.msg("Login Failed");
-							error(ErrorCodes.INVALID_LOGIN, "Incorrect Username or Password!");
-						}
+						case "createuser" -> throw new DuplicateUsernameException(); //TODO Implement user creation
+						default -> throw new RPMError();
 					}
-					case "exit" -> {
-						dos.writeUTF("exit");
-						System.out.println("JavaSrc.Client " + this.s + " sends exit...");
-						System.out.println("Closing this connection.");
-						this.s.close();
-						System.out.println("Connection closed");
-						return;
-					}
-					default -> error(ErrorCodes.UNKNOWN_ERROR, "Unknown Error");
 				}
+				catch(RPMException|RPMRuntimeException e)
+				{
+					if(e.getWarn())
+						warning(e.getCode(), e.getMessage());
+					else error(e.getCode(), e.getMessage());
+				}
+				catch(IndexOutOfBoundsException e)
+				{
+					Util.error(e.getMessage());
+					error(ErrorCodes.UNKNOWN_ERROR, "Unknown Index-Out-Of-Bounds Error!");
+				}
+				dos.writeUTF("over");
 			}
 			catch(IOException ioe)
 			{
@@ -103,7 +120,13 @@ class ClientHandler extends Thread
 	
 	private void error(ErrorCodes code, String msg) throws IOException
 	{
+		Util.error("E#%03d: %s".formatted(code.ordinal(), msg));
 		dos.writeUTF("error " + code.ordinal() + " " + msg);
+	}
+	private void warning(ErrorCodes code, String msg) throws IOException
+	{
+		Util.error("W#%03d: %s".formatted(code.ordinal(), msg));
+		dos.writeUTF("warn " + code.ordinal() + " " + msg);
 	}
 }
 

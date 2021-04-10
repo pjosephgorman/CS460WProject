@@ -3,7 +3,7 @@ package fxml;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-public class MainMenuController
+public class MainMenuController implements SceneController
 {
 	public Button patientActionsButton;
 	public Button acpButton;
@@ -19,5 +19,17 @@ public class MainMenuController
 	
 	public void goToPatientActions(ActionEvent event){
 		//TODO creat actions to get to patient actions window
+	}
+	
+	@Override
+	public void clear()
+	{
+	
+	}
+	
+	@Override
+	public void error(String msg)
+	{
+	
 	}
 }
