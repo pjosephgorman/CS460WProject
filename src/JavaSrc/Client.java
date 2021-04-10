@@ -15,6 +15,7 @@ public class Client extends Application
 	private Stage stage;
 	private Scenes scene;
 	
+	private ACPController acpController;
 	private ConfirmDeleteController confirmDeleteController;
 	private LoadingController loadingController;
 	private LoginController loginController;
@@ -22,6 +23,7 @@ public class Client extends Application
 	private MedicalChartController medicalChartController;
 	private UserAccountsController userAccountsController;
 	private EditAccountController editAccountController;
+	private PatientActionsController patientActionsController;
 	
 	public enum Scenes
 	{
@@ -54,6 +56,7 @@ public class Client extends Application
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/ACP.fxml"));
 		acp = new Scene(loader.load());
+		acpController = loader.getController();
 		
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/UserAccounts.fxml"));
@@ -66,6 +69,7 @@ public class Client extends Application
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/PatientActions.fxml"));
 		patientActions = new Scene(loader.load());
+		patientActionsController = loader.getController();
 		
 		
 		loader = new FXMLLoader(getClass().getResource("/fxml/MedicalChart.fxml"));
@@ -94,7 +98,7 @@ public class Client extends Application
 		                  });
 	}
 	
-	void setMainMenu()
+	public void setMainMenu()
 	{
 		Platform.runLater(() ->
 		                  {
@@ -130,6 +134,14 @@ public class Client extends Application
 		                  });
 	}
 	
+	public void setCreateMedicalChart()
+	{
+		Platform.runLater(() ->
+		                  {
+			                  setScene(Scenes.MEDICALCHART);
+			                  stage.setTitle("Create Medical Chart");
+		                  });
+	}
 	
 	void error(String msg)
 	{
@@ -152,15 +164,15 @@ public class Client extends Application
 		if(sc == null) return null;
 		switch(sc)
 		{
-			//case PATIENTACTIONS -> {return ;}
+			case PATIENTACTIONS -> {return patientActionsController;}
 			case LOADING -> {return loadingController;}
 			case LOGIN -> {return loginController;}
 			case CONFDEL -> {return confirmDeleteController;}
 			case MEDICALCHART -> {return medicalChartController;}
-			//case ACP -> {return ;}
+			case ACP -> {return acpController;}
 			case MAINMENU -> {return mainMenuController;}
 			case USERACCOUNTS -> {return userAccountsController;}
-			//case EDITACCOUNT -> {return  editAccountController;}
+			case EDITACCOUNT -> {return  editAccountController;}
 		}
 		return null;
 	}
