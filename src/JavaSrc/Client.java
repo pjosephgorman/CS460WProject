@@ -1,6 +1,6 @@
 package JavaSrc;
 
-import fxml.LoginController;
+import fxml.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +15,12 @@ public class Client extends Application
 	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart;
 	private Stage stage;
 	
+	private ConfirmDeleteController confirmDeleteController;
+	private LoadingController loadingController;
 	private LoginController loginController;
+	private MainMenuController mainMenuController;
+	private MedicalChartController medicalChartController;
+	private UserAccountsController userAccountsController;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception

@@ -5,8 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="444.0" prefWidth="554.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaSrc.Client">
+<GridPane alignment="center" hgap="10" prefHeight="444.0" prefWidth="554.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="fxml.UserAccountsController">
     <columnConstraints>
         <ColumnConstraints />
         <ColumnConstraints />
@@ -61,8 +61,8 @@
         <Label text="*" GridPane.columnIndex="2" GridPane.rowIndex="7" />
         <Label text="*" GridPane.columnIndex="2" GridPane.rowIndex="8" />
         <Label text="*" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-        <Button mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-        <Button mnemonicParsing="false" text="Submit" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+        <Button mnemonicParsing="false" onAction="#doCancel" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+        <Button mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="3" GridPane.rowIndex="11" />
         <Label text="* = Required Field" GridPane.rowIndex="11" />
         <Label alignment="CENTER" text="Edit User Account" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER">
             <font>
