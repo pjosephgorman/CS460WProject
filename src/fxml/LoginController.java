@@ -26,7 +26,8 @@ public class LoginController implements SceneController
 			return;
 		}
 		error.setText("");
-		Client.singleton.runCommand("login " + (uname.getText().replaceAll(" ", "")) + " " + Util.hash(pwd.getText().replaceAll(" ", "")));
+		Client.singleton.runCommand("login %s %s".formatted((uname.getText().replaceAll(" ", "")), Util.hash(pwd.getText().replaceAll(
+				" ", ""))));
 	}
 	
 	@Override
