@@ -114,6 +114,7 @@ public class ConnectionHandler extends Thread
 						}
 					}
 				}
+				catch(InterruptedException ignored){}
 				catch(Exception e)
 				{
 					e.printStackTrace();
@@ -128,11 +129,24 @@ public class ConnectionHandler extends Thread
 		{
 			e.printStackTrace();
 		}
+		finally
+		{
+			client.handler = null;
+			Util.msg("Cleared connectionHandler!");
+			client.handler = new ConnectionHandler(client);
+			client.handler.start();
+		}
 	}
 	
 	public void runCommand(String cmd)
 	{
 		commands.add(cmd);
+	}
+	
+	public void kill()
+	{
+		commands.clear();
+		runCommand("exit");
 	}
 }
 

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 public class Client extends Application
 {
 	public static Client singleton;
-	private ConnectionHandler handler;
+	ConnectionHandler handler;
 	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart;
 	private Stage stage;
 	private Scenes scene;
@@ -161,6 +161,12 @@ public class Client extends Application
 		SceneController c = getController(sc);
 		if(c != null)
 			c.clear();
+	}
+	
+	public void logout()
+	{
+		setScene(Scenes.LOADING);
+		handler.kill();
 	}
 	
 	public void runCommand(String cmd)

@@ -16,6 +16,7 @@ public class MainMenuController implements SceneController
 	public void doLogout(ActionEvent event) throws IOException
 	{
 		//TODO create logout function
+		Client.singleton.logout();
 	}
 	
 	public void goToACP(ActionEvent event)
