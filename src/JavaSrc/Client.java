@@ -84,7 +84,7 @@ public class Client extends Application
 	{
 		Platform.runLater(() ->
 		                  {
-			                  setScene(Scenes.LOGIN);
+		                  	  setScene(Scenes.LOGIN);
 			                  stage.setTitle("Login");
 		                  });
 	}
@@ -93,10 +93,29 @@ public class Client extends Application
 	{
 		Platform.runLater(() ->
 		                  {
-		                  	setScene(Scenes.MAINMENU);
-		                  	stage.setTitle("Main Menu");
+		                  	  setScene(Scenes.MAINMENU);
+		                  	  stage.setTitle("Main Menu");
 		                  });
 	}
+	
+	public void setACP()
+	{
+		Platform.runLater(() ->
+		                   {
+		                   	   setScene(Scenes.ACP);
+		                   	   stage.setTitle("Admin Control Panel");
+		                   });
+	}
+	
+	public void setPatientActions()
+	{
+		Platform.runLater(() ->
+							{
+								setScene(Scenes.PATIENTACTIONS);
+								stage.setTitle("Patient Actions");
+							});
+	}
+	
 	
 	void error(String msg)
 	{
