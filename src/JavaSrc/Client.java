@@ -194,6 +194,7 @@ public class Client extends Application
 	
 	void updateInfo(UserInfo info)
 	{
+		Util.msg("Updating login profile with info:%n%s%n".formatted(info));
 		for(Scenes sc : Scenes.values())
 		{
 			SceneController c = getController(sc);

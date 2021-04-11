@@ -13,21 +13,21 @@ public class UserInfo
 	public String uname, pwd, fname, mname, lname, phone, email;
 	public Roles role;
 	
-	UserInfo()
+	private UserInfo(int userID)
 	{
-		id = 0;
+		id = userID;
 	}
 	
-	UserInfo(int userID) throws NoSuchUserException
+	public static UserInfo loadUser(int userID) throws NoSuchUserException
 	{
 		try
 		{
 			ResultSet r = SQLHandler.fetchUserRow(userID);
 			if(r == null || !r.next()) throw new NoSuchUserException();
-			id = r.getInt(1);
-			load(r);
-			if(id != userID) throw new RPMError();
-			System.out.println(this);
+			if(userID != r.getInt(1)) throw new RPMError();
+			UserInfo ret = new UserInfo(userID);
+			ret.load(r);
+			return ret;
 		}
 		catch(NoSuchUserException e)
 		{
@@ -59,6 +59,29 @@ public class UserInfo
 		email = r.getString(9);
 	}
 	
+	public String store()
+	{
+		return id + ";" + uname + ";" + pwd + ";" + fname + ";" + (mname == null ? "" : mname) + ";" + lname + ";" + role + ";" + phone + ";" + email;
+	}
+	
+	public static UserInfo load(String str)
+	{
+		String[] args = str.split(";");
+		UserInfo ret = new UserInfo(Integer.parseInt(args[0]));
+		ret.uname = args[1];
+		ret.pwd = args[2];
+		ret.fname = args[3];
+		if(args[4].equals(""))
+			ret.mname = null;
+		else ret.mname = args[4];
+		ret.lname = args[5];
+		ret.role = Roles.valueOf(args[6]);
+		ret.phone = args[7];
+		ret.email = args[8];
+		//System.out.printf("Loaded '%s' as:\n%s%n", str,ret);
+		return ret;
+	}
+	
 	@Override
 	public String toString()
 	{
@@ -66,7 +89,9 @@ public class UserInfo
 		       "id=" + id +
 		       ", uname='" + uname + '\'' +
 		       ", fname='" + fname + '\'' +
-		       ", mname='" + mname + '\'' +
+		       (mname == null
+		            ? ""
+		            : ", mname='" + mname + '\'') +
 		       ", lname='" + lname + '\'' +
 		       ", phone='" + phone + '\'' +
 		       ", email='" + email + '\'' +

@@ -78,7 +78,7 @@ class ClientHandler extends Thread
 								usrRole = info.role;
 								usrID = info.id;
 								Util.msg("Login Successful! Role: %s, ID: %05d".formatted(usrRole,usrID));
-								dos.writeUTF("login");
+								dos.writeUTF("login " + info.store());
 							}
 							else
 							{
@@ -153,7 +153,7 @@ class ClientHandler extends Thread
 	private void error(ErrorCodes code, String msg) throws IOException
 	{
 		Util.error("E#%03d: %s".formatted(code.ordinal(), msg));
-		dos.writeUTF("error " + code.ordinal() + " " + msg);
+		dos.writeUTF(Util.formatError(false, code, msg));
 	}
 	
 	private void warning(ErrorCodes code, String msg) throws IOException

@@ -1,5 +1,9 @@
 package JavaSrc;
 
+import JavaSrc.Data.UserInfo;
+import JavaSrc.Exceptions.RPMError;
+import JavaSrc.Exceptions.RPMRuntimeException;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.ConnectException;
@@ -87,24 +91,16 @@ public class ConnectionHandler extends Thread
 								dos.close();
 								return;
 							case "login":
+								if(cmd.length < 2) throw new RPMError();
 								client.setMainMenu();
 								Util.msg("Login successful!");
+								UserInfo info = UserInfo.load(received.split(" ",2)[1]);
+								client.updateInfo(info);
 								break;
 							case "error":
 								processing = false;
 							case "warning":
-								cmd = received.split(" ", 3);
-								ErrorCodes code = ErrorCodes.UNKNOWN_ERROR;
-								try
-								{
-									code = ErrorCodes.values()[Integer.parseInt(cmd[1])];
-								}
-								catch(Exception ignored) {}
-								String msg = ("%c#%03d").formatted(cmd[0].toUpperCase().charAt(0), code.ordinal()) + " " + (cmd.length < 3
-								                                                                                            ? "Unknown Error"
-								                                                                                            : cmd[2]);
-								Util.error(msg);
-								client.error(msg);
+								error(received);
 								break;
 							case "over":
 								processing = false;
@@ -135,6 +131,10 @@ public class ConnectionHandler extends Thread
 		{
 			client.timeout = true;
 		}
+		catch(RPMRuntimeException e)
+		{
+			error(Util.formatError(e));
+		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
@@ -158,6 +158,20 @@ public class ConnectionHandler extends Thread
 		commands.clear();
 		runCommand("exit");
 	}
+	
+	private void error(String command)
+	{
+		String[] cmd = command.split(" ", 3);
+		ErrorCodes code = ErrorCodes.UNKNOWN_ERROR;
+		try
+		{
+			code = ErrorCodes.values()[Integer.parseInt(cmd[1])];
+		}
+		catch(Exception ignored) {}
+		String msg = ("%c#%03d").formatted(cmd[0].toUpperCase().charAt(0), code.ordinal()) + " " + (cmd.length < 3
+		                                                                                            ? "Unknown Error"
+		                                                                                            : cmd[2]);
+		Util.error(msg);
+		client.error(msg);
+	}
 }
-
-

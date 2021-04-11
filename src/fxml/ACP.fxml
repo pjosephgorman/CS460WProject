@@ -7,14 +7,9 @@
 <AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ACPController">
     <children>
         <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
-            <content>
-                <TableView prefHeight="302.0" prefWidth="602.0">
-                    <columns>
-                        <TableColumn prefWidth="122.0" text="Column X" />
-                        <TableColumn prefWidth="293.0" text="Users" />
-                    </columns>
-                </TableView>
-            </content>
+         <content>
+            <VBox prefHeight="296.0" prefWidth="585.0" fx:id="vBox"/>
+         </content>
         </ScrollPane>
         <Button layoutX="94.0" layoutY="361.0" minWidth="50.0" mnemonicParsing="false" onAction="#createNewUser" text="New User" />
         <Button layoutX="218.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" onAction="#editUserInfo" text="Edit" />
