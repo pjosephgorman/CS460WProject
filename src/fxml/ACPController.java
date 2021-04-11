@@ -5,6 +5,7 @@ import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,6 +20,9 @@ public class ACPController implements SceneController
 	public Button editButton;
 	public Button deleteButton;
 	public Button backButton;
+	
+	@FXML
+	public Label error;
 	
 	public void createNewUser(ActionEvent event)
 	{

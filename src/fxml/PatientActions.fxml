@@ -7,13 +7,9 @@
 <AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.PatientActionsController">
     <children>
         <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
-            <content>
-                <TableView prefHeight="302.0" prefWidth="602.0">
-                    <columns>
-                        <TableColumn prefWidth="591.0" text="Patient" />
-                    </columns>
-                </TableView>
-            </content>
+         <content>
+            <VBox fx:id="vBox" prefHeight="291.0" prefWidth="588.0" />
+         </content>
         </ScrollPane>
         <Button layoutX="82.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#createChart" text="Create Chart" />
         <Button layoutX="270.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#viewChart" text="View Chart" />
