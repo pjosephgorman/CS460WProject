@@ -1,5 +1,7 @@
 package JavaSrc;
 
+import JavaSrc.Data.SQLHandler;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,6 +12,7 @@ public class Server
 {
 	public static void main(String[] args) throws IOException
 	{
+		SQLHandler.init();
 		// server is listening on port 5056
 		ServerSocket ss = new ServerSocket(5056);
 		
