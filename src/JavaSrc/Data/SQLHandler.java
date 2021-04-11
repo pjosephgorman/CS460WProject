@@ -33,28 +33,41 @@ public class SQLHandler
 				{ rolelist.append(",'").append(r.name()).append("'"); }
 				rolelist.deleteCharAt(0); //Extra comma!
 				update(c, """
-				          CREATE TABLE users (
-				          	user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
-				          	uname      VARCHAR(32)  NOT NULL                   UNIQUE,
-				          	pwd        CHAR(128)    NOT NULL,
-				          	fname      VARCHAR(64)  NOT NULL,
-				          	mname      VARCHAR(64),
-				          	lname      VARCHAR(64)  NOT NULL,
-				          	role       VARCHAR(20)  NOT NULL CHECK(role IN (%s)),
-				          	phone      VARCHAR(20)  NOT NULL,
-				          	email      VARCHAR(50)  NOT NULL
-				          );""".formatted(rolelist));
+						CREATE TABLE users (
+							user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
+							uname      VARCHAR(32)  NOT NULL                   UNIQUE,
+							pwd        CHAR(128)    NOT NULL,
+							fname      VARCHAR(64)  NOT NULL,
+							mname      VARCHAR(64),
+							lname      VARCHAR(64)  NOT NULL,
+							role       VARCHAR(20)  NOT NULL CHECK(role IN (%s)),
+							phone      VARCHAR(20)  NOT NULL,
+							email      VARCHAR(50)  NOT NULL
+						);""".formatted(rolelist));
 				
-				/*update(c, """
-				          CREATE TABLE patients (
-				          	patient_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
-				          	uname        VARCHAR(32)  NOT NULL                    UNIQUE,
-				          	fname        VARCHAR(64)  NOT NULL,
-				          	mname        VARCHAR(64),
-				          	lname        VARCHAR(64)  NOT NULL,
-				          	phone        VARCHAR(20)  NOT NULL,
-				          	email        VARCHAR(50)  NOT NULL
-				          );""".formatted(rolelist));*/
+				update(c, """
+						CREATE TABLE patients (
+							patient_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
+							uname        VARCHAR(32)  NOT NULL                    UNIQUE,
+							fname        VARCHAR(64)  NOT NULL,
+							mname        VARCHAR(64),
+							lname        VARCHAR(64)  NOT NULL,
+							phone        VARCHAR(20)  NOT NULL,
+							email        VARCHAR(50)  NOT NULL,
+							address      VARCHAR(50)  NOT NULL,
+							insurance    VARCHAR(50)  NOT NULL,
+							allergies    VARCHAR(50),
+							medications  VARCHAR(50),
+							heartrate    VARCHAR(20),
+							temperature  VARCHAR(50),
+							reasonforvisit VARCHAR(50),
+							preexistingconditions VARCHAR(50),
+							nursecomment VARCHAR(100),
+							diagnosis    VARCHAR(50),
+							test         VARCHAR(32),
+							results      VARCHAR(50),
+							billingmethod VARCHAR(50)
+						);""".formatted(rolelist));
 				
 				//Test values
 				createUser(c, "foo", "pineapple", true, "a", "", "b", Admin, "555-555-5555", "foo@gmail.com");
@@ -84,33 +97,32 @@ public class SQLHandler
 	}
 	
 	private static void createUser(Connection c, String uname, String pwd, boolean hash, String fname, String mname, String lname, Roles role,
-	                               String phone,
-	                               String email)
-			throws SQLException, RPMException
+	                               String phone, String email) throws SQLException, RPMException
 	{
-		if(hash)
-			pwd = Util.hash(pwd);
+		if(hash) pwd = Util.hash(pwd);
 		try
 		{
 			if(mname != null && !mname.equals(""))
 			{
 				update(c,
-						"INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(
-								uname,
-								pwd, fname, mname, lname, role.name(), phone, email));
+				       "INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(
+						       uname, pwd, fname, mname, lname, role.name(), phone, email));
 			}
 			else
 			{
 				update(c,
-						"INSERT INTO users (uname, pwd, fname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s')".formatted(
-								uname,
-								pwd, fname, lname, role.name(), phone, email));
+				       "INSERT INTO users (uname, pwd, fname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s')".formatted(uname,
+				                                                                                                                                pwd,
+				                                                                                                                                fname,
+				                                                                                                                                lname,
+				                                                                                                                                role.name(),
+				                                                                                                                                phone,
+				                                                                                                                                email));
 			}
 		}
 		catch(SQLException e)
 		{
-			if(e.getMessage().contains("UNIQUE"))
-				throw new DuplicateUsernameException();
+			if(e.getMessage().contains("UNIQUE")) throw new DuplicateUsernameException();
 			throw e;
 		}
 	}
@@ -189,7 +201,7 @@ public class SQLHandler
 		{
 			Connection c = connect();
 			return query(c, """
-			                SELECT * FROM users WHERE user_id = %d""".formatted(UserID));
+					SELECT * FROM users WHERE user_id = %d""".formatted(UserID));
 		}
 		catch(SQLException ignored)
 		{
