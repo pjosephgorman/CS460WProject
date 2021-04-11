@@ -7,6 +7,7 @@ import JavaSrc.Util;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import static JavaSrc.Data.Roles.*;
 
@@ -197,6 +198,7 @@ public class SQLHandler
 		}
 	}
 	
+	
 	public static int countUsers() throws SQLException
 	{
 		int count = 0;
@@ -211,5 +213,36 @@ public class SQLHandler
 			Util.trace(e);
 		}
 		return count;
+	}
+	
+	public static void delUser(int UserID)
+	{
+		try
+		{
+			Connection c = connect();
+			update(c, """
+			          DELETE FROM users WHERE user_id = %d""".formatted(UserID));
+		}
+		catch(SQLException ignored) {}
+	}
+	
+	public static ArrayList<UserInfo> loadAllUserInfos()
+	{
+		ArrayList<UserInfo> list = new ArrayList<>();
+		try
+		{
+			Connection c = connect();
+			ResultSet r = query(c, "SELECT * FROM users");
+			while(r.next())
+			{
+				try
+				{
+					list.add(new UserInfo(r));
+				}
+				catch(Exception ignored) {}
+			}
+		}
+		catch(SQLException ignored) {}
+		return list;
 	}
 }

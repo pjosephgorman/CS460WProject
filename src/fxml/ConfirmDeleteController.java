@@ -8,19 +8,23 @@ public class ConfirmDeleteController implements SceneController
 {
 	public Button yesButton;
 	public Button noButton;
+	private Runnable onYes, onNo;
 	
 	public void doYesButton(ActionEvent event){
-		//TODO creates function that confirms deletion
+		onYes.run();
+		clear();
 	}
 	
 	public void doNoButton(ActionEvent event){
-		//TODO creates function that denies deletion
+		onNo.run();
+		clear();
 	}
 	
 	@Override
 	public void clear()
 	{
-	
+		onYes = null;
+		onNo = null;
 	}
 	
 	@Override
@@ -33,5 +37,11 @@ public class ConfirmDeleteController implements SceneController
 	public void updateInfo(UserInfo info)
 	{
 	
+	}
+	
+	public void setRunnables(Runnable yes, Runnable no)
+	{
+		this.onYes = yes;
+		this.onNo = no;
 	}
 }
