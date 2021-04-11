@@ -40,6 +40,7 @@ class ClientHandler extends Thread
 		try
 		{
 			s.setSoTimeout(10 * 60 * 1000);
+			//ten second socket timeout for testing purposes
 			//s.setSoTimeout(10000);
 		}
 		catch(SocketException ignored){}
