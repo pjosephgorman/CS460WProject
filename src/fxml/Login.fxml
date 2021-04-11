@@ -23,5 +23,5 @@
    <Label text="Username:" GridPane.rowIndex="1" />
    <Label text="Password:" GridPane.rowIndex="2" />
    <Button fx:id="loginButton" defaultButton="true" mnemonicParsing="false" onAction="#doLogin" text="Login" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-   <Label fx:id="error" textAlignment="CENTER" textFill="#ff0606" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+   <Label fx:id="error" textAlignment="CENTER" textFill="RED" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
 </GridPane>

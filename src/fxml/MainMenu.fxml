@@ -24,7 +24,7 @@
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
-        <Button fx:id="acpButton" mnemonicParsing="false" onAction="#goToACP" prefHeight="25.0" prefWidth="96.0" text="ACP" GridPane.rowIndex="2">
+        <Button fx:id="acpButton" mnemonicParsing="false" onAction="#goToACP" prefHeight="25.0" prefWidth="96.0" text="ACP" GridPane.rowIndex="4">
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
@@ -32,7 +32,8 @@
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
-   <Button fx:id="editAccountButton" layoutX="162.0" layoutY="259.0" mnemonicParsing="false" onAction="#goToEditAccount" prefHeight="25.0" prefWidth="96.0" text="Edit Account" GridPane.rowIndex="4">
+   <Button fx:id="editAccountButton" layoutX="162.0" layoutY="259.0" mnemonicParsing="false" onAction="#goToEditAccount" prefHeight="25.0"
+           prefWidth="96.0" text="Edit Account" GridPane.rowIndex="2">
       <GridPane.margin>
          <Insets top="5.0" />
       </GridPane.margin>
