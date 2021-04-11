@@ -45,10 +45,21 @@ public class SQLHandler
 				          	email      VARCHAR(50)  NOT NULL
 				          );""".formatted(rolelist));
 				
+				/*update(c, """
+				          CREATE TABLE patients (
+				          	patient_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
+				          	uname        VARCHAR(32)  NOT NULL                    UNIQUE,
+				          	fname        VARCHAR(64)  NOT NULL,
+				          	mname        VARCHAR(64),
+				          	lname        VARCHAR(64)  NOT NULL,
+				          	phone        VARCHAR(20)  NOT NULL,
+				          	email        VARCHAR(50)  NOT NULL
+				          );""".formatted(rolelist));*/
+				
 				//Test values
-				createUser(c, "foo", "pineapple", true, "a", "","b", Admin,"555-555-5555", "foo@gmail.com");
-				createUser(c, "bar", "banana", true, "a", "","b", Physician,"555-555-5555", "foo@gmail.com");
-				createUser(c, "bah", "abcd", true, "a", "","b", Nurse,"555-555-5555","foo@gmail.com");
+				createUser(c, "foo", "pineapple", true, "a", "", "b", Admin, "555-555-5555", "foo@gmail.com");
+				createUser(c, "bar", "banana", true, "a", "", "b", Physician, "555-555-5555", "foo@gmail.com");
+				createUser(c, "bah", "abcd", true, "a", "", "b", Nurse, "555-555-5555", "foo@gmail.com");
 				//createUser(c, "foo", "1234", true, "a", "", "b", Reception, "555-555-5555", "foo@gmail.com");
 				
 				int cnt = 0;
@@ -84,7 +95,8 @@ public class SQLHandler
 			if(mname != null && !mname.equals(""))
 			{
 				update(c,
-						"INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(uname,
+						"INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(
+								uname,
 								pwd, fname, mname, lname, role.name(), phone, email));
 			}
 			else
@@ -169,7 +181,6 @@ public class SQLHandler
 		{
 			return null;
 		}
-		
 	}
 	
 	static ResultSet fetchUserRow(int UserID)
@@ -184,5 +195,21 @@ public class SQLHandler
 		{
 			return null;
 		}
+	}
+	
+	public static int countUsers() throws SQLException
+	{
+		int count = 0;
+		Connection c = connect();
+		try
+		{
+			ResultSet r = query(c, "SELECT * FROM users");
+			while(r.next()) ++count;
+		}
+		catch(Exception e)
+		{
+			Util.trace(e);
+		}
+		return count;
 	}
 }
