@@ -25,10 +25,10 @@ public class PatientInfo
 		{
 			ResultSet r = SQLHandler.fetchPatientRow(patientID);
 			if(r == null || !r.next()) throw new NoSuchPatientException();
-			id = r.getInt(1);
-			load(r);
-			if(id != patientID) throw new RPMError();
-			System.out.println(this);
+			if(patientID != r.getInt(1)) throw new RPMError();
+			PatientInfo ret = new PatientInfo(patientID);
+			ret.load(r);
+			return ret;
 		}
 		catch (NoSuchPatientException e)
 		{
