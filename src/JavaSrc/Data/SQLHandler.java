@@ -209,6 +209,20 @@ public class SQLHandler
 		}
 	}
 	
+	static ResultSet fetchPatientRow(int PatientID)
+	{
+		try
+		{
+			Connection c = connect();
+			return query(c, """
+					SELECT * FROM patients WHERE patient_id = %d""".formatted(PatientID));
+		}
+		catch(SQLException ignored)
+		{
+			return null;
+		}
+	}
+	
 	public static int countUsers() throws SQLException
 	{
 		int count = 0;
