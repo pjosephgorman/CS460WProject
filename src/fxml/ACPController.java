@@ -90,7 +90,6 @@ public class ACPController implements SceneController
 	@Override
 	public void error(String msg)
 	{
-		System.out.println("Set ACP error = '%s'".formatted(msg));
 		error.setText(msg);
 	}
 	
