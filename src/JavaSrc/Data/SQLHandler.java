@@ -50,24 +50,13 @@ public class SQLHandler
 						CREATE TABLE patients (
 							patient_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
 							uname        VARCHAR(32)  NOT NULL                    UNIQUE,
-							fname        VARCHAR(64)  NOT NULL,
-							mname        VARCHAR(64),
-							lname        VARCHAR(64)  NOT NULL,
-							phone        VARCHAR(20)  NOT NULL,
-							email        VARCHAR(50)  NOT NULL,
-							address      VARCHAR(50)  NOT NULL,
-							insurance    VARCHAR(50)  NOT NULL,
-							allergies    VARCHAR(50),
-							medications  VARCHAR(50),
-							heartrate    VARCHAR(20),
-							temperature  VARCHAR(50),
-							reasonforvisit VARCHAR(50),
-							preexistingconditions VARCHAR(50),
-							nursecomment VARCHAR(100),
-							diagnosis    VARCHAR(50),
-							test         VARCHAR(32),
-							results      VARCHAR(50),
-							billingmethod VARCHAR(50)
+							name         VARCHAR(64)  NOT NULL,
+							symptoms     VARCHAR(64)  NOT NULL,
+							test         VARCHAR(64),
+							age          VARCHAR(20)  NOT NULL,
+							sex          VARCHAR(50)  NOT NULL,
+							physician    VARCHAR(32),
+							nursecomment VARCHAR(50),
 						);""".formatted(rolelist));
 				
 				//Test values

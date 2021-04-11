@@ -10,9 +10,10 @@ import java.sql.SQLException;
 public class PatientInfo
 {
 	public final int id;
-	public String fname, mname, lname, phone, email, address, insurance, allergies,
-			medications, heartrate, temperature, reasonforvisit, preexistingconditions,
-			nursecomment, diagnosis, test, results, billingmethod;
+	public String name, symptoms, test, age, sex, physician, nursecomment;
+	
+	//correct String list
+	/*name symptom */
 	
 	private PatientInfo(int patientID)
 	{
@@ -50,23 +51,13 @@ public class PatientInfo
 	
 	private void load(ResultSet r) throws SQLException
 	{
-		fname = r.getString(3);
-		mname = r.getString(4);
-		lname = r.getString(5);
-		phone = r.getString(6);
-		email = r.getString(7);
-		address = r.getString(8);
-		insurance = r.getString(9);
-		allergies = r.getString(10);
-		medications = r.getString(11);
-		heartrate = r.getString(12);
-		temperature = r.getString(13);
-		reasonforvisit = r.getString(14);
-		preexistingconditions = r.getString(15);
-		nursecomment = r.getString(16);
-		diagnosis = r.getString(17);
-		test = r.getString(18);
-		results = r.getString(19);
-		billingmethod = r.getString(20);
+		name = r.getString(3);
+		symptoms = r.getString(4);
+		test = r.getString(5);
+		age = r.getString(6);
+		sex = r.getString(7);
+		test = r.getString(8);
+		physician = r.getString(9);
+		nursecomment = r.getString(10);
 	}
 }
