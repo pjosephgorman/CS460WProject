@@ -55,7 +55,9 @@ public class SQLHandler
 				ResultSet r = query(c, "SELECT * FROM users");
 				while(r.next())
 				{
-					new UserInfo(cnt++);
+					UserInfo info = UserInfo.loadUser(cnt++);
+					String str = info.store();
+					UserInfo.load(str);
 				}
 			}
 			catch(Exception e)
@@ -161,7 +163,7 @@ public class SQLHandler
 			s = c.createStatement();
 			r = s.executeQuery("SELECT user_id FROM users WHERE uname = '" + uname + "'");
 			if(!r.next()) throw new RPMError();
-			return new UserInfo(r.getInt(1));
+			return UserInfo.loadUser(r.getInt(1));
 		}
 		catch(SQLException ignored)
 		{

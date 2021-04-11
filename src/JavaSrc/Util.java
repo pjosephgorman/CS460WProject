@@ -1,5 +1,7 @@
 package JavaSrc;
 
+import JavaSrc.Exceptions.ErrorCodable;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -32,5 +34,15 @@ public class Util
 	{
 		if(str.length() < 13) return str;
 		return str.substring(0,10) + "...";
+	}
+	
+	public static String formatError(ErrorCodable e)
+	{
+		return formatError(e.getWarn(), e.getCode(), ((Exception)e).getMessage());
+	}
+	
+	public static String formatError(boolean warn, ErrorCodes code, String msg)
+	{
+		return (warn ? "warn " : "error ") + code.ordinal() + " " + msg;
 	}
 }
