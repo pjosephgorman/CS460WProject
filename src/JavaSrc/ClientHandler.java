@@ -114,6 +114,11 @@ class ClientHandler extends Thread
 							admin();
 							reloadACP();
 						}
+						case "echo" -> {
+							dos.writeUTF(received.substring(5));
+							if(cmd[1].equals("error") || cmd[1].equals("over"))
+								continue;
+						}
 						default -> throw new RPMError();
 					}
 					dos.writeUTF("over");

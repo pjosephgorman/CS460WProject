@@ -81,13 +81,17 @@ public class ACPController implements SceneController
 	@Override
 	public void clear()
 	{
-		Platform.runLater(() -> vBox.getChildren().clear());
+		Platform.runLater(() -> {
+			vBox.getChildren().clear();
+			error.setText("");
+		});
 	}
 	
 	@Override
 	public void error(String msg)
 	{
-	
+		System.out.println("Set ACP error = '%s'".formatted(msg));
+		error.setText(msg);
 	}
 	
 	@Override

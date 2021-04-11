@@ -79,6 +79,7 @@ public class ConnectionHandler extends Thread
 				try
 				{
 					String tosend = commands.take();
+					//System.out.println("Sent: \"" + tosend + "\"");
 					dos.writeUTF(tosend);
 					boolean processing = true;
 					while(processing)
@@ -165,6 +166,7 @@ public class ConnectionHandler extends Thread
 	
 	public void runCommand(String cmd)
 	{
+		//System.out.println("Queued: \"" + cmd + "\"");
 		commands.add(cmd);
 	}
 	

@@ -44,7 +44,7 @@ public class UserInfo
 	{
 		id = r.getInt(1);
 		load(r);
-		System.out.println(this);
+		//System.out.println(this);
 	}
 	
 	private void load(ResultSet r) throws SQLException

@@ -15,7 +15,7 @@ public class Client extends Application
 	ConnectionHandler handler;
 	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount, welcome;
 	private Stage stage;
-	private Scenes scene;
+	public Scenes scene;
 	boolean timeout = false;
 	
 	private WelcomeController welcomeController;
@@ -186,8 +186,9 @@ public class Client extends Application
 			acpController.load(info);
 	}
 	
-	void error(String msg)
+	public void error(String msg)
 	{
+		System.out.printf("Error '%s' thrown for scene '%s'%n", msg, scene);
 		Platform.runLater(() ->
 		{
 			SceneController c = getController(scene);
