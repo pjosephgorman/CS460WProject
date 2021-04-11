@@ -1,5 +1,6 @@
 package fxml;
 
+import JavaSrc.Data.UserInfo;
 import javafx.scene.control.Label;
 
 public class LoadingController implements SceneController
@@ -14,6 +15,12 @@ public class LoadingController implements SceneController
 	
 	@Override
 	public void error(String msg)
+	{
+	
+	}
+	
+	@Override
+	public void updateInfo(UserInfo info)
 	{
 	
 	}

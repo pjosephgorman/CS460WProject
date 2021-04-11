@@ -1,5 +1,6 @@
 package fxml;
 
+import JavaSrc.Data.UserInfo;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 
@@ -42,6 +43,12 @@ public class MedicalChartController implements SceneController
 	
 	@Override
 	public void error(String msg)
+	{
+	
+	}
+	
+	@Override
+	public void updateInfo(UserInfo info)
 	{
 	
 	}

@@ -1,6 +1,7 @@
 package fxml;
 
 import JavaSrc.Client;
+import JavaSrc.Data.UserInfo;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -35,6 +36,12 @@ public class ACPController implements SceneController
 	
 	@Override
 	public void error(String msg)
+	{
+	
+	}
+	
+	@Override
+	public void updateInfo(UserInfo info)
 	{
 	
 	}

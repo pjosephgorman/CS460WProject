@@ -1,5 +1,6 @@
 package fxml;
 
+import JavaSrc.Data.UserInfo;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -37,6 +38,12 @@ public class EditAccountController implements SceneController
 	
 	@Override
 	public void error(String msg)
+	{
+	
+	}
+	
+	@Override
+	public void updateInfo(UserInfo info)
 	{
 	
 	}

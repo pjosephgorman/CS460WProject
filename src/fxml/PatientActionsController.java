@@ -1,6 +1,7 @@
 package fxml;
 
 import JavaSrc.Client;
+import JavaSrc.Data.UserInfo;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
@@ -30,6 +31,12 @@ public class PatientActionsController implements SceneController
 	
 	@Override
 	public void error(String msg)
+	{
+	
+	}
+	
+	@Override
+	public void updateInfo(UserInfo info)
 	{
 	
 	}

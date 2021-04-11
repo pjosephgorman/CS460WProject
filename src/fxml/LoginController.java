@@ -1,6 +1,7 @@
 package fxml;
 
 import JavaSrc.Client;
+import JavaSrc.Data.UserInfo;
 import JavaSrc.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -47,5 +48,11 @@ public class LoginController implements SceneController
 			//Clear the password field on a failed login
 			pwd.setText("");
 		}
+	}
+	
+	@Override
+	public void updateInfo(UserInfo info)
+	{
+	
 	}
 }

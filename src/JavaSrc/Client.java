@@ -1,5 +1,6 @@
 package JavaSrc;
 
+import JavaSrc.Data.UserInfo;
 import fxml.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -173,6 +174,15 @@ public class Client extends Application
 		error("");
 	}
 	
+	void updateInfo(UserInfo info)
+	{
+		for(Scenes sc : Scenes.values())
+		{
+			SceneController c = getController(sc);
+			c.updateInfo(info);
+		}
+	}
+	
 	private SceneController getController(Scenes sc)
 	{
 		if(sc == null) return null;
@@ -187,7 +197,7 @@ public class Client extends Application
 			case MAINMENU -> {return mainMenuController;}
 			case USERACCOUNTS -> {return userAccountsController;}
 			case EDITACCOUNT -> {return  editAccountController;}
-			//case WELCOME -> {return welcomeController;}
+			case WELCOME -> {return welcomeController;}
 		}
 		return null;
 	}
