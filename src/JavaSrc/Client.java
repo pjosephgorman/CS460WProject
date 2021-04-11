@@ -158,6 +158,24 @@ public class Client extends Application
 		                  });
 	}
 	
+	public void setConfDel()
+	{
+		Platform.runLater(() ->
+		                  {
+			                  setScene(Scenes.CONFDEL);
+			                  stage.setTitle("Confirm Delete");
+		                  });
+	}
+	
+	public void setUsrAccounts()
+	{
+		Platform.runLater(() ->
+		                  {
+			                  setScene(Scenes.USERACCOUNTS);
+			                  stage.setTitle("User Accounts");
+		                  });
+	}
+	
 	void error(String msg)
 	{
 		Platform.runLater(() ->

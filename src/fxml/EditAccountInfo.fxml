@@ -45,21 +45,21 @@
         <Label text="Phone Number:" GridPane.rowIndex="9" />
         <Label text="Email Address:" GridPane.rowIndex="10" />
         <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="newPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="9" />
-        <TextField GridPane.columnIndex="1" GridPane.rowIndex="10" />
+        <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <TextField fx:id="emailAddress" GridPane.columnIndex="1" GridPane.rowIndex="10" />
         <Label GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label GridPane.columnIndex="2" GridPane.rowIndex="3" />
         <Label GridPane.columnIndex="2" GridPane.rowIndex="5" />
         <Label GridPane.columnIndex="2" GridPane.rowIndex="7" />
         <Label GridPane.columnIndex="2" GridPane.rowIndex="9" />
         <Label GridPane.columnIndex="2" GridPane.rowIndex="10" />
-        <Button mnemonicParsing="false" onAction="#doCancel" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="12" />
-        <Button mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#doCancel" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+        <Button fx:id="submitButton" mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="3" GridPane.rowIndex="12" />
         <Label text="* = Required Field" GridPane.rowIndex="12" />
         <Label alignment="CENTER" text="Edit User Account" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER">
             <font>
@@ -68,6 +68,7 @@
         </Label>
       <Label text="*" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Label text="Old Password:" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="oldPassword" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label fx:id="error" textFill="RED" />
     </children>
 </GridPane>

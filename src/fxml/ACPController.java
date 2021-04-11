@@ -13,7 +13,7 @@ public class ACPController implements SceneController
 	public Button backButton;
 	
 	public void createNewUser(ActionEvent event){
-	
+		Client.singleton.setUsrAccounts();
 	}
 	
 	public void editUserInfo(ActionEvent event){
@@ -21,7 +21,7 @@ public class ACPController implements SceneController
 	}
 	
 	public void deleteUser(ActionEvent event){
-	
+		Client.singleton.setConfDel();
 	}
 	
 	public void back(ActionEvent event){
