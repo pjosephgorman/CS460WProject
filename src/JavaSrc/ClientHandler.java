@@ -39,8 +39,8 @@ class ClientHandler extends Thread
 		// Set the socket timeout for ten minutes
 		try
 		{
-//			s.setSoTimeout(10 * 60 * 1000);
-			s.setSoTimeout(10000);
+			s.setSoTimeout(10 * 60 * 1000);
+			//s.setSoTimeout(10000);
 		}
 		catch(SocketException ignored){}
 		
@@ -174,4 +174,3 @@ class ClientHandler extends Thread
 		usrID = -1;
 	}
 }
-
