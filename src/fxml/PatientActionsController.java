@@ -32,7 +32,7 @@ public class PatientActionsController implements SceneController
 	
 	public void loadPatient(PatientInfo info){
 		HBox hBox = new HBox();
-		Label nameLabel = new Label(info.fname + " (" + info.fname + (info.mname == null ? "" : " " + info.mname) + " " + info.lname + ")");
+		Label nameLabel = new Label(info.name);
 		hBox.getChildren().add(nameLabel);
 		hBox.setSpacing(10);
 		nameLabel.setFont(new Font(16));
