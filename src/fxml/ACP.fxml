@@ -18,6 +18,6 @@
                 <Font size="18.0" />
             </font>
         </Label>
-      <Label fx:id="error" textAlignment="CENTER" layoutX="292.0" layoutY="365.0" textFill="#f80505" GridPane.halignment="CENTER"/>
+      <Label fx:id="error" layoutX="219.0" layoutY="365.0" textAlignment="LEFT" textFill="#f80505" GridPane.halignment="LEFT" />
     </children>
 </AnchorPane>
