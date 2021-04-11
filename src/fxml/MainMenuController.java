@@ -20,7 +20,7 @@ public class MainMenuController implements SceneController
 	
 	public void goToACP(ActionEvent event)
 	{
-		Client.singleton.setACP();
+		Client.singleton.runCommand("loadacp");
 	}
 	
 	public void goToPatientActions(ActionEvent event)
@@ -48,6 +48,6 @@ public class MainMenuController implements SceneController
 	@Override
 	public void updateInfo(UserInfo info)
 	{
-		acpButton.setVisible(info.role == Roles.Admin);
+		acpButton.setVisible(info != null && info.role == Roles.Admin);
 	}
 }

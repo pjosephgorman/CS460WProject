@@ -43,7 +43,7 @@ class ClientHandler extends Thread
 			//ten second socket timeout for testing purposes
 			//s.setSoTimeout(10000);
 		}
-		catch(SocketException ignored){}
+		catch(SocketException ignored) {}
 		
 		String received;
 		String toreturn;
@@ -69,7 +69,7 @@ class ClientHandler extends Thread
 							{
 								Util.error("Login attempted with < 3 args");
 								throw new RPMError(ErrorCodes.INVALID_LOGIN, "Login message attempted with " + cmd.length + " args, needs 3 args.",
-								                   false);
+										false);
 							}
 							Connection c = SQLHandler.connect();
 							UserInfo info = SQLHandler.login(c, cmd[1], cmd[2]);
@@ -77,7 +77,7 @@ class ClientHandler extends Thread
 							{
 								usrRole = info.role;
 								usrID = info.id;
-								Util.msg("Login Successful! Role: %s, ID: %05d".formatted(usrRole,usrID));
+								Util.msg("Login Successful! Role: %s, ID: %05d".formatted(usrRole, usrID));
 								dos.writeUTF("login " + info.store());
 							}
 							else
@@ -95,6 +95,25 @@ class ClientHandler extends Thread
 							return;
 						}
 						case "createuser" -> throw new DuplicateUsernameException(); //TODO Implement user creation
+						
+						case "edituser" -> {
+							admin();
+							int id = Integer.parseInt(cmd[1]);
+							UserInfo info = UserInfo.loadUser(id);
+							dos.writeUTF("edituser " + info.store());
+						}
+						case "deleteuser" -> {
+							admin();
+							int id = Integer.parseInt(cmd[1]);
+							if(id == usrID)
+								throw new RPMError(ErrorCodes.UNKNOWN_ERROR, "Cannot delete yourself!", false);
+							SQLHandler.delUser(id);
+							reloadACP();
+						}
+						case "loadacp" -> {
+							admin();
+							reloadACP();
+						}
 						default -> throw new RPMError();
 					}
 					dos.writeUTF("over");
@@ -143,6 +162,16 @@ class ClientHandler extends Thread
 		}
 	}
 	
+	private void reloadACP() throws IOException
+	{
+		dos.writeUTF("clearacp");
+		for(UserInfo info : SQLHandler.loadAllUserInfos())
+		{
+			dos.writeUTF("acp " + info.store());
+		}
+		dos.writeUTF("showacp");
+	}
+	
 	private void handle(Exception e, boolean forceTerminal) throws IOException
 	{
 		if(!(e instanceof RPMException || e instanceof RPMRuntimeException)) return;
@@ -173,5 +202,13 @@ class ClientHandler extends Thread
 	{
 		usrRole = null;
 		usrID = -1;
+	}
+	
+	private void admin() throws RPMError
+	{
+		if(usrRole != Roles.Admin)
+		{
+			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
+		}
 	}
 }

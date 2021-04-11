@@ -1,5 +1,6 @@
 package JavaSrc;
 
+import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
 import fxml.*;
 import javafx.application.Application;
@@ -126,8 +127,10 @@ public class Client extends Application
 	{
 		Platform.runLater(() ->
 		                   {
-		                   	   setScene(Scenes.ACP);
-		                   	   stage.setTitle("Admin Control Panel");
+		                   	   if(setScene(Scenes.ACP))
+		                       {
+		                       	stage.setTitle("Admin Control Panel");
+		                       }
 		                   });
 	}
 	
@@ -158,10 +161,12 @@ public class Client extends Application
 		                  });
 	}
 	
-	public void setConfDel()
+	public void setConfDel(Runnable yes, Runnable no)
 	{
+		if(yes == null || no == null) return;
 		Platform.runLater(() ->
 		                  {
+			                  confirmDeleteController.setRunnables(yes, no);
 			                  setScene(Scenes.CONFDEL);
 			                  stage.setTitle("Confirm Delete");
 		                  });
@@ -174,6 +179,11 @@ public class Client extends Application
 			                  setScene(Scenes.USERACCOUNTS);
 			                  stage.setTitle("User Accounts");
 		                  });
+	}
+	
+	public void loadACP(UserInfo info)
+	{
+			acpController.load(info);
 	}
 	
 	void error(String msg)
@@ -221,12 +231,15 @@ public class Client extends Application
 		return null;
 	}
 	
-	public void setScene(Scenes sc)
+	public boolean setScene(Scenes sc)
 	{
-		if(sc == null) return;
+		if(sc == null) return false;
+		if(sc == scene) return true;
+		if(sc == Scenes.ACP && handler.getRole() != Roles.Admin) return false;
 		clearScene(scene);
 		stage.setScene(getScene(sc));
 		scene = sc;
+		return true;
 	}
 	
 	private Scene getScene(Scenes sc)
@@ -248,7 +261,7 @@ public class Client extends Application
 		return null;
 	}
 	
-	private void clearScene(Scenes sc)
+	void clearScene(Scenes sc)
 	{
 		SceneController c = getController(sc);
 		if(c != null)

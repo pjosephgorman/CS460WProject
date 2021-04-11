@@ -1,5 +1,6 @@
 package JavaSrc;
 
+import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
 import JavaSrc.Exceptions.RPMError;
 import JavaSrc.Exceptions.RPMRuntimeException;
@@ -18,6 +19,8 @@ public class ConnectionHandler extends Thread
 	private final Client client;
 	private final LinkedTransferQueue<String> commands;
 	private static final int RETRY_SECONDS = 30;
+	private Roles role = null;
+	private int id = -1;
 	
 	public ConnectionHandler(Client cl)
 	{
@@ -86,28 +89,40 @@ public class ConnectionHandler extends Thread
 						String[] cmd = received.split(" ");
 						switch(cmd[0].toLowerCase())
 						{
-							case "exit":
+							case "exit" -> {
 								dis.close();
 								dos.close();
 								return;
-							case "login":
+							}
+							case "login" -> {
 								if(cmd.length < 2) throw new RPMError();
 								client.setMainMenu();
 								Util.msg("Login successful!");
-								UserInfo info = UserInfo.load(received.split(" ",2)[1]);
+								UserInfo info = UserInfo.load(received.split(" ", 2)[1]);
 								client.updateInfo(info);
-								break;
-							case "error":
+								role = info.role;
+								id = info.id;
+							}
+							case "clearacp" -> client.clearScene(Client.Scenes.ACP);
+							case "acp" -> {
+								if(cmd.length < 2) throw new RPMError();
+								client.loadACP(UserInfo.load(received.split(" ", 2)[1]));
+							}
+							case "showacp" -> client.setACP();
+							case "edituser" -> {
+								if(cmd.length < 2) throw new RPMError();
+								UserInfo info = UserInfo.load(received.split(" ", 2)[1]);
+							}
+							case "error" -> {
 								processing = false;
-							case "warning":
 								error(received);
-								break;
-							case "over":
-								processing = false;
-								break;
-							default:
+							}
+							case "warning" -> error(received);
+							case "over" -> processing = false;
+							default -> {
+								Util.error("Unknown command '%s'\n".formatted(received));
 								running = false;
-								break;
+							}
 						}
 					}
 				}
@@ -173,5 +188,14 @@ public class ConnectionHandler extends Thread
 		                                                                                            : cmd[2]);
 		Util.error(msg);
 		client.error(msg);
+	}
+	
+	Roles getRole()
+	{
+		return role;
+	}
+	int getID()
+	{
+		return id;
 	}
 }
