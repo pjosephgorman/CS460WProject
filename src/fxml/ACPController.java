@@ -74,7 +74,6 @@ public class ACPController implements SceneController
 			
 			hBox.getChildren().add(delete);
 			vBox.getChildren().add(hBox);
-			System.out.println(info);
 		});
 	}
 	

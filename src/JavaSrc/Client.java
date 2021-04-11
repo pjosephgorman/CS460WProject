@@ -188,7 +188,6 @@ public class Client extends Application
 	
 	public void error(String msg)
 	{
-		System.out.printf("Error '%s' thrown for scene '%s'%n", msg, scene);
 		Platform.runLater(() ->
 		{
 			SceneController c = getController(scene);
