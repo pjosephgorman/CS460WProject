@@ -26,52 +26,58 @@ public class SQLHandler
 			Connection c = connect();
 			try
 			{
-				if(query(c, "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'users'").next()) return; //Already exists
-				
-				//Create table
-				StringBuilder rolelist = new StringBuilder();
-				for(Roles r : Roles.values())
-				{ rolelist.append(",'").append(r.name()).append("'"); }
-				rolelist.deleteCharAt(0); //Extra comma!
-				update(c, """
-						CREATE TABLE users (
-							user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
-							uname      VARCHAR(32)  NOT NULL                   UNIQUE,
-							pwd        CHAR(128)    NOT NULL,
-							fname      VARCHAR(64)  NOT NULL,
-							mname      VARCHAR(64),
-							lname      VARCHAR(64)  NOT NULL,
-							role       VARCHAR(20)  NOT NULL CHECK(role IN (%s)),
-							phone      VARCHAR(20)  NOT NULL,
-							email      VARCHAR(50)  NOT NULL
-						);""".formatted(rolelist));
-				
-				update(c, """
-						CREATE TABLE patients (
-							patient_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
-							uname        VARCHAR(32)  NOT NULL                    UNIQUE,
-							name         VARCHAR(64)  NOT NULL,
-							symptoms     VARCHAR(64)  NOT NULL,
-							test         VARCHAR(64),
-							age          VARCHAR(20)  NOT NULL,
-							sex          VARCHAR(50)  NOT NULL,
-							physician    VARCHAR(32),
-							nursecomment VARCHAR(50),
-						);""".formatted(rolelist));
-				
-				//Test values
-				createUser(c, "foo", "pineapple", true, "a", "", "b", Admin, "555-555-5555", "foo@gmail.com");
-				createUser(c, "bar", "banana", true, "a", "", "b", Physician, "555-555-5555", "foo@gmail.com");
-				createUser(c, "bah", "abcd", true, "a", "", "b", Nurse, "555-555-5555", "foo@gmail.com");
-				//createUser(c, "foo", "1234", true, "a", "", "b", Reception, "555-555-5555", "foo@gmail.com");
-				
-				int cnt = 0;
-				ResultSet r = query(c, "SELECT * FROM users");
-				while(r.next())
+				if(!query(c, "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'users'").next())
 				{
-					UserInfo info = UserInfo.loadUser(cnt++);
-					String str = info.store();
-					UserInfo.load(str);
+					
+					//Create table
+					StringBuilder rolelist = new StringBuilder();
+					for(Roles r : Roles.values())
+					{ rolelist.append(",'").append(r.name()).append("'"); }
+					rolelist.deleteCharAt(0); //Extra comma!
+					update(c, """
+					          CREATE TABLE users (
+					          	user_id    INT                     IDENTITY(0,1)   PRIMARY KEY,
+					          	uname      VARCHAR(32)  NOT NULL                   UNIQUE,
+					          	pwd        CHAR(128)    NOT NULL,
+					          	fname      VARCHAR(64)  NOT NULL,
+					          	mname      VARCHAR(64),
+					          	lname      VARCHAR(64)  NOT NULL,
+					          	role       VARCHAR(20)  NOT NULL CHECK(role IN (%s)),
+					          	phone      VARCHAR(20)  NOT NULL,
+					          	email      VARCHAR(50)  NOT NULL
+					          );""".formatted(rolelist));
+					
+					//Test values
+					createUser(c, "foo", "pineapple", true, "a", "", "b", Admin, "555-555-5555", "foo@gmail.com");
+					createUser(c, "bar", "banana", true, "a", "", "b", Physician, "555-555-5555", "foo@gmail.com");
+					createUser(c, "bah", "abcd", true, "a", "", "b", Nurse, "555-555-5555", "foo@gmail.com");
+					//createUser(c, "foo", "1234", true, "a", "", "b", Reception, "555-555-5555", "foo@gmail.com");
+					
+					/*int cnt = 0;
+					ResultSet r = query(c, "SELECT * FROM users");
+					while(r.next())
+					{
+						UserInfo info = UserInfo.loadUser(cnt++);
+						String str = info.store();
+						UserInfo.load(str);
+					}*/
+				}
+				if(!query(c,"SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'patients'").next())
+				{
+					update(c, """
+					          CREATE TABLE patients (
+					          	patient_id   INT                     IDENTITY(0,1)   PRIMARY KEY,
+					          	name         VARCHAR(64)  NOT NULL,
+					          	symptoms     VARCHAR(64)  NOT NULL,
+					          	test         VARCHAR(64),
+					          	age          INT          NOT NULL,
+					          	sex          VARCHAR(50)  NOT NULL,
+					          	physician    VARCHAR(32),
+					          	nursecomment VARCHAR(50),
+					          );""");
+					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", null, null);
+					PatientInfo info = PatientInfo.loadPatient(0);
+					System.out.println(info);
 				}
 			}
 			catch(Exception e)
@@ -95,20 +101,51 @@ public class SQLHandler
 			if(mname != null && !mname.equals(""))
 			{
 				update(c,
-				       "INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(
-						       uname, pwd, fname, mname, lname, role.name(), phone, email));
+						"INSERT INTO users (uname, pwd, fname, mname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')".formatted(
+								uname, pwd, fname, mname, lname, role.name(), phone, email));
 			}
 			else
 			{
 				update(c,
-				       "INSERT INTO users (uname, pwd, fname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s')".formatted(uname,
-				                                                                                                                                pwd,
-				                                                                                                                                fname,
-				                                                                                                                                lname,
-				                                                                                                                                role.name(),
-				                                                                                                                                phone,
-				                                                                                                                                email));
+						"INSERT INTO users (uname, pwd, fname, lname, role, phone, email) VALUES ('%s','%s','%s','%s','%s','%s','%s')".formatted(
+								uname,
+								pwd,
+								fname,
+								lname,
+								role.name(),
+								phone,
+								email));
 			}
+		}
+		catch(SQLException e)
+		{
+			if(e.getMessage().contains("UNIQUE")) throw new DuplicateUsernameException();
+			throw e;
+		}
+	}
+	
+	private static void createPatient(Connection c, String name, String symptoms, String test, int age, String sex, String physician,
+	                                  String nursecomment) throws SQLException,
+	                                                              RPMException
+	{
+		try
+		{
+			String _test = (test == null || test.equals("")) ? "" : ", test";
+			String _physician = (physician == null || physician.equals("")) ? "" : ", physician";
+			String _nursecomment = (nursecomment == null || nursecomment.equals("")) ? "" : ", nursecomment";
+			if(_test.equals("")) test = "";
+			else test = ", '" + test + "'";
+			if(_physician.equals("")) physician = "";
+			else physician = ", '" + physician + "'";
+			if(_nursecomment.equals("")) nursecomment = "";
+			else nursecomment = ", '" + nursecomment + "'";
+			
+			String sql = ("INSERT INTO patients (name, symptoms, age, sex%s%s%s) VALUES ('%s','%s','%d','%s'%s%s%s)").formatted(_test, _physician,
+					_nursecomment, name,
+					symptoms,
+					age, sex, test, physician, nursecomment);
+			System.out.println(sql);
+			update(c,sql);
 		}
 		catch(SQLException e)
 		{
@@ -123,6 +160,7 @@ public class SQLHandler
 		{
 			Connection c = connect();
 			update(c, "DROP TABLE IF EXISTS users");
+			update(c, "DROP TABLE IF EXISTS patients");
 		}
 		catch(SQLException e)
 		{
@@ -191,7 +229,7 @@ public class SQLHandler
 		{
 			Connection c = connect();
 			return query(c, """
-					SELECT * FROM users WHERE user_id = %d""".formatted(UserID));
+			                SELECT * FROM users WHERE user_id = %d""".formatted(UserID));
 		}
 		catch(SQLException ignored)
 		{
@@ -205,7 +243,7 @@ public class SQLHandler
 		{
 			Connection c = connect();
 			return query(c, """
-					SELECT * FROM patients WHERE patient_id = %d""".formatted(PatientID));
+			                SELECT * FROM patients WHERE patient_id = %d""".formatted(PatientID));
 		}
 		catch(SQLException ignored)
 		{

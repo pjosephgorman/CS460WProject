@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public class PatientInfo
 {
 	public final int id;
-	public String name, symptoms, test, age, sex, physician, nursecomment;
+	public int age;
+	public String name, symptoms, test, sex, physician, nursecomment;
 	
 	//correct String list
 	/*name symptom */
@@ -49,15 +50,57 @@ public class PatientInfo
 		System.out.println(this);
 	}
 	
+	
+	public String store()
+	{
+		return id + ";" + name + ";" + symptoms + ";" + age + ";" + sex + ";" + (test == null ? "" : test) + ";" + (physician == null ? "" : physician) +
+		       ";" + (nursecomment == null ? "" : nursecomment);
+	}
+	
+	public static PatientInfo load(String str)
+	{
+		String[] args = str.split(";");
+		PatientInfo ret = new PatientInfo(Integer.parseInt(args[0]));
+		ret.name = args[1];
+		ret.symptoms = args[2];
+		ret.age = Integer.parseInt(args[3]);
+		ret.sex = args[4];
+		if(args[5].equals(""))
+			ret.test = null;
+		else ret.test = args[5];
+		if(args[6].equals(""))
+			ret.physician = null;
+		else ret.physician = args[6];
+		if(args[7].equals(""))
+			ret.nursecomment = null;
+		else ret.nursecomment = args[7];
+		//System.out.printf("Loaded '%s' as:\n%s%n", str,ret);
+		return ret;
+	}
+	
 	private void load(ResultSet r) throws SQLException
 	{
-		name = r.getString(3);
-		symptoms = r.getString(4);
-		test = r.getString(5);
-		age = r.getString(6);
-		sex = r.getString(7);
-		test = r.getString(8);
-		physician = r.getString(9);
-		nursecomment = r.getString(10);
+		name = r.getString(2);
+		symptoms = r.getString(3);
+		test = r.getString(4);
+		age = r.getInt(5);
+		sex = r.getString(6);
+		physician = r.getString(7);
+		nursecomment = r.getString(8);
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "PatientInfo{" +
+		       "id=" + id +
+		       ", age=" + age +
+		       ", name='" + name + '\'' +
+		       ", symptoms='" + symptoms + '\'' +
+		       ", test='" + test + '\'' +
+		       ", sex='" + sex + '\'' +
+		       ", physician='" + physician + '\'' +
+		       ", nursecomment='" + nursecomment + '\'' +
+		       '}';
 	}
 }
