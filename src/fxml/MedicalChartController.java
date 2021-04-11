@@ -17,8 +17,11 @@ public class MedicalChartController implements SceneController
 	public Button editFieldButton;
 	public Button testPatientButton;
 	public Button cancelButton;
+	public Button submitButton;
 	
-	
+	public void doSubmit(ActionEvent event){
+		//TODO create submit button
+	}
 	public void doEdit(ActionEvent event){
 		//TODO create edit feature for fields
 	}
