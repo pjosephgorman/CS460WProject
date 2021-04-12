@@ -29,14 +29,6 @@ public class ConnectionHandler extends Thread
 		commands = new LinkedTransferQueue<>();
 	}
 	
-	//TODO remove test function
-	public static void main(String[] args)
-	{
-		ConnectionHandler ch = new ConnectionHandler(null);
-		ch.start();
-		ch.runCommand("login x y");
-	}
-	
 	@Override
 	public void run()
 	{
