@@ -120,6 +120,12 @@ public class ConnectionHandler extends Thread
 							case "edituser" -> {
 								if(cmd.length < 2) throw new RPMError();
 								UserInfo info = UserInfo.load(received.split(" ", 2)[1]);
+								System.out.println(info);
+							}
+							case "editpat" -> {
+								if(cmd.length < 2) throw new RPMError();
+								PatientInfo info = PatientInfo.load(received.split(" ", 2)[1]);
+								System.out.println(info);
 							}
 							case "error" -> {
 								processing = false;
