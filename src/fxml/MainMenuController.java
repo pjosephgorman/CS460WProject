@@ -25,7 +25,7 @@ public class MainMenuController implements SceneController
 	
 	public void goToPatientActions(ActionEvent event)
 	{
-		Client.singleton.setPatientActions();
+		Client.singleton.runCommand("loadpat");
 	}
 	
 	public void goToEditAccount(ActionEvent event)

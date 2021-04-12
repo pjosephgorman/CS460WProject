@@ -47,7 +47,6 @@ public class PatientInfo
 	{
 		id = r.getInt(1);
 		load(r);
-		System.out.println(this);
 	}
 	
 	
@@ -65,13 +64,13 @@ public class PatientInfo
 		ret.symptoms = args[2];
 		ret.age = Integer.parseInt(args[3]);
 		ret.sex = args[4];
-		if(args[5].equals(""))
+		if(args.length < 6 || args[5].equals(""))
 			ret.test = null;
 		else ret.test = args[5];
-		if(args[6].equals(""))
+		if(args.length < 7 || args[6].equals(""))
 			ret.physician = null;
 		else ret.physician = args[6];
-		if(args[7].equals(""))
+		if(args.length < 8 || args[7].equals(""))
 			ret.nursecomment = null;
 		else ret.nursecomment = args[7];
 		//System.out.printf("Loaded '%s' as:\n%s%n", str,ret);

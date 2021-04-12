@@ -20,27 +20,26 @@ public class ACPController implements SceneController
 	public Button editButton;
 	public Button deleteButton;
 	public Button backButton;
+	private boolean busy = false;
 	
 	@FXML
 	public Label error;
 	
+	public void refresh()
+	{
+		Client.singleton.runCommand("loadacp");
+		busy = true;
+	}
+	
 	public void createNewUser(ActionEvent event)
 	{
+		if(busy) return;
 		Client.singleton.setUsrAccounts();
-	}
-	
-	public void editUserInfo(ActionEvent event)
-	{
-	
-	}
-	
-	public void deleteUser(ActionEvent event)
-	{
-	
 	}
 	
 	public void back(ActionEvent event)
 	{
+		if(busy) return;
 		Client.singleton.setMainMenu();
 	}
 	
@@ -57,19 +56,25 @@ public class ACPController implements SceneController
 			
 			Button edit = new Button("Edit");
 			edit.setOnAction(e ->
-					Client.singleton.runCommand("edituser " + info.id));
+			{
+				if(busy) return;
+				Client.singleton.runCommand("edituser " + info.id);
+			});
 			
 			hBox.getChildren().add(edit);
 			
 			
 			Button delete = new Button("Delete");
 			delete.setOnAction(e ->
-					Client.singleton.setConfDel(() ->
-					{
-						Client.singleton.runCommand("deleteuser " + info.id);
-						Client.singleton.runCommand("loadacp");
-					}, () ->
-							Client.singleton.runCommand("loadacp")));
+			{
+				if(busy) return;
+				Client.singleton.setConfDel(() ->
+				{
+					Client.singleton.runCommand("deleteuser " + info.id);
+					Client.singleton.runCommand("loadacp");
+				}, () ->
+						Client.singleton.runCommand("loadacp"));
+			});
 			
 			
 			hBox.getChildren().add(delete);
@@ -83,6 +88,7 @@ public class ACPController implements SceneController
 		Platform.runLater(() -> {
 			vBox.getChildren().clear();
 			error.setText("");
+			busy = false;
 		});
 	}
 	
@@ -90,6 +96,7 @@ public class ACPController implements SceneController
 	public void error(String msg)
 	{
 		error.setText(msg);
+		busy = false;
 	}
 	
 	@Override

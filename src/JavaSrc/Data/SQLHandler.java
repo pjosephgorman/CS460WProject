@@ -59,7 +59,7 @@ public class SQLHandler
 					{
 						UserInfo info = UserInfo.loadUser(cnt++);
 						String str = info.store();
-						UserInfo.load(str);
+						System.out.println(UserInfo.load(str));
 					}*/
 				}
 				if(!query(c,"SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'patients'").next())
@@ -76,8 +76,16 @@ public class SQLHandler
 					          	nursecomment VARCHAR(50),
 					          );""");
 					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", null, null);
-					PatientInfo info = PatientInfo.loadPatient(0);
-					System.out.println(info);
+					createPatient(c, "Jane Doe", "Stomach Ache", null, 25, "Female", null, null);
+					
+					/*int cnt = 0;
+					ResultSet r = query(c, "SELECT * FROM patients");
+					while(r.next())
+					{
+						PatientInfo info = PatientInfo.loadPatient(cnt++);
+						String str = info.store();
+						System.out.println(PatientInfo.load(str));
+					}*/
 				}
 			}
 			catch(Exception e)
@@ -145,16 +153,14 @@ public class SQLHandler
 			if(_nursecomment.equals("")) nursecomment = "";
 			else nursecomment = ", '" + nursecomment + "'";
 			
-			String sql = ("INSERT INTO patients (name, symptoms, age, sex%s%s%s) VALUES ('%s','%s','%d','%s'%s%s%s)").formatted(_test, _physician,
+			update(c, "INSERT INTO patients (name, symptoms, age, sex%s%s%s) VALUES ('%s','%s','%d','%s'%s%s%s)".formatted(_test, _physician,
 					_nursecomment, name,
 					symptoms,
-					age, sex, test, physician, nursecomment);
-			System.out.println(sql);
-			update(c,sql);
+					age, sex, test, physician, nursecomment));
 		}
 		catch(SQLException e)
 		{
-			if(e.getMessage().contains("UNIQUE")) throw new DuplicateUsernameException();
+			if(e.getMessage().contains("UNIQUE")) throw new RPMError();
 			throw e;
 		}
 	}
@@ -284,6 +290,17 @@ public class SQLHandler
 		catch(SQLException ignored) {}
 	}
 	
+	public static void delPatient(int PatientID)
+	{
+		try
+		{
+			Connection c = connect();
+			update(c, """
+			          DELETE FROM patients WHERE patient_id = %d""".formatted(PatientID));
+		}
+		catch(SQLException ignored) {}
+	}
+	
 	public static ArrayList<UserInfo> loadAllUserInfos()
 	{
 		ArrayList<UserInfo> list = new ArrayList<>();
@@ -296,6 +313,26 @@ public class SQLHandler
 				try
 				{
 					list.add(new UserInfo(r));
+				}
+				catch(Exception ignored) {}
+			}
+		}
+		catch(SQLException ignored) {}
+		return list;
+	}
+	
+	public static ArrayList<PatientInfo> loadAllPatientInfos()
+	{
+		ArrayList<PatientInfo> list = new ArrayList<>();
+		try
+		{
+			Connection c = connect();
+			ResultSet r = query(c, "SELECT * FROM patients");
+			while(r.next())
+			{
+				try
+				{
+					list.add(new PatientInfo(r));
 				}
 				catch(Exception ignored) {}
 			}

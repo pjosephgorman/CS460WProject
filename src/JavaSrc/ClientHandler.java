@@ -2,6 +2,7 @@ package JavaSrc;// Java implementation of  JavaSrc.Server side
 // It contains two classes : JavaSrc.Server and JavaSrc.ClientHandler
 // Save file as JavaSrc.Server.java
 
+import JavaSrc.Data.PatientInfo;
 import JavaSrc.Data.Roles;
 import JavaSrc.Data.SQLHandler;
 import JavaSrc.Data.UserInfo;
@@ -120,6 +121,22 @@ class ClientHandler extends Thread
 							admin();
 							reloadACP();
 						}
+						case "editpat" -> {
+							physician();
+							int id = Integer.parseInt(cmd[1]);
+							PatientInfo info = PatientInfo.loadPatient(id);
+							dos.writeUTF("editpat " + info.store());
+						}
+						case "deletepat" -> {
+							physician();
+							int id = Integer.parseInt(cmd[1]);
+							SQLHandler.delPatient(id);
+							reloadPatients();
+						}
+						case "loadpat" -> {
+							logged();
+							reloadPatients();
+						}
 						case "echo" -> {
 							dos.writeUTF(received.substring(5));
 							if(cmd[1].equals("error") || cmd[1].equals("over"))
@@ -183,6 +200,16 @@ class ClientHandler extends Thread
 		dos.writeUTF("showacp");
 	}
 	
+	private void reloadPatients() throws IOException
+	{
+		dos.writeUTF("clearpat");
+		for(PatientInfo info : SQLHandler.loadAllPatientInfos())
+		{
+			dos.writeUTF("pat " + info.store());
+		}
+		dos.writeUTF("showpat");
+	}
+	
 	private void handle(Exception e, boolean forceTerminal) throws IOException
 	{
 		if(!(e instanceof RPMException || e instanceof RPMRuntimeException)) return;
@@ -218,6 +245,22 @@ class ClientHandler extends Thread
 	private void admin() throws RPMError
 	{
 		if(usrRole != Roles.Admin)
+		{
+			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
+		}
+	}
+	
+	private void logged() throws RPMError
+	{
+		if(usrRole == null)
+		{
+			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
+		}
+	}
+	
+	private void physician() throws RPMError
+	{
+		if(usrRole != Roles.Physician && usrRole != Roles.Admin)
 		{
 			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
 		}

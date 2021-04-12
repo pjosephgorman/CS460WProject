@@ -1,5 +1,6 @@
 package JavaSrc;
 
+import JavaSrc.Data.PatientInfo;
 import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
 import JavaSrc.Exceptions.RPMError;
@@ -110,6 +111,12 @@ public class ConnectionHandler extends Thread
 								client.loadACP(UserInfo.load(received.split(" ", 2)[1]));
 							}
 							case "showacp" -> client.setACP();
+							case "clearpat" -> client.clearScene(Client.Scenes.PATIENTACTIONS);
+							case "pat" -> {
+								if(cmd.length < 2) throw new RPMError();
+								client.loadPat(PatientInfo.load(received.split(" ", 2)[1]));
+							}
+							case "showpat" -> client.setPatientActions();
 							case "edituser" -> {
 								if(cmd.length < 2) throw new RPMError();
 								UserInfo info = UserInfo.load(received.split(" ", 2)[1]);

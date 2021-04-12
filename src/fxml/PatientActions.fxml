@@ -17,4 +17,5 @@
             <Font size="18.0"/>
         </font>
     </Label>
+    <Label fx:id="error" layoutX="219.0" layoutY="365.0" textFill="#f80505" GridPane.halignment="LEFT"/>
 </AnchorPane>

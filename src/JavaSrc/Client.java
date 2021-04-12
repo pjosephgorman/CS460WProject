@@ -1,5 +1,6 @@
 package JavaSrc;
 
+import JavaSrc.Data.PatientInfo;
 import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
 import fxml.*;
@@ -184,6 +185,10 @@ public class Client extends Application
 	public void loadACP(UserInfo info)
 	{
 			acpController.load(info);
+	}
+	public void loadPat(PatientInfo info)
+	{
+			patientActionsController.load(info);
 	}
 	
 	public void error(String msg)
