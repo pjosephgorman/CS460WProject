@@ -4,25 +4,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" minHeight="150.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="fxml.ConfirmDeleteController">
+<GridPane alignment="center" hgap="10" minHeight="150.0" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ConfirmDeleteController">
     <columnConstraints>
-        <ColumnConstraints minWidth="110.0" />
-        <ColumnConstraints />
-        <ColumnConstraints minWidth="60.0" />
-        <ColumnConstraints />
-        <ColumnConstraints minWidth="110.0" />
+        <ColumnConstraints minWidth="110.0"/>
+        <ColumnConstraints/>
+        <ColumnConstraints minWidth="60.0"/>
+        <ColumnConstraints/>
+        <ColumnConstraints minWidth="110.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
+        <RowConstraints/>
+        <RowConstraints/>
     </rowConstraints>
-    <children>
-        <Label alignment="CENTER_RIGHT" text="Are you sure you wish to delete the user?" GridPane.columnSpan="5" GridPane.halignment="CENTER">
-            <font>
-                <Font size="18.0" />
-            </font></Label>
-        <Button minWidth="50.0" mnemonicParsing="false" onAction="#doYesButton" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Button minWidth="50.0" mnemonicParsing="false" onAction="#doNoButton" text="No" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-    </children>
+    <Label alignment="CENTER_RIGHT" text="Are you sure you wish to delete the user?" GridPane.columnSpan="5" GridPane.halignment="CENTER">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Button minWidth="50.0" mnemonicParsing="false" onAction="#doYesButton" text="Yes" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Button minWidth="50.0" mnemonicParsing="false" onAction="#doNoButton" text="No" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
 </GridPane>

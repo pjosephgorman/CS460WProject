@@ -36,11 +36,6 @@ public class PatientActionsController implements SceneController
 		Client.singleton.setCreateMedicalChart();
 	}
 	
-	public void viewChart(ActionEvent event)
-	{
-		if(busy) return;
-	}
-	
 	public void back()
 	{
 		if(busy) return;
@@ -59,6 +54,7 @@ public class PatientActionsController implements SceneController
 			hBox.setAlignment(Pos.CENTER);
 			
 			Button edit = new Button("Edit");
+			edit.setAlignment(Pos.CENTER_RIGHT);
 			edit.setOnAction(e ->
 			{
 				if(busy) return;
@@ -69,6 +65,7 @@ public class PatientActionsController implements SceneController
 			
 			
 			Button delete = new Button("Delete");
+			delete.setAlignment(Pos.CENTER_RIGHT);
 			delete.setOnAction(e ->
 			{
 				if(busy) return;

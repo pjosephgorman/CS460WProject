@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="center" hgap="10" minHeight="400.0" minWidth="400.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MainMenuController">
+<GridPane alignment="center" hgap="10" minHeight="400.0" minWidth="400.0" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MainMenuController">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -32,8 +33,7 @@
             <GridPane.margin>
                 <Insets top="5.0" />
             </GridPane.margin></Button>
-   <Button fx:id="editAccountButton" layoutX="162.0" layoutY="259.0" mnemonicParsing="false" onAction="#goToEditAccount" prefHeight="25.0"
-           prefWidth="96.0" text="Edit Account" GridPane.rowIndex="2">
+   <Button fx:id="editAccountButton" layoutX="162.0" layoutY="259.0" mnemonicParsing="false" onAction="#goToEditAccount" prefHeight="25.0" prefWidth="96.0" text="Edit Account" GridPane.rowIndex="2">
       <GridPane.margin>
          <Insets top="5.0" />
       </GridPane.margin>

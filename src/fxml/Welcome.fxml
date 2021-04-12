@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.WelcomeController">
-   <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#goToLogin" prefHeight="25.0" prefWidth="90.0" text="Login"
-           GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+<GridPane alignment="CENTER" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="fxml.WelcomeController">
+   <Button alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#goToLogin" prefHeight="25.0" prefWidth="90.0" text="Login" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
    <Label text="Welcome!" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <font>
          <Font size="36.0" />

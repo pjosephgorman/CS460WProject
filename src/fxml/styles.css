@@ -1,0 +1,20 @@
+.label{
+    -fx-text-fill: #2B65EC;
+}
+
+.button {
+    -fx-background-color: #2B65EC;
+    -fx-text-fill: white;
+}
+
+.scroll-pane{
+    -fx-background-color: floralwhite;
+}
+
+#error{
+    -fx-text-fill: red;
+}
+.root{
+    -fx-background-color: floralwhite;
+}
+

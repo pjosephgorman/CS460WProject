@@ -4,17 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="402.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fxml.ACPController">
+<AnchorPane prefHeight="402.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ACPController">
     <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
-        <VBox fx:id="vBox" prefHeight="296.0" prefWidth="585.0" spacing="4"/>
+        <VBox fx:id="vBox" prefHeight="296.0" prefWidth="585.0" spacing="4" />
     </ScrollPane>
-    <Button layoutX="94.0" layoutY="361.0" minWidth="50.0" mnemonicParsing="false" onAction="#createNewUser" text="New User"/>
-    <Button layoutX="444.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" onAction="#back" text="Back"/>
+    <Button layoutX="94.0" layoutY="361.0" minWidth="50.0" mnemonicParsing="false" onAction="#createNewUser" text="New User" />
+    <Button layoutX="444.0" layoutY="361.0" minWidth="60.0" mnemonicParsing="false" onAction="#back" text="Back" />
     <Label layoutX="223.0" layoutY="7.0" text="Admin Control Panel">
         <font>
-            <Font size="18.0"/>
+            <Font size="18.0" />
         </font>
     </Label>
-    <Label fx:id="error" layoutX="219.0" layoutY="365.0" textFill="#f80505" GridPane.halignment="LEFT"/>
+    <Label fx:id="error" layoutX="219.0" layoutY="365.0" textFill="#f80505" GridPane.halignment="LEFT" />
 </AnchorPane>

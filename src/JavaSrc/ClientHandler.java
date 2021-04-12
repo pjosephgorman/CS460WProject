@@ -121,6 +121,12 @@ class ClientHandler extends Thread
 							admin();
 							reloadACP();
 						}
+						case "createpat" -> {
+							physician();
+							String[] args = received.split(" ", 2)[1].split(";");
+							SQLHandler.createPatient(args);
+							reloadPatients();
+						}
 						case "editpat" -> {
 							physician();
 							int id = Integer.parseInt(cmd[1]);
@@ -154,6 +160,11 @@ class ClientHandler extends Thread
 				{
 					Util.error(e.getMessage());
 					error(ErrorCodes.UNKNOWN_ERROR, "Unknown Index-Out-Of-Bounds Error!");
+				}
+				catch(NumberFormatException e)
+				{
+					Util.trace(e);
+					error(ErrorCodes.UNKNOWN_ERROR, "Unknown NumberFormat Error!");
 				}
 			}
 			catch(InterruptedIOException iioe)

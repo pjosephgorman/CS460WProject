@@ -1,7 +1,9 @@
 package fxml;
 
 import JavaSrc.Client;
+import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
+import JavaSrc.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +20,7 @@ public class EditAccountController implements SceneController
 	public TextField firstName;
 	public TextField middleName;
 	public TextField lastName;
-	public ChoiceBox role;
+	public ChoiceBox<Roles> role;
 	public TextField phoneNumber;
 	public TextField emailAddress;
 	public Button cancelButton;
@@ -40,6 +42,18 @@ public class EditAccountController implements SceneController
 			error.setText("Missing required fields!");
 			return;
 		}
+		if(!newPassword.getText().equals(confirmPassword.getText()))
+		{
+			error.setText("Passwords must match");
+		}
+		if(oldPassword.getText().equals(confirmPassword.getText()))
+		{
+			error.setText("Can't use pre-existing password");
+			return;
+		}
+		Client.singleton.runCommand("edituser %s;%s;;%s;%s".formatted(oldPassword.getText().replaceAll(" ", ""),
+		                                                                Util.hash(newPassword.getText().replaceAll(" ", "")),
+		                                                                phoneNumber.getText().trim(), emailAddress.getText().trim()));
 	}
 	
 	
@@ -51,6 +65,7 @@ public class EditAccountController implements SceneController
 		confirmPassword.setText("");
 		phoneNumber.setText("");
 		emailAddress.setText("");
+		error.setText("");
 	}
 	
 	@Override

@@ -137,9 +137,13 @@ public class SQLHandler
 		}
 	}
 	
+	public static void createPatient(String[] args) throws SQLException,RPMException{
+		Connection c = connect();
+		createPatient(c, args[0], args[1], args[2], Integer.parseInt(args[3]), args[4], args[5], args[6]);
+	}
+	
 	private static void createPatient(Connection c, String name, String symptoms, String test, int age, String sex, String physician,
-	                                  String nursecomment) throws SQLException,
-	                                                              RPMException
+	                                  String nursecomment) throws SQLException
 	{
 		try
 		{
