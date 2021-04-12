@@ -92,6 +92,11 @@ public class SQLHandler
 		}
 	}
 	
+	public static void createUser(String[] args) throws SQLException, RPMException{
+		Connection c = connect();
+		createUser(c, args[0], args[1], false, args[2], args[3], args[4], Roles.valueOf(args[7]), args[5], args[6]);
+	}
+	
 	private static void createUser(Connection c, String uname, String pwd, boolean hash, String fname, String mname, String lname, Roles role,
 	                               String phone, String email) throws SQLException, RPMException
 	{

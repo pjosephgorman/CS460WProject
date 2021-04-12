@@ -23,6 +23,7 @@ class ClientHandler extends Thread
 	private final Socket s;
 	private Roles usrRole;
 	private int usrID;
+	private String usrname;
 	
 	// Constructor
 	public ClientHandler(Socket _s, DataInputStream _dis, DataOutputStream _dos)
@@ -94,7 +95,12 @@ class ClientHandler extends Thread
 							Util.msg("Connection closed");
 							return;
 						}
-						case "createuser" -> throw new DuplicateUsernameException(); //TODO Implement user creation
+						case "createuser" -> {
+							admin();
+							String[] args = received.split(" ", 2)[1].split(";");
+							SQLHandler.createUser(args);
+							reloadACP();
+						}
 						
 						case "edituser" -> {
 							admin();
