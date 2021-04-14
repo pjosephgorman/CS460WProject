@@ -29,7 +29,6 @@ public class LoginController implements SceneController
 		error.setText("");
 		Client.singleton.runCommand("login %s %s".formatted((uname.getText().replaceAll(" ", "")), Util.hash(pwd.getText().replaceAll(
 				" ", ""))));
-		Client.singleton.setMainMenu();
 	}
 	
 	@Override
