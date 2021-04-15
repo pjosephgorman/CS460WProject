@@ -17,6 +17,9 @@ public class MedicalChartController implements SceneController
 	public TextArea testsTextArea;
 	public TextArea nurseComment;
 	public Button testPatientButton;
+	public TextField height;
+	public TextField weight;
+	public TextArea vitals;
 	public Button cancelButton;
 	public Button submitButton;
 	
@@ -40,7 +43,9 @@ public class MedicalChartController implements SceneController
 	public void doSubmit(ActionEvent event)
 	{
 		if(busy) return;
-		if(physician.getText().isBlank() || nameTextField.getText().isBlank() || ageTextField.getText().isBlank() || sex.getText().isBlank() || symptomsTextArea.getText().isBlank() || testsTextArea.getText().isBlank())
+		if(physician.getText().isBlank() || nameTextField.getText().isBlank() || ageTextField.getText().isBlank() || sex.getText().isBlank() ||
+		   symptomsTextArea.getText().isBlank() || testsTextArea.getText().isBlank() || height.getText().isBlank() || weight.getText().isBlank()
+			|| vitals.getText().isBlank())
 		{
 			error.setText("Missing required fields!");
 			return;
