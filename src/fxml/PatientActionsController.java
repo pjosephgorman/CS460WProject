@@ -77,7 +77,18 @@ public class PatientActionsController implements SceneController
 						Client.singleton.runCommand("loadpat"));
 			});
 			
+			Button discharge = new Button("Discharge");
+			discharge.setAlignment(Pos.CENTER_RIGHT);
+			discharge.setOnAction(e ->
+           {
+                if(busy)return;
+                Client.singleton.setPatientDischarge();
+            
+            
+           });
 			
+			
+			hBox.getChildren().add(discharge);
 			hBox.getChildren().add(delete);
 			vBox.getChildren().add(hBox);
 			System.out.println(info);

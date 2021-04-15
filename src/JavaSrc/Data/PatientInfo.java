@@ -10,8 +10,8 @@ import java.sql.SQLException;
 public class PatientInfo
 {
 	public final int id;
-	public int age;
-	public String name, symptoms, test, sex, physician, nursecomment;
+	public int age, height, weight;
+	public String name, symptoms, test, sex, physician, nursecomment, vitals;
 	
 	//correct String list
 	/*name symptom */

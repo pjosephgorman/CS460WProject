@@ -143,6 +143,11 @@ class ClientHandler extends Thread
 							logged();
 							reloadPatients();
 						}
+//						case "discharge" {
+//							nurse();
+//
+//							reloadPatients();
+//						}
 						case "echo" -> {
 							dos.writeUTF(received.substring(5));
 							if(cmd[1].equals("error") || cmd[1].equals("over"))
@@ -272,6 +277,22 @@ class ClientHandler extends Thread
 	private void physician() throws RPMError
 	{
 		if(usrRole != Roles.Physician && usrRole != Roles.Admin)
+		{
+			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
+		}
+	}
+	
+	private void nurse() throws RPMError
+	{
+		if(usrRole != Roles.Nurse)
+		{
+			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
+		}
+	}
+	
+	private void billing() throws RPMError
+	{
+		if(usrRole != Roles.Billing)
 		{
 			throw new RPMError(ErrorCodes.INSUFFICIENT_PERMS, "Insufficient Permissions", false);
 		}

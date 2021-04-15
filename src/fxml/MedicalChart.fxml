@@ -4,52 +4,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MedicalChartController">
+<GridPane alignment="center" hgap="10" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MedicalChartController">
     <columnConstraints>
-        <ColumnConstraints maxWidth="121.0" minWidth="89.0" prefWidth="119.0"/>
-        <ColumnConstraints maxWidth="222.0" minWidth="88.0" prefWidth="178.0"/>
-        <ColumnConstraints maxWidth="134.0" minWidth="0.0" prefWidth="44.0"/>
-        <ColumnConstraints maxWidth="37.0" minWidth="60.0" prefWidth="36.0"/>
-        <ColumnConstraints maxWidth="37.0" minWidth="60.0" prefWidth="36.0"/>
-        <ColumnConstraints maxWidth="55.0" minWidth="60.0" prefWidth="55.0"/>
-        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0"/>
-        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0"/>
-        <ColumnConstraints/>
-        <ColumnConstraints/>
+        <ColumnConstraints maxWidth="121.0" minWidth="89.0" prefWidth="119.0" />
+        <ColumnConstraints maxWidth="222.0" minWidth="88.0" prefWidth="178.0" />
+        <ColumnConstraints maxWidth="134.0" minWidth="0.0" prefWidth="27.0" />
+        <ColumnConstraints maxWidth="114.0" minWidth="60.0" prefWidth="110.0" />
+        <ColumnConstraints maxWidth="55.0" minWidth="27.0" prefWidth="27.0" />
+        <ColumnConstraints maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints />
+        <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
     </rowConstraints>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
-    <Label text="Attending Physician:"/>
-    <Label text="Patient Name:" GridPane.rowIndex="1"/>
-    <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <Label text="Age" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-    <TextField fx:id="ageTextField" prefHeight="25.0" prefWidth="42.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-    <Label text="Sex:" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
-    <Label text="Admitting Symptoms" GridPane.rowIndex="2"/>
-    <TextArea fx:id="symptomsTextArea" prefHeight="118.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <Label text="Tests Performed" GridPane.rowIndex="3"/>
-    <Button minWidth="80.0" mnemonicParsing="false" onAction="#doEdit" text="Edit Fields" GridPane.columnIndex="1" GridPane.halignment="RIGHT"
-            GridPane.rowIndex="5"/>
-    <Button mnemonicParsing="false" onAction="#doTest" prefHeight="25.0" prefWidth="80.0" text="Test Patient" GridPane.columnIndex="2"
-            GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
-    <Button fx:id="cancelButton" minWidth="80.0" mnemonicParsing="false" onAction="#doCancel" prefHeight="25.0" prefWidth="55.0" text="Cancel"
-            GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="5"/>
-    <TextField fx:id="physician" GridPane.columnIndex="1"/>
-    <Label text="Comments" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
-    <TextArea fx:id="nurseComment" prefHeight="200.0" prefWidth="208.0" GridPane.columnIndex="4" GridPane.columnSpan="5" GridPane.rowIndex="3"/>
-    <Button fx:id="submitButton" minWidth="80.0" mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="7"
-            GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
-    <TextField fx:id="sex" GridPane.columnIndex="8" GridPane.rowIndex="1"/>
-    <TextArea fx:id="testsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <Label fx:id="error" textFill="RED" GridPane.columnIndex="8"/>
+    <Label text="Attending Physician:" />
+    <Label text="Patient Name:" GridPane.rowIndex="1" />
+    <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label prefHeight="17.0" prefWidth="31.0" text="Age:" GridPane.columnIndex="2" />
+    <TextField fx:id="ageTextField" prefHeight="25.0" prefWidth="83.0" GridPane.columnIndex="3" />
+    <Label text="Sex:" GridPane.columnIndex="5" GridPane.halignment="RIGHT" />
+    <Label text="Admitting Symptoms" GridPane.rowIndex="2" />
+    <TextArea fx:id="symptomsTextArea" prefHeight="118.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label text="Tests Performed" GridPane.rowIndex="3" />
+    <Button mnemonicParsing="false" onAction="#doTest" prefHeight="25.0" prefWidth="80.0" text="Test Patient" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+    <Button fx:id="cancelButton" minWidth="80.0" mnemonicParsing="false" onAction="#doCancel" prefHeight="25.0" prefWidth="55.0" text="Cancel" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
+    <TextField fx:id="physician" GridPane.columnIndex="1" />
+    <Label text="Comments" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+    <TextArea fx:id="nurseComment" prefHeight="200.0" prefWidth="208.0" GridPane.columnIndex="4" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+    <Button fx:id="submitButton" minWidth="80.0" mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+    <TextField fx:id="sex" GridPane.columnIndex="8" />
+    <TextArea fx:id="testsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label fx:id="error" textFill="RED" GridPane.columnIndex="8" />
 </GridPane>

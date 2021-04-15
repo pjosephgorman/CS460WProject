@@ -78,6 +78,7 @@ public class SQLHandler
 					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", null, null);
 					createPatient(c, "Jane Doe", "Stomach Ache", null, 25, "Female", null, null);
 					
+					
 					/*int cnt = 0;
 					ResultSet r = query(c, "SELECT * FROM patients");
 					while(r.next())

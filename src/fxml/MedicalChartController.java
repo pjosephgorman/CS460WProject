@@ -16,7 +16,6 @@ public class MedicalChartController implements SceneController
 	public TextArea symptomsTextArea;
 	public TextArea testsTextArea;
 	public TextArea nurseComment;
-	public Button editFieldButton;
 	public Button testPatientButton;
 	public Button cancelButton;
 	public Button submitButton;
@@ -28,15 +27,9 @@ public class MedicalChartController implements SceneController
 	
 	public void doCancel(ActionEvent event)
 	{
-		//TODO create submit button
 		if(busy) return;
 		Client.singleton.runCommand("loadpat");
 		busy = true;
-	}
-	
-	public void doEdit(ActionEvent event)
-	{
-		//TODO create edit feature for fields
 	}
 	
 	public void doTest(ActionEvent event)
@@ -46,7 +39,6 @@ public class MedicalChartController implements SceneController
 	
 	public void doSubmit(ActionEvent event)
 	{
-		//TODO create cancel feature to go back
 		if(busy) return;
 		if(physician.getText().isBlank() || nameTextField.getText().isBlank() || ageTextField.getText().isBlank() || sex.getText().isBlank() || symptomsTextArea.getText().isBlank() || testsTextArea.getText().isBlank())
 		{

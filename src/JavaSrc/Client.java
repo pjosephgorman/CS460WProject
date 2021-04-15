@@ -14,7 +14,7 @@ public class Client extends Application
 {
 	public static Client singleton;
 	ConnectionHandler handler;
-	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount, welcome;
+	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount, welcome, patientDischarge;
 	private Stage stage;
 	public Scenes scene;
 	boolean timeout = false;
@@ -29,10 +29,11 @@ public class Client extends Application
 	private UserAccountsController userAccountsController;
 	private EditAccountController editAccountController;
 	private PatientActionsController patientActionsController;
+	private PatientDischargeController patientDischargeController;
 	
 	public enum Scenes
 	{
-		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT, WELCOME
+		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT, WELCOME, DISCHARGE
 	}
 	
 	@Override
@@ -88,6 +89,10 @@ public class Client extends Application
 		loader = new FXMLLoader(getClass().getResource("/fxml/EditAccountInfo.fxml"));
 		editAccount = new Scene(loader.load());
 		editAccountController = loader.getController();
+		
+		loader = new FXMLLoader(getClass().getResource("/fxml/PatientDischargeForm.fxml"));
+		patientDischarge = new Scene(loader.load());
+		patientDischargeController = loader.getController();
 		
 		stage.setOnCloseRequest(windowEvent ->
 		                        {
@@ -182,6 +187,15 @@ public class Client extends Application
 		                  });
 	}
 	
+	public void setPatientDischarge()
+	{
+		Platform.runLater(() ->
+		                  {
+			                  setScene(Scenes.DISCHARGE);
+			                  stage.setTitle("Patient Discharge Form");
+		                  });
+	}
+	
 	public void loadACP(UserInfo info)
 	{
 			acpController.load(info);
@@ -232,6 +246,7 @@ public class Client extends Application
 			case USERACCOUNTS -> {return userAccountsController;}
 			case EDITACCOUNT -> {return  editAccountController;}
 			case WELCOME -> {return welcomeController;}
+			case DISCHARGE -> {return patientDischargeController;}
 		}
 		return null;
 	}
@@ -262,6 +277,7 @@ public class Client extends Application
 			case USERACCOUNTS -> {return usrAccounts;}
 			case EDITACCOUNT -> {return editAccount;}
 			case WELCOME -> {return welcome;}
+			case DISCHARGE -> {return patientDischarge;}
 		}
 		return null;
 	}
