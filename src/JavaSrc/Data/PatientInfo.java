@@ -32,11 +32,11 @@ public class PatientInfo
 			ret.load(r);
 			return ret;
 		}
-		catch (NoSuchPatientException e)
+		catch(NoSuchPatientException e)
 		{
 			throw e;
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
 			Util.trace(e);
 			throw new NoSuchPatientException();
@@ -52,8 +52,9 @@ public class PatientInfo
 	
 	public String store()
 	{
-		return id + ";" + name + ";" + symptoms + ";" + age + ";" + sex + ";" + (test == null ? "" : test) + ";" + (physician == null ? "" : physician) +
-		       ";" + (nursecomment == null ? "" : nursecomment);
+		return id + ";" + name + ";" + symptoms + ";" + age + ";" + sex + ";" + height + ";" + weight +
+		       ";" + vitals + ";" + (test == null ? "" : test) + ";" + (physician == null ? "" : physician)
+		       + ";" + (nursecomment == null ? "" : nursecomment);
 	}
 	
 	public static PatientInfo load(String str)
@@ -64,14 +65,14 @@ public class PatientInfo
 		ret.symptoms = args[2];
 		ret.age = Integer.parseInt(args[3]);
 		ret.sex = args[4];
-		if(args.length < 6 || args[5].equals(""))
-			ret.test = null;
+		ret.height = Integer.parseInt(args[3]);
+		ret.weight = Integer.parseInt(args[4]);
+		ret.vitals = args[4];
+		if(args.length < 6 || args[5].equals("")) ret.test = null;
 		else ret.test = args[5];
-		if(args.length < 7 || args[6].equals(""))
-			ret.physician = null;
+		if(args.length < 7 || args[6].equals("")) ret.physician = null;
 		else ret.physician = args[6];
-		if(args.length < 8 || args[7].equals(""))
-			ret.nursecomment = null;
+		if(args.length < 8 || args[7].equals("")) ret.nursecomment = null;
 		else ret.nursecomment = args[7];
 		//System.out.printf("Loaded '%s' as:\n%s%n", str,ret);
 		return ret;
@@ -84,22 +85,16 @@ public class PatientInfo
 		test = r.getString(4);
 		age = r.getInt(5);
 		sex = r.getString(6);
-		physician = r.getString(7);
-		nursecomment = r.getString(8);
+		height = r.getInt(7);
+		weight = r.getInt(8);
+		vitals = r.getString(9);
+		physician = r.getString(10);
+		nursecomment = r.getString(11);
 	}
 	
 	@Override
 	public String toString()
 	{
-		return "PatientInfo{" +
-		       "id=" + id +
-		       ", age=" + age +
-		       ", name='" + name + '\'' +
-		       ", symptoms='" + symptoms + '\'' +
-		       ", test='" + test + '\'' +
-		       ", sex='" + sex + '\'' +
-		       ", physician='" + physician + '\'' +
-		       ", nursecomment='" + nursecomment + '\'' +
-		       '}';
+		return "PatientInfo{" + "id=" + id + ", age=" + age + ", name='" + name + '\'' + ", symptoms='" + symptoms + '\'' + ", test='" + test + '\'' + ", sex='" + sex + '\'' + ", height=" + height + '\'' + ", weight=" + weight + '\'' + ", vitals=" + vitals + '\'' + ", physician='" + physician + '\'' + ", nursecomment='" + nursecomment + '\'' + '}';
 	}
 }

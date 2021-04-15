@@ -72,8 +72,11 @@ public class SQLHandler
 					          	test         VARCHAR(64),
 					          	age          INT          NOT NULL,
 					          	sex          VARCHAR(50)  NOT NULL,
+					          	height       INT          NOT NULL,
+					          	weight       INT          NOT NULL,
+					          	vitals       VARCHAR(112) NOT NULL,
 					          	physician    VARCHAR(32),
-					          	nursecomment VARCHAR(50),
+					          	nursecomment VARCHAR(112),
 					          );""");
 					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", null, null);
 					createPatient(c, "Jane Doe", "Stomach Ache", null, 25, "Female", null, null);
