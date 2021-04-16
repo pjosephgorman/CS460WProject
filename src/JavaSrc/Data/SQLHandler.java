@@ -62,7 +62,7 @@ public class SQLHandler
 						System.out.println(UserInfo.load(str));
 					}*/
 				}
-				if(!query(c,"SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'patients'").next())
+				if(!query(c, "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'patients'").next())
 				{
 					update(c, """
 					          CREATE TABLE patients (
@@ -104,7 +104,8 @@ public class SQLHandler
 		}
 	}
 	
-	public static void createUser(String[] args) throws SQLException, RPMException{
+	public static void createUser(String[] args) throws SQLException, RPMException
+	{
 		Connection c = connect();
 		createUser(c, args[0], args[1], false, args[2], args[3], args[4], Roles.valueOf(args[7]), args[5], args[6]);
 	}
@@ -141,40 +142,48 @@ public class SQLHandler
 		}
 	}
 	
-	public static void createPatient(String[] args) throws SQLException,RPMException{
+	public static void createPatient(String[] args) throws SQLException, RPMException
+	{
 		Connection c = connect();
-		createPatient(c, args[0], args[1], args[2], Integer.parseInt(args[3]), args[4], Integer.parseInt(args[5]), Integer.parseInt(args[6]),
-		              args[7], args[8], args[9]);
+		createPatient(c, args[0], args[1], args[2], Integer.parseInt(args[3]), args[4], Integer.parseInt(args[5]),
+				Integer.parseInt(args[6]),
+				args[7], args[8], args[9]);
 	}
 	
 	private static void createPatient(Connection c, String name, String symptoms, String test, int age, String sex, int height, int weight,
-	                                  String vitals,String physician, String nursecomment) throws SQLException
+	                                  String vitals, String physician, String nursecomment) throws SQLException
 	{
 		try
 		{
-			String _test = (test == null || test.equals("")) ? "" : ", test";
-			String _physician = (physician == null || physician.equals("")) ? "" : ", physician";
-			String _nursecomment = (nursecomment == null || nursecomment.equals("")) ? "" : ", nursecomment";
-			if(_test.equals("")) test = "";
-			else test = ", '" + test + "'";
-			if(_physician.equals("")) physician = "";
-			else physician = ", '" + physician + "'";
-			if(_nursecomment.equals("")) nursecomment = "";
-			else nursecomment = ", '" + nursecomment + "'";
+			String[] nullables = buildNullable(new String[]{test, physician, nursecomment, ""+height, ""+weight, vitals}, new String[]{"test",
+					"physician"
+					, "nursecomment", "height", "weight", "vitals"});
 			
-			//We're getting a number format error when trying to add a patient now, we think the problems are in lines 166-170 and lines 144-147
 			//Also the table patient table isn't showing any content when we run the Client
-			update(c,
-			       "INSERT INTO patients (name, symptoms, age, sex, height, weight, vitals%s%s%s) VALUES ('%s','%s','%d','%s','%d','%d','%s'%s%s%s)".formatted(_test, _physician,
-					_nursecomment, name,
+			update(c, "INSERT INTO patients (name, symptoms, age, sex%s) VALUES ('%s','%s','%d','%s'%s)".formatted(nullables[0],
+					name,
 					symptoms,
-					age, sex, height, weight, vitals, nursecomment, test, physician));
+					age, sex, nullables[1]));
 		}
 		catch(SQLException e)
 		{
 			if(e.getMessage().contains("UNIQUE")) throw new RPMError();
 			throw e;
 		}
+	}
+	
+	private static String[] buildNullable(String[] val, String[] key)
+	{
+		int len = Math.min(key.length, val.length);
+		StringBuilder[] ret = new StringBuilder[]{new StringBuilder(), new StringBuilder()};
+		for(int q = 0; q < len; ++q)
+		{
+			if(val[q] == null || val[q].isBlank())
+				continue;
+			ret[0].append(", ").append(key[q]);
+			ret[1].append(", '").append(val[q]).append('\'');
+		}
+		return new String[]{ret[0].toString(), ret[1].toString()};
 	}
 	
 	private static void clear()

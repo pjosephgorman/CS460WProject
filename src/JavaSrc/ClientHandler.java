@@ -123,7 +123,11 @@ class ClientHandler extends Thread
 						}
 						case "createpat" -> {
 							physician();
-							String[] args = received.split(" ", 2)[1].split(";");
+							String[] args = received.split(" ", 2)[1].split(";", -1);
+							Util.msg("Len: " + args.length);
+							for(String str : args)
+								Util.msg(str);
+							Util.msg("--");
 							SQLHandler.createPatient(args);
 							reloadPatients();
 						}

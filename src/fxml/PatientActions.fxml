@@ -11,7 +11,7 @@
     </ScrollPane>
     <Button layoutX="82.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#createChart" text="Create Chart" />
     <Button layoutX="455.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#back" text="Back" />
-    <Label layoutX="233.0" layoutY="7.0" text="Hosptial Patients">
+    <Label layoutX="233.0" layoutY="7.0" text="Hospital Patients">
         <font>
             <Font size="18.0" />
         </font>

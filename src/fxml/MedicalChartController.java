@@ -43,20 +43,24 @@ public class MedicalChartController implements SceneController
 	public void doSubmit(ActionEvent event)
 	{
 		if(busy) return;
-		if(physician.getText().isBlank() || nameTextField.getText().isBlank() || ageTextField.getText().isBlank() || sex.getText().isBlank() ||
-		   symptomsTextArea.getText().isBlank() || testsTextArea.getText().isBlank() || height.getText().isBlank() || weight.getText().isBlank()
-			|| vitals.getText().isBlank())
+		if(nameTextField.getText().isBlank() || ageTextField.getText().isBlank() || sex.getText().isBlank() ||
+		   symptomsTextArea.getText().isBlank())
 		{
 			error.setText("Missing required fields!");
 			return;
 		}
+		String fieldname = "Age";
 		try
 		{
 			Integer.parseInt(ageTextField.getText().trim());
+			fieldname = "Height";
+			Integer.parseInt(height.getText().trim());
+			fieldname = "Weight";
+			Integer.parseInt(weight.getText().trim());
 		}
 		catch(NumberFormatException e)
 		{
-			error.setText("Age must be a number");
+			error.setText("%s must be a number".formatted(fieldname));
 			return;
 		}
 		Client.singleton.runCommand("createpat %s;%s;%s;%s;%s;%s;%s;%s;%s;%s".formatted(nameTextField.getText().trim(),
