@@ -72,9 +72,9 @@ public class SQLHandler
 					          	test         VARCHAR(64),
 					          	age          INT          NOT NULL,
 					          	sex          VARCHAR(50)  NOT NULL,
-					          	height       INT          NOT NULL,
-					          	weight       INT          NOT NULL,
-					          	vitals       VARCHAR(112) NOT NULL,
+					          	height       INT,
+					          	weight       INT,
+					          	vitals       VARCHAR(112),
 					          	physician    VARCHAR(32),
 					          	nursecomment VARCHAR(112),
 					          );""");
