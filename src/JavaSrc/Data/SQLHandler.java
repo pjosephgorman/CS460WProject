@@ -78,8 +78,8 @@ public class SQLHandler
 					          	physician    VARCHAR(32),
 					          	nursecomment VARCHAR(112),
 					          );""");
-					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", null, null);
-					createPatient(c, "Jane Doe", "Stomach Ache", null, 25, "Female", null, null);
+					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", 60, 250, "97 degrees, 150/60 BP", null, null);
+					createPatient(c, "Jane Doe", "Stomach Ache", null, 25, "Female", 55, 200, "99 degrees, 140/55 BP", null, null);
 					
 					
 					/*int cnt = 0;
@@ -143,11 +143,12 @@ public class SQLHandler
 	
 	public static void createPatient(String[] args) throws SQLException,RPMException{
 		Connection c = connect();
-		createPatient(c, args[0], args[1], args[2], Integer.parseInt(args[3]), args[4], args[5], args[6]);
+		createPatient(c, args[0], args[1], args[2], Integer.parseInt(args[3]), args[4], Integer.parseInt(args[5]), Integer.parseInt(args[6]),
+		              args[7], args[8], args[9]);
 	}
 	
-	private static void createPatient(Connection c, String name, String symptoms, String test, int age, String sex, String physician,
-	                                  String nursecomment) throws SQLException
+	private static void createPatient(Connection c, String name, String symptoms, String test, int age, String sex, int height, int weight,
+	                                  String vitals,String physician, String nursecomment) throws SQLException
 	{
 		try
 		{
@@ -161,10 +162,13 @@ public class SQLHandler
 			if(_nursecomment.equals("")) nursecomment = "";
 			else nursecomment = ", '" + nursecomment + "'";
 			
-			update(c, "INSERT INTO patients (name, symptoms, age, sex%s%s%s) VALUES ('%s','%s','%d','%s'%s%s%s)".formatted(_test, _physician,
+			//We're getting a number format error when trying to add a patient now, we think the problems are in lines 166-170 and lines 144-147
+			//Also the table patient table isn't showing any content when we run the Client
+			update(c,
+			       "INSERT INTO patients (name, symptoms, age, sex, height, weight, vitals%s%s%s) VALUES ('%s','%s','%d','%s','%d','%d','%s'%s%s%s)".formatted(_test, _physician,
 					_nursecomment, name,
 					symptoms,
-					age, sex, test, physician, nursecomment));
+					age, sex, height, weight, vitals, nursecomment, test, physician));
 		}
 		catch(SQLException e)
 		{

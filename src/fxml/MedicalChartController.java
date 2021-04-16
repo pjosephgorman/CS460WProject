@@ -59,10 +59,12 @@ public class MedicalChartController implements SceneController
 			error.setText("Age must be a number");
 			return;
 		}
-		Client.singleton.runCommand("createpat %s;%s;%s;%s;%s;%s;%s".formatted(nameTextField.getText().trim(), symptomsTextArea.getText().trim(),
+		Client.singleton.runCommand("createpat %s;%s;%s;%s;%s;%s;%s;%s;%s;%s".formatted(nameTextField.getText().trim(),
+		                                                                             symptomsTextArea.getText().trim(),
 		                                                                       testsTextArea.getText().trim(), ageTextField.getText().trim(),
-		                                                                       sex.getText().trim(), physician.getText().trim(),
+		                                                                       sex.getText().trim(), height.getText().trim(), weight.getText().trim(), vitals.getText().trim(), physician.getText().trim(),
 		                                                                       nurseComment.getText().trim()));
+		                                                                       
 		busy = true;
 	}
 	

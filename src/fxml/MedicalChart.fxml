@@ -45,7 +45,7 @@
     <Button fx:id="submitButton" minWidth="80.0" mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
     <TextField fx:id="sex" GridPane.columnIndex="8" />
     <TextArea fx:id="testsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <Label fx:id="error" textFill="RED" GridPane.columnIndex="8" />
+    <Label fx:id="error" textFill="RED" GridPane.rowIndex="5" />
    <Label text="Height:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
    <TextField fx:id="height" GridPane.columnIndex="3" GridPane.rowIndex="1" />
    <Label text="Weight:" GridPane.columnIndex="5" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
