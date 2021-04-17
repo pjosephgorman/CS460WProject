@@ -2,6 +2,7 @@ package fxml;
 
 import JavaSrc.Client;
 import JavaSrc.Data.PatientInfo;
+import JavaSrc.Data.Roles;
 import JavaSrc.Data.UserInfo;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ public class PatientActionsController implements SceneController
 	public Button viewChartsButton;
 	public Button backButton;
 	private boolean busy = false;
+	private boolean showDischarge = false;
 	
 	@FXML
 	public Label error;
@@ -77,18 +79,17 @@ public class PatientActionsController implements SceneController
 						Client.singleton.runCommand("loadpat"));
 			});
 			
-			Button discharge = new Button("Discharge");
-			discharge.setAlignment(Pos.CENTER_RIGHT);
-			discharge.setOnAction(e ->
-           {
-                if(busy)return;
-                Client.singleton.setPatientDischarge();
-            
-            
-           });
-			
-			
-			hBox.getChildren().add(discharge);
+			if(showDischarge)
+			{
+				Button discharge = new Button("Discharge");
+				discharge.setAlignment(Pos.CENTER_RIGHT);
+				discharge.setOnAction(e ->
+				{
+					if(busy) return;
+					Client.singleton.setPatientDischarge();
+				});
+				hBox.getChildren().add(discharge);
+			}
 			hBox.getChildren().add(delete);
 			vBox.getChildren().add(hBox);
 			System.out.println(info);
@@ -116,6 +117,6 @@ public class PatientActionsController implements SceneController
 	@Override
 	public void updateInfo(UserInfo info)
 	{
-	
+		showDischarge = (info.role == Roles.Nurse || info.role == Roles.Admin);
 	}
 }
