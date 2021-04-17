@@ -53,7 +53,7 @@ public class PatientInfo
 	public String store()
 	{
 		return id + ";" + name + ";" + symptoms + ";" + age + ";" + sex + ";" + height + ";" + weight +
-		       ";" + vitals + ";" + (test == null ? "" : test) + ";" + (physician == null ? "" : physician)
+		       ";" + (vitals == null ? "" : vitals) + ";" + (test == null ? "" : test) + ";" + (physician == null ? "" : physician)
 		       + ";" + (nursecomment == null ? "" : nursecomment);
 	}
 	
@@ -65,17 +65,17 @@ public class PatientInfo
 		ret.symptoms = args[2];
 		ret.age = Integer.parseInt(args[3]);
 		ret.sex = args[4];
-		if(args.length < 6 || args[5].equals("")) ret.height = null;
+		if(args.length < 6 || args[5] == null || args[5].equals("")) ret.height = null;
 		else ret.height = "" + Integer.parseInt(args[5]);
-		if(args.length < 7 || args[6].equals("")) ret.weight = null;
+		if(args.length < 7 || args[6] == null || args[6].equals("")) ret.weight = null;
 		else ret.weight = "" + Integer.parseInt(args[6]);
-		if(args.length < 8 || args[7].equals("")) ret.vitals = null;
+		if(args.length < 8 || args[7] == null || args[7].equals("")) ret.vitals = null;
 		else ret.vitals = args[7];
-		if(args.length < 9 || args[8].equals("")) ret.test = null;
+		if(args.length < 9 || args[8] == null || args[8].equals("")) ret.test = null;
 		else ret.test = args[8];
-		if(args.length < 10 || args[9].equals("")) ret.physician = null;
+		if(args.length < 10 || args[9] == null || args[9].equals("")) ret.physician = null;
 		else ret.physician = args[9];
-		if(args.length < 11 || args[10].equals("")) ret.nursecomment = null;
+		if(args.length < 11 || args[10] == null || args[10].equals("")) ret.nursecomment = null;
 		else ret.nursecomment = args[10];
 		//System.out.printf("Loaded '%s' as:\n%s%n", str,ret);
 		return ret;
