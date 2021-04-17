@@ -7,7 +7,7 @@ public class PatientDischargeInfo
 {
 	public final int id;
 	public int days;
-	public String patName, address, email, instructions;
+	public String address, email, instructions;
 	public Diagnosis diagnosis;
 	public Medication medication;
 	
