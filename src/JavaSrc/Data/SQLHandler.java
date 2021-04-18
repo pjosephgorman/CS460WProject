@@ -48,6 +48,7 @@ public class SQLHandler
 					          );""".formatted(rolelist));
 					
 					//Test values
+					createUser(c, "admin", "admin", true, "Administrator", "", "Admin", Admin, "555-555-5555", "foo@gmail.com");
 					createUser(c, "foo", "pineapple", true, "a", "", "b", Admin, "555-555-5555", "foo@gmail.com");
 					createUser(c, "bar", "banana", true, "a", "", "b", Physician, "555-555-5555", "foo@gmail.com");
 					createUser(c, "bah", "abcd", true, "a", "", "b", Nurse, "555-555-5555", "foo@gmail.com");
