@@ -20,6 +20,13 @@ public class PatientDischargeInfo
 		System.out.println(this);
 	}
 	
+	public double calculateBill(double days)
+	{
+		double medPrice = 10 + medication.ordinal() + 1;
+		double pricePerDay = days * 100;
+		return 0;
+	}
+	
 	private void load(ResultSet r) throws SQLException
 	{
 		throw new SQLException();
