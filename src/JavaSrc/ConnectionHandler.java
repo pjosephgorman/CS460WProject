@@ -47,7 +47,7 @@ public class ConnectionHandler extends Thread
 			{
 				try
 				{
-					System.out.println("Attempting connection... #" + (i++));
+					Util.msg("Attempting connection... #" + (i++));
 					s = new Socket(ip, 5056);
 				}
 				catch(ConnectException e)
@@ -72,14 +72,14 @@ public class ConnectionHandler extends Thread
 				try
 				{
 					String tosend = commands.take();
-					//System.out.println("Sent: \"" + tosend + "\"");
+					//Util.msg("Sent: \"" + tosend + "\"");
 					dos.writeUTF(tosend);
 					boolean processing = true;
 					while(processing)
 					{
 						// printing date or time as requested by client
 						String received = dis.readUTF().trim();
-						System.out.println("Received: \"" + received + "\""); //TODO remove print
+						Util.msg("Received: \"" + received + "\"");
 						String[] cmd = received.split(" ");
 						switch(cmd[0].toLowerCase())
 						{
@@ -112,12 +112,12 @@ public class ConnectionHandler extends Thread
 							case "edituser" -> {
 								if(cmd.length < 2) throw new RPMError();
 								UserInfo info = UserInfo.load(received.split(" ", 2)[1]);
-								System.out.println(info);
+								Util.msg(info.toString());
 							}
 							case "editpat" -> {
 								if(cmd.length < 2) throw new RPMError();
 								PatientInfo info = PatientInfo.load(received.split(" ", 2)[1]);
-								System.out.println(info);
+								Util.msg(info.toString());
 							}
 							case "error" -> {
 								processing = false;
