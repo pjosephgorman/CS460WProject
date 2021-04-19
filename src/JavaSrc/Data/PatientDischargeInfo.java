@@ -7,9 +7,11 @@ public class PatientDischargeInfo
 {
 	public final int id;
 	public int days;
-	public String address, email, instructions;
+	public String patName, address, email, instructions;
 	public Diagnosis diagnosis;
 	public Medication medication;
+	
+//	public final double test = 100.0;
 	
 	private PatientDischargeInfo(int disId, int patientId) { id = disId; }
 	
@@ -20,7 +22,7 @@ public class PatientDischargeInfo
 		System.out.println(this);
 	}
 	
-	public double calculateBill(double days)
+	public double calculateBill(String patName, double days, Medication medication)
 	{
 		double medPrice = 10 + medication.ordinal() + 1;
 		double pricePerDay = days * 100;

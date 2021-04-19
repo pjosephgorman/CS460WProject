@@ -18,7 +18,6 @@ public class PatientActionsController implements SceneController
 {
 	public VBox vBox;
 	public Button createChartButton;
-	public Button viewChartsButton;
 	public Button backButton;
 	private boolean busy = false;
 	private boolean showDischarge = false;

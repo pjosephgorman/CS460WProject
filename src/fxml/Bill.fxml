@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="447.0" prefWidth="648.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.BillController">
+   <Button layoutX="287.0" layoutY="396.0" minWidth="75.0" mnemonicParsing="false" text="Print"/>
+   <Label layoutX="309.0" layoutY="29.0" text="Bill">
+      <font>
+         <Font size="24.0"/>
+      </font>
+   </Label>
+   <TextArea fx:id="itemizedBill" layoutX="47.0" layoutY="64.0" prefHeight="315.0" prefWidth="556.0"/>
+</AnchorPane>

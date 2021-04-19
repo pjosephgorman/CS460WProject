@@ -92,6 +92,7 @@ public class UserAccountsController implements SceneController
 	
 	}
 	
+	
 	public void initialize(){
 		for(Roles r : Roles.values()){
 			role.getItems().add(r);

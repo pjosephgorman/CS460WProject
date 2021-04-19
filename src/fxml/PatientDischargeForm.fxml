@@ -21,6 +21,6 @@
     <TextField fx:id="patientName" layoutX="99.0" layoutY="21.0" prefHeight="25.0" prefWidth="190.0" />
     <TextField fx:id="email" layoutX="98.0" layoutY="150.0" prefHeight="25.0" prefWidth="190.0" />
     <TextField fx:id="days" layoutX="98.0" layoutY="215.0" prefHeight="25.0" prefWidth="52.0" />
-    <Button alignment="CENTER" layoutX="553.0" layoutY="321.0" minWidth="70.0" mnemonicParsing="false" text="Print Bill" />
+    <Button alignment="CENTER" layoutX="553.0" layoutY="321.0" minWidth="70.0" mnemonicParsing="false" onAction="#printBill" text="Print Bill" />
    <ChoiceBox fx:id="medications" layoutX="150.0" layoutY="278.0" prefWidth="150.0" />
 </AnchorPane>

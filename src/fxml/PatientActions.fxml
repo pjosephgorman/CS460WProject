@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="402.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fxml.PatientActionsController">
+<AnchorPane prefHeight="402.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.PatientActionsController">
     <ScrollPane layoutY="34.0" prefHeight="303.0" prefWidth="600.0">
-        <VBox fx:id="vBox" prefHeight="291.0" prefWidth="588.0" spacing="4"/>
+        <VBox fx:id="vBox" prefHeight="291.0" prefWidth="539.0" spacing="4" />
     </ScrollPane>
     <Button layoutX="82.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#createChart" text="Create Chart" />
     <Button layoutX="455.0" layoutY="361.0" minWidth="80.0" mnemonicParsing="false" onAction="#back" text="Back" />

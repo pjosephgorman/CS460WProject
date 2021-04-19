@@ -35,6 +35,14 @@ public class PatientDischargeController implements SceneController
 	
 	public void printBill(ActionEvent event){
 		//TODO print itemized bill
+		if(busy) return;
+		
+		TextArea textArea = new TextArea();
+		String name = patientName.getText();
+		textArea.setText(name);
+		BillController bill = new BillController();
+		bill.createBill(name, textArea);
+		Client.singleton.setBill();
 	}
 	
 	
@@ -55,4 +63,5 @@ public class PatientDischargeController implements SceneController
 	{
 	
 	}
+	
 }
