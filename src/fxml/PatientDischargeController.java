@@ -1,25 +1,28 @@
 package fxml;
 
 import JavaSrc.Client;
-import JavaSrc.Data.Diagnosis;
-import JavaSrc.Data.Medication;
-import JavaSrc.Data.UserInfo;
+import JavaSrc.Data.*;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 
 public class PatientDischargeController implements SceneController
 {
-	public TextField patientName;
+	public Label patientName;
 	public TextField days;
 	public TextField email;
 	public ChoiceBox<Diagnosis> diagnosis;
 	public TextArea instructions;
 	public ChoiceBox<Medication> medications;
-	public Button submitButton;
+	public Button printBillButton;
 	public Button cancelButton;
+	
+	@FXML
+	private Label error;
+	
+	private String tests;
+	
+	private PatientInfo patInfo;
 	
 	private boolean busy = false;
 	
@@ -29,39 +32,59 @@ public class PatientDischargeController implements SceneController
 		busy = true;
 	}
 	
-	public void submit(ActionEvent event){
-		//TODO submit discharge information
-	}
-	
 	public void printBill(ActionEvent event){
 		//TODO print itemized bill
 		if(busy) return;
-		
-		TextArea textArea = new TextArea();
-		String name = patientName.getText();
-		textArea.setText(name);
-		BillController bill = new BillController();
-		bill.createBill(name, textArea);
-		Client.singleton.setBill();
+		if(days.getText().isBlank() || diagnosis.getValue() == null || medications.getValue() == null)
+		{
+			error.setText("Missing Required Fields");
+			return;
+		}
+		Client.singleton.setBill(new String[] {patInfo.name, days.getText(), medications.getValue().toString(), tests, diagnosis.getValue().toString()});
+		busy = true;
 	}
 	
 	
 	@Override
 	public void clear()
 	{
-	
+		busy = false;
+		patientName.setText("");
+		days.setText("");
+		diagnosis.setValue(null);
+		email.setText("");
+		instructions.setText("");
+		medications.setValue(null);
+		patInfo = null;
 	}
 	
 	@Override
 	public void error(String msg)
 	{
-	
+		if(!msg.isBlank()) busy = false;
+		busy = false;
 	}
 	
 	@Override
 	public void updateInfo(UserInfo info)
 	{
-	
+		printBillButton.setVisible(info != null && (info.role == Roles.Admin || info.role == Roles.Billing));
 	}
 	
+	public void load(PatientInfo info)
+	{
+		patInfo = info;
+		patientName.setText(info.name);
+		tests = info.test;
+		
+	}
+	
+	public void initialize(){
+		for(Diagnosis d : Diagnosis.values()){
+			diagnosis.getItems().add(d);
+		}
+		for(Medication m : Medication.values()){
+			medications.getItems().add(m);
+		}
+	}
 }

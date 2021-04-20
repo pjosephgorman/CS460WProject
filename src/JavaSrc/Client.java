@@ -192,19 +192,21 @@ public class Client extends Application
 		                  });
 	}
 	
-	public void setPatientDischarge()
+	public void setPatientDischarge(PatientInfo info)
 	{
 		Platform.runLater(() ->
 		                  {
+		                  	patientDischargeController.load(info);
 			                  setScene(Scenes.DISCHARGE);
 			                  stage.setTitle("Patient Discharge Form");
 		                  });
 	}
 	
-	public void setBill()
+	public void setBill(String[] args)
 	{
 		Platform.runLater(() ->
 		                  {
+		                  	billController.createBill(args);
 			                  setScene(Scenes.BILL);
 			                  stage.setTitle("Bill");
 		                  });

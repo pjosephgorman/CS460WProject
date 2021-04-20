@@ -4,56 +4,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="fxml.MedicalChartController">
+<GridPane alignment="center" hgap="10" stylesheets="@styles.css" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.MedicalChartController">
     <columnConstraints>
-        <ColumnConstraints maxWidth="121.0" minWidth="89.0" prefWidth="119.0"/>
-        <ColumnConstraints maxWidth="222.0" minWidth="88.0" prefWidth="178.0"/>
-        <ColumnConstraints maxWidth="134.0" minWidth="0.0" prefWidth="60.0"/>
-        <ColumnConstraints maxWidth="114.0" minWidth="60.0" prefWidth="110.0"/>
-        <ColumnConstraints maxWidth="55.0" minWidth="45.0" prefWidth="27.0"/>
-        <ColumnConstraints maxWidth="60.0" minWidth="60.0" prefWidth="60.0"/>
-        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0"/>
-        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0"/>
-        <ColumnConstraints/>
-        <ColumnConstraints/>
+        <ColumnConstraints maxWidth="121.0" minWidth="210.0" prefWidth="200.0" />
+        <ColumnConstraints maxWidth="222.0" minWidth="88.0" prefWidth="178.0" />
+        <ColumnConstraints maxWidth="134.0" minWidth="0.0" prefWidth="60.0" />
+        <ColumnConstraints maxWidth="114.0" minWidth="60.0" prefWidth="110.0" />
+        <ColumnConstraints maxWidth="55.0" minWidth="45.0" prefWidth="27.0" />
+        <ColumnConstraints maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints maxWidth="12.0" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints />
+        <ColumnConstraints />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
-        <RowConstraints/>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
     </rowConstraints>
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
     </padding>
-    <Label text="Attending Physician:" GridPane.halignment="RIGHT"/>
-    <TextField fx:id="physician" GridPane.columnIndex="1"/>
-    <Label prefHeight="17.0" prefWidth="31.0" text="Age:" GridPane.columnIndex="2" GridPane.halignment="RIGHT"/>
-    <TextField fx:id="ageTextField" prefHeight="25.0" prefWidth="83.0" GridPane.columnIndex="3"/>
-    <Label text="Sex:" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.columnSpan="2"/>
-    <TextField fx:id="sex" GridPane.columnIndex="8"/>
-    <Label text="Patient Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
-    <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <Label text="Height (in):" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
-    <TextField fx:id="height" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-    <Label text="Weight (lb):" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.columnSpan="2"/>
-    <TextField fx:id="weight" GridPane.columnIndex="8" GridPane.rowIndex="1"/>
-    <Label text="Admitting Symptoms" GridPane.rowIndex="2" GridPane.valignment="TOP"/>
-    <TextArea fx:id="symptomsTextArea" prefHeight="118.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-    <Label text="Vitals" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP"/>
-    <TextArea fx:id="vitals" prefHeight="118.0" prefWidth="322.0" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="2"/>
-    <Label text="Tests Performed" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP"/>
-    <TextArea fx:id="testsTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-    <Label text="Comments" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP"/>
-    <TextArea fx:id="nurseComment" prefHeight="200.0" prefWidth="208.0" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="3"/>
-    <Button mnemonicParsing="false" onAction="#doTest" prefHeight="25.0" prefWidth="80.0" text="Test Patient" GridPane.columnIndex="1"
-            GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
-    <Button fx:id="cancelButton" minWidth="80.0" mnemonicParsing="false" onAction="#doCancel" prefHeight="25.0" prefWidth="55.0" text="Cancel"
-            GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="5"/>
-    <Button fx:id="submitButton" minWidth="80.0" mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="5"
-            GridPane.halignment="CENTER" GridPane.rowIndex="5"/>
-    <Label fx:id="error" textFill="RED" GridPane.rowIndex="6" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+    <Label text="Attending Physician:" GridPane.halignment="RIGHT" />
+    <TextField fx:id="physician" GridPane.columnIndex="1" />
+    <Label prefHeight="17.0" prefWidth="31.0" text="Age:" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+    <TextField fx:id="ageTextField" prefHeight="25.0" prefWidth="83.0" GridPane.columnIndex="3" />
+    <Label text="Sex:" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="RIGHT" />
+    <TextField fx:id="sex" GridPane.columnIndex="8" />
+    <Label text="Patient Name:" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+    <TextField fx:id="nameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label text="Height (in):" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+    <TextField fx:id="height" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+    <Label text="Weight (lb):" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+    <TextField fx:id="weight" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+    <Label text="Admitting Symptoms" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+    <TextArea fx:id="symptomsTextArea" prefHeight="118.0" prefWidth="206.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label text="Vitals" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+    <TextArea fx:id="vitals" prefHeight="118.0" prefWidth="322.0" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="2" />
+    <TextArea fx:id="testsTextArea" prefHeight="246.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.rowSpan="7" />
+    <Label text="Comments" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+    <TextArea fx:id="nurseComment" prefHeight="200.0" prefWidth="208.0" GridPane.columnIndex="3" GridPane.columnSpan="6" GridPane.rowIndex="4" />
+    <Button fx:id="cancelButton" minWidth="80.0" mnemonicParsing="false" onAction="#doCancel" prefHeight="25.0" prefWidth="55.0" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
+    <Button fx:id="submitButton" minWidth="80.0" mnemonicParsing="false" onAction="#doSubmit" text="Submit" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="12" />
+    <Label fx:id="error" textFill="RED" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+   <Label text="MRI, CT, X-Ray" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+   <Label text="White Blood Cell, Red Blood Cell" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+   <Label text="Liver Function, Kidney Function" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
+   <Label text="Urinary Test, Stool Test, Electrolyte Test" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+   <Label text="Input Tests Performed (Case Sensitive, Choose one options below):" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BASELINE" />
 </GridPane>

@@ -6,16 +6,13 @@ import JavaSrc.Data.UserInfo;
 import JavaSrc.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class UserAccountsController implements SceneController
 {
 	public TextField username;
-	public TextField password;
-	public TextField confirmPassword;
+	public PasswordField password;
+	public PasswordField confirmPassword;
 	public TextField firstName;
 	public TextField middleName;
 	public TextField lastName;

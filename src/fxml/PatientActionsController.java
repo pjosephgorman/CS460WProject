@@ -85,7 +85,8 @@ public class PatientActionsController implements SceneController
 				discharge.setOnAction(e ->
 				{
 					if(busy) return;
-					Client.singleton.setPatientDischarge();
+					Client.singleton.setPatientDischarge(info);
+					busy = true;
 				});
 				hBox.getChildren().add(discharge);
 			}
@@ -116,6 +117,6 @@ public class PatientActionsController implements SceneController
 	@Override
 	public void updateInfo(UserInfo info)
 	{
-		showDischarge = (info.role == Roles.Nurse || info.role == Roles.Admin);
+		showDischarge = (info.role == Roles.Nurse || info.role == Roles.Admin || info.role == Roles.Billing);
 	}
 }

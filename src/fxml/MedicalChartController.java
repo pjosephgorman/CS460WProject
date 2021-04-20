@@ -38,11 +38,6 @@ public class MedicalChartController implements SceneController
 		busy = true;
 	}
 	
-	public void doTest(ActionEvent event)
-	{
-		//TODO create feature to perform a test
-	}
-	
 	public void doSubmit(ActionEvent event)
 	{
 		if(busy) return;
@@ -73,11 +68,6 @@ public class MedicalChartController implements SceneController
 		                                                                       nurseComment.getText().trim()));
 		                                                                       
 		busy = true;
-	}
-	
-	public void fillTestsPerformed(ActionEvent event)
-	{
-		//TODO fills the tests performed field after button is pressed
 	}
 	
 	@Override

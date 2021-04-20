@@ -45,8 +45,6 @@
     <Label text="Phone Number:" GridPane.rowIndex="8" />
     <Label text="Email Address:" GridPane.rowIndex="9" />
     <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <TextField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <TextField fx:id="middleName" GridPane.columnIndex="1" GridPane.rowIndex="5" />
     <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -74,4 +72,6 @@
     </ChoiceBox>
     <Label fx:id="error" textFill="RED" />
     <Label text="*" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+   <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   <PasswordField fx:id="confirmPassword" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 </GridPane>
