@@ -34,7 +34,7 @@ public class BillController implements SceneController
 	
 	public int medicationsPrescribed(String args)
 	{
-		switch (args)
+	 	switch (args)
 		{
 			case "Corticosteroids":
 				return 300;
