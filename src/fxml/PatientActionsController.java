@@ -34,7 +34,7 @@ public class PatientActionsController implements SceneController
 	public void createChart(ActionEvent event)
 	{
 		if(busy) return;
-		Client.singleton.setCreateMedicalChart();
+		Client.singleton.runCommand("createpat");
 	}
 	
 	public void back()

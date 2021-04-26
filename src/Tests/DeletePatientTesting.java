@@ -59,7 +59,7 @@ public class DeletePatientTesting
 			dis = new DataInputStream(s.getInputStream());
 			dos = new DataOutputStream(s.getOutputStream());
 			commands.add("login admin admin");
-			commands.add("deletepat 2");
+			commands.add("deletepat ");
 			while(!commands.isEmpty())
 			{
 				String next = commands.take();

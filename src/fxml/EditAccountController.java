@@ -25,6 +25,7 @@ public class EditAccountController implements SceneController
 	public TextField emailAddress;
 	public Button cancelButton;
 	public Button submitButton;
+	private boolean busy = false;
 	
 	@FXML
 	private Label error;
@@ -36,6 +37,7 @@ public class EditAccountController implements SceneController
 	
 	public void doSubmit(ActionEvent event){
 		//TODO create submit button that sends data to database
+		if(busy) return;
 		if(oldPassword.getText().isBlank() || newPassword.getText().isBlank() || confirmPassword.getText().isBlank()
 				|| phoneNumber.getText().isBlank() || emailAddress.getText().isBlank())
 		{
@@ -54,12 +56,14 @@ public class EditAccountController implements SceneController
 		Client.singleton.runCommand("edituser %s;%s;;%s;%s".formatted(oldPassword.getText().replaceAll(" ", ""),
 		                                                                Util.hash(newPassword.getText().replaceAll(" ", "")),
 		                                                                phoneNumber.getText().trim(), emailAddress.getText().trim()));
+		busy = true;
 	}
 	
 	
 	@Override
 	public void clear()
 	{
+		busy = false;
 		oldPassword.setText("");
 		newPassword.setText("");
 		confirmPassword.setText("");
@@ -71,7 +75,8 @@ public class EditAccountController implements SceneController
 	@Override
 	public void error(String msg)
 	{
-	
+		if(!msg.isBlank()) busy = false;
+		error.setText(msg);
 	}
 	
 	@Override

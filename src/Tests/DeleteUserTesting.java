@@ -59,7 +59,7 @@ public class DeleteUserTesting
 			dis = new DataInputStream(s.getInputStream());
 			dos = new DataOutputStream(s.getOutputStream());
 			commands.add("login admin admin");
-			commands.add("deleteuser 4");
+			commands.add("deletepat ");
 			
 			while(!commands.isEmpty())
 			{

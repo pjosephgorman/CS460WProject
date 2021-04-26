@@ -59,7 +59,7 @@ public class CreateMedicalChartTest
 			dis = new DataInputStream(s.getInputStream());
 			dos = new DataOutputStream(s.getOutputStream());
 			commands.add("login admin admin");
-			commands.add("createpat Patrick Gorman;Headache;MRI;21;Male;60;200;85/40 BP;Michael Smith;Take Pills");
+			commands.add("createpat ");
 			
 			while(!commands.isEmpty())
 			{
