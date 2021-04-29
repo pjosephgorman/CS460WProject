@@ -49,19 +49,9 @@ public class SQLHandler
 					
 					//Test values
 					createUser(c, "admin", "admin", true, "Administrator", "", "Admin", Admin, "555-555-5555", "foo@gmail.com");
-					createUser(c, "foo", "pineapple", true, "a", "", "b", Admin, "555-555-5555", "foo@gmail.com");
-					createUser(c, "bar", "banana", true, "a", "", "b", Physician, "555-555-5555", "foo@gmail.com");
-					createUser(c, "bah", "abcd", true, "a", "", "b", Nurse, "555-555-5555", "foo@gmail.com");
-					//createUser(c, "foo", "1234", true, "a", "", "b", Reception, "555-555-5555", "foo@gmail.com");
-					
-					/*int cnt = 0;
-					ResultSet r = query(c, "SELECT * FROM users");
-					while(r.next())
-					{
-						UserInfo info = UserInfo.loadUser(cnt++);
-						String str = info.store();
-						System.out.println(UserInfo.load(str));
-					}*/
+					createUser(c, "billing", "bill", true, "a", "", "b", Billing, "555-555-5555", "foo@gmail.com");
+					createUser(c, "physician", "doc", true, "a", "", "b", Physician, "555-555-5555", "foo@gmail.com");
+					createUser(c, "nurse", "nur", true, "a", "", "b", Nurse, "555-555-5555", "foo@gmail.com");
 				}
 				if(!query(c, "SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'patients'").next())
 				{
@@ -79,18 +69,8 @@ public class SQLHandler
 					          	physician    VARCHAR(32),
 					          	nursecomment VARCHAR(112),
 					          );""");
-					createPatient(c, "John Smith", "Sore Throat", null, 30, "Male", 60, 250, "97 degrees, 150/60 BP", null, null);
-					createPatient(c, "Jane Doe", "Stomach Ache", null, 25, "Female", 55, 200, "99 degrees, 140/55 BP", null, null);
-					
-					
-					/*int cnt = 0;
-					ResultSet r = query(c, "SELECT * FROM patients");
-					while(r.next())
-					{
-						PatientInfo info = PatientInfo.loadPatient(cnt++);
-						String str = info.store();
-						System.out.println(PatientInfo.load(str));
-					}*/
+					createPatient(c, "John Smith", "Sore Throat", "MRI", 30, "Male", 60, 250, "97 degrees, 150/60 BP", null, null);
+					createPatient(c, "Jane Doe", "Stomach Ache", "MRI", 25, "Female", 55, 200, "99 degrees, 140/55 BP", null, null);
 				}
 			}
 			catch(Exception e)

@@ -14,7 +14,8 @@ public class Client extends Application
 {
 	public static Client singleton;
 	ConnectionHandler handler;
-	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount, welcome, patientDischarge, Bill;
+	Scene loading, login, mainMenu, acp, usrAccounts, confDel, patientActions, medicalChart, editAccount, welcome, patientDischarge, Bill,
+	ViewChart, ViewAcpAccounts;
 	private Stage stage;
 	public Scenes scene;
 	boolean timeout = false;
@@ -31,10 +32,13 @@ public class Client extends Application
 	private PatientActionsController patientActionsController;
 	private PatientDischargeController patientDischargeController;
 	private BillController billController;
+	private ViewMedicalChartController viewMedicalChartController;
+	private ViewAcpAccountController viewAcpAccountController;
 	
 	public enum Scenes
 	{
-		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT, WELCOME, DISCHARGE, BILL
+		LOADING, LOGIN, MAINMENU, ACP, USERACCOUNTS, CONFDEL, PATIENTACTIONS, MEDICALCHART, EDITACCOUNT, WELCOME, DISCHARGE, BILL, VIEWCHART,
+		VIEWACPACCOUNT
 	}
 	
 	@Override
@@ -98,6 +102,14 @@ public class Client extends Application
 		loader = new FXMLLoader(getClass().getResource("/fxml/Bill.fxml"));
 		Bill = new Scene(loader.load());
 		billController = loader.getController();
+		
+		loader = new FXMLLoader(getClass().getResource("/fxml/ViewMedicalChart.fxml"));
+		ViewChart = new Scene(loader.load());
+		viewMedicalChartController = loader.getController();
+		
+		loader = new FXMLLoader(getClass().getResource("/fxml/ViewAcpAccount.fxml"));
+		ViewAcpAccounts = new Scene(loader.load());
+		viewAcpAccountController = loader.getController();
 		
 		stage.setOnCloseRequest(windowEvent ->
 		                        {
@@ -212,6 +224,25 @@ public class Client extends Application
 		                  });
 	}
 	
+	public void setViewChart(String[] args)
+	{
+		Platform.runLater(() ->
+		                  {
+			                  viewMedicalChartController.view(args);
+			                  setScene(Scenes.VIEWCHART);
+			                  stage.setTitle("Medical Chart");
+		                  });
+	}
+	
+	public void setViewAcpAccounts(String[] args)
+	{
+		Platform.runLater(() ->
+		                  {
+			                  viewAcpAccountController.view(args);
+			                  setScene(Scenes.VIEWACPACCOUNT);
+			                  stage.setTitle("ACP Account");
+		                  });
+	}
 	
 	public void loadACP(UserInfo info)
 	{
@@ -265,6 +296,8 @@ public class Client extends Application
 			case WELCOME -> {return welcomeController;}
 			case DISCHARGE -> {return patientDischargeController;}
 			case BILL -> {return billController;}
+			case VIEWCHART -> {return viewMedicalChartController;}
+			case VIEWACPACCOUNT -> {return viewAcpAccountController;}
 		}
 		return null;
 	}
@@ -297,6 +330,8 @@ public class Client extends Application
 			case WELCOME -> {return welcome;}
 			case DISCHARGE -> {return patientDischarge;}
 			case BILL -> {return Bill;}
+			case VIEWCHART -> {return ViewChart;}
+			case VIEWACPACCOUNT -> {return ViewAcpAccounts;}
 		}
 		return null;
 	}

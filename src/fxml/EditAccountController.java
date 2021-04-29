@@ -31,7 +31,6 @@ public class EditAccountController implements SceneController
 	private Label error;
 	
 	public void doCancel(ActionEvent event){
-		clear();
 		Client.singleton.setMainMenu();
 	}
 	
@@ -53,9 +52,11 @@ public class EditAccountController implements SceneController
 			error.setText("Can't use pre-existing password");
 			return;
 		}
+		Client.singleton.setMainMenu();
 		Client.singleton.runCommand("edituser %s;%s;;%s;%s".formatted(oldPassword.getText().replaceAll(" ", ""),
 		                                                                Util.hash(newPassword.getText().replaceAll(" ", "")),
 		                                                                phoneNumber.getText().trim(), emailAddress.getText().trim()));
+		
 		busy = true;
 	}
 	

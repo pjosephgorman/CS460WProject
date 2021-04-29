@@ -14,6 +14,8 @@ public class PatientDischargeController implements SceneController
 	public ChoiceBox<Diagnosis> diagnosis;
 	public TextArea instructions;
 	public ChoiceBox<Medication> medications;
+	public TextField insurance;
+	public TextField address;
 	public Button printBillButton;
 	public Button cancelButton;
 	
@@ -40,7 +42,8 @@ public class PatientDischargeController implements SceneController
 			error.setText("Missing Required Fields");
 			return;
 		}
-		Client.singleton.setBill(new String[] {patInfo.name, days.getText(), medications.getValue().toString(), tests, diagnosis.getValue().toString()});
+		Client.singleton.setBill(new String[] {patInfo.name, days.getText(), medications.getValue().toString(), tests,
+				diagnosis.getValue().toString(), insurance.getText(), address.getText()});
 		busy = true;
 	}
 	
@@ -55,6 +58,8 @@ public class PatientDischargeController implements SceneController
 		email.setText("");
 		instructions.setText("");
 		medications.setValue(null);
+		insurance.setText("");
+		address.setText("");
 		patInfo = null;
 	}
 	
@@ -76,7 +81,6 @@ public class PatientDischargeController implements SceneController
 		patInfo = info;
 		patientName.setText(info.name);
 		tests = info.test;
-		
 	}
 	
 	public void initialize(){

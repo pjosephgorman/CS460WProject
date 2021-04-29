@@ -58,7 +58,8 @@ public class ACPController implements SceneController
 			edit.setOnAction(e ->
 			{
 				if(busy) return;
-				Client.singleton.runCommand("edituser " + info.id);
+				Client.singleton.setViewAcpAccounts(new String[]{info.uname, info.pwd, info.fname, info.mname, info.lname, String.valueOf(info.role),
+													info.phone, info.email});
 			});
 			
 			hBox.getChildren().add(edit);

@@ -19,7 +19,6 @@ public class MedicalChartController implements SceneController
 	public TextArea symptomsTextArea;
 	public TextArea testsTextArea;
 	public TextArea nurseComment;
-	public Button testPatientButton;
 	public TextField height;
 	public TextField weight;
 	public TextArea vitals;

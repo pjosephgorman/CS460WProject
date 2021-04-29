@@ -17,8 +17,6 @@ import javafx.scene.text.Font;
 public class PatientActionsController implements SceneController
 {
 	public VBox vBox;
-	public Button createChartButton;
-	public Button backButton;
 	private boolean busy = false;
 	private boolean showDischarge = false;
 	
@@ -34,7 +32,7 @@ public class PatientActionsController implements SceneController
 	public void createChart(ActionEvent event)
 	{
 		if(busy) return;
-		Client.singleton.runCommand("createpat");
+		Client.singleton.setCreateMedicalChart();
 	}
 	
 	public void back()
@@ -59,7 +57,8 @@ public class PatientActionsController implements SceneController
 			edit.setOnAction(e ->
 			{
 				if(busy) return;
-				Client.singleton.runCommand("editpat " + info.id);
+				Client.singleton.setViewChart(new String[]{info.physician, info.name, String.valueOf(info.age), info.height, info.sex, info.weight,
+												info.symptoms, info.vitals, info.test, info.nursecomment});
 			});
 			
 			hBox.getChildren().add(edit);
